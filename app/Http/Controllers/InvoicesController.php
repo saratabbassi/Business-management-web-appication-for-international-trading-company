@@ -10,6 +10,7 @@ use App\products;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class InvoicesController extends Controller
 {
@@ -21,7 +22,7 @@ class InvoicesController extends Controller
     public function index()
     {
         
-        $invoices= Products::all();
+        $invoices= invoices::all();
 
         return view('invoices.invoices', compact('invoices'));
         
@@ -36,9 +37,16 @@ class InvoicesController extends Controller
 
     { 
         
-      
-            
-        $last = !invoices::latest() ? invoices::latest()->first()->invoice_no: "Aucune facture disponible" ;
+      $invoices =invoices::all();
+      if($invoices->isEmpty())
+{
+    $last = "Aucune facture disponible";
+ }else{
+    $last =invoices::pluck('invoice_no')->last();
+ }
+       
+     
+        
         $devises = devise::all();
         $customers=customers::all();
         $categories=categories::all();
@@ -62,12 +70,16 @@ class InvoicesController extends Controller
     {   
         
         $data['invoice_no'] = $request->invoice_no;
+            
+        $data['last_invoice_no'] = $request->last_invoice_no;
         $data['devise'] = $request->devise;
         $data['customer_name'] = $request->customer_name;
         $data['customer_adress'] = $request->customer_adress;
-        $data['invoice_number'] = $request->invoice_number;
+        $data['invoice_no'] = $request->invoice_no;
         $data['invoice_date'] = $request->invoice_date;
+      
         $data['company_adress'] = $request->company_adress;
+        $data['company_name'] = $request->company_name;
         $data['company_phone'] = $request->company_phone;
         $data['poids_brut'] = $request->poids_brut;
         $data['poids_net'] = $request->poids_net;
@@ -77,8 +89,9 @@ class InvoicesController extends Controller
         $data['sub_total'] = $request->sub_total;
         $data['shipping'] = $request->shipping;
         $data['total_due'] = $request->total_due;
+        $data['created_by'] = (Auth::user()->name);
 
-        $invoice = Invoice::create($data);
+        $invoice = Invoices::create($data);
 
         $details_list = [];
         for ($i = 0; $i < count($request->categorie_id); $i++) {
@@ -87,19 +100,20 @@ class InvoicesController extends Controller
             $details_list[$i]['size_id'] = $request->size_id[$i];
             $details_list[$i]['quantity'] = $request->quantity[$i];
             $details_list[$i]['unit_price'] = $request->unit_price[$i];
-            $details_list[$i]['row_sub_total'] = $request->row_sub_total[$i];
+            $details_list[$i]['total_price'] = $request->total_price[$i];
+            $details_list[$i]['created_by'] = (Auth::user()->name);
         }
 
         $details = $invoice->details()->createMany($details_list);
 
         if ($details) {
             return redirect()->back()->with([
-                'message' => __('Frontend/frontend.created_successfully'),
+                'message' => __('la facture est créé avec succès'),
                 'alert-type' => 'success'
             ]);
         } else {
             return redirect()->back()->with([
-                'message' => __('Frontend/frontend.created_failed'),
+                'message' => __('la creation de facture a échoué'),
                 'alert-type' => 'danger'
             ]);
         }

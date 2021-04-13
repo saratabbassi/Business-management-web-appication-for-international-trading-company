@@ -17,7 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->bigIncrements('id');
             $table->string('last_invoice_no')->unique();
             $table->string('invoice_no')->unique();
-            $table->date('invoice_date');
+            $table->date('invoice_date')->nullable();
             $table->string('devise');
             $table->string('customer_name');
             $table->string('customer_adress');

@@ -8,6 +8,7 @@ use App\products_attachement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class ProductsDetailsController extends Controller
 {
     /**

@@ -68,8 +68,8 @@
                             <div class="col">
 
                                 <label for="inputName" class="control-label">Dernier numéro de facture</label>
-                                <input type="text" class="form-control" id="last_invoice_no" name="last_invoice_no"
-                                    title="Saisir le nom du produit " readonly>
+                                <input type="text" class="form-control" id="last_invoice_no" name="last_invoice_no" value="{{$last}}"
+                                  readonly>
                             </div>
                             <div class="col">
 
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col">
                                 <label>Date</label>
-                                <input class="form-control fc-datepicker" data-date-format="dd-mm-yyyy" name="invoice_Date"
+                                <input class="form-control fc-datepicker" data-date-format="dd-mm-yyyy" name="invoice_date" id="invoice_date"
                                     placeholder="DD-MM-YYYY" type="text" value="{{ date('d-m-Y') }}">
                             </div>
 
@@ -117,40 +117,23 @@
 
 
 
-                                <select id="customer" name="customer" class="form-control select2 "
+                                <select id="customer_name" name="customer_name" class="form-control select2 "
                                     onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                     <option value="">Choisir Client</option>
                                     @foreach ($customers as $c)
 
-                                        <option value="{{ $c->customer_adress }}" adress="{{ $c->customer_adress }}">
-                                            {{ $c->customer_name }}</option>
+                                        <option value="{{ $c->id }}" adress="{{$c->customer_adress}}">{{ $c->customer_name }}</option>
                                     @endforeach
 
                                 </select>
-
-
-
-
                             </div>
-
-
-
-
-
-
-
-
 
                             <div class="col">
                                 <label for="inputName" class="control-label">Adresse du client</label>
-                                <input type="text" class="form-control" id="invoice_number" name="adress"
-                                    title="Saisir le nom du produit " readonly>
+                                <input type="text" class="form-control" id="customer_adress" name="customer_adress"
+                                    title="Saisir le nom du produit "  readonly>
                             </div>
                            
-
-
-
-
                         </div>
 
                         {{-- 3 --}}
@@ -160,18 +143,18 @@
 
                             <div class="col">
                                 <label for="inputName" class="control-label">Nom Societé</label>
-                                <input type="text" class="form-control" id="invoice_number" name="invoice_number"
+                                <input type="text" class="form-control" id="company_name" name="company_name"
                                     title="Saisir le nom du produit " value="TINAST SCI">
 
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Adresse societé</label>
-                                <input type="text" class="form-control" id="invoice_number" name="invoice_number"
+                                <input type="text" class="form-control" id="company_adress" name="company_adress"
                                     title="Saisir le nom du produit " value="Agareb Sfax 3030">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Tel</label>
-                                <input type="text" class="form-control" id="invoice_number" name="invoice_number"
+                                <input type="text" class="form-control" id="company_phone" name="company_phone"
                                     title="Saisir le nom du produit " value="+216 26 566 627">
                             </div>
 
@@ -183,22 +166,22 @@
                         <div class="row">
                             <div class="col">
                                 <label for="inputName" class="control-label">Poids brut</label>
-                                <input type="text" class="form-control" id="invoice_number" name="invoice_number"
+                                <input type="text" class="form-control" id="poids_brut" name="poids_brut"
                                     title="Saisir le nom du produit ">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Poids net</label>
-                                <input type="text" class="form-control" id="invoice_number" name="invoice_number"
+                                <input type="text" class="form-control" id="poids_net" name="poids_net"
                                     title="Saisir le nom du produit ">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Le nombre de colis</label>
-                                <input type="text" class="form-control" id="invoice_number" name="invoice_number"
+                                <input type="text" class="form-control" id="packages_number" name="packages_number"
                                     title="Saisir le nom du produit ">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Livraison</label>
-                                <input type="text" class="form-control" id="invoice_number" name="invoice_number"
+                                <input type="text" class="form-control" id="livraison" name="livraison"
                                     title="Saisir le nom du produit ">
                             </div>
                             <div class="col ">
@@ -208,9 +191,9 @@
 
 
 
-                                <select class="form-control select2">
+                                <select class="form-control select2" id="incoterm" name="incoterm">
                                     <option label="Choisir">Choisir Incoterm</option>
-                                    <option value="  CFR">
+                                    <option value=" CFR">
                                         CFR
                                     </option>
                                     <option value="BIO">
@@ -232,8 +215,7 @@
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Détails de paiement</label>
-                                <input type="text" class="form-control" id="invoice_no" name="invoice_no"
-                                    title="Saisir le nom du produit " value="">
+                                <input type="text" class="form-control" id="payment_details" name="payment_details">
                             </div>
                         </div>
 
@@ -319,16 +301,14 @@
 
 
 
-                                    <input type="text"  class="form-control sub_total" readonly>
+                                    <input type="text" id="sub_total" name="sub_total" class="form-control sub_total" readonly>
                                 </div>
 
                                 <div class="col-md-3 ml-auto">
 
                                     <label for="shipping">Shipping Costs</label>
 
-
-
-                                    <input type="text"  class="form-control shipping">
+                                    <input type="text" id="shipping" name="shipping" class="form-control shipping">
                                 </div>
                                 <div class="col-md-3 ml-auto">
 
@@ -336,7 +316,7 @@
 
 
 
-                                    <input type="text"  class="form-control total_due" readonly>
+                                    <input type="text" id="total_due" name="total_due" class="form-control total_due" readonly>
                                 </div>
                             </div>
 
@@ -399,14 +379,21 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
-
+    <script>
+        var date = $('.fc-datepicker').datepicker({
+            dateFormat: 'dd-mm-yy'
+        }).val();
+    </script>
 
 
     <script>
         $(function() {
-            $('select[name="customer"]').change(function() {
+            $('select[name="customer_name"]').change(function() {
+                var option = $('option:selected', this).attr('adress');
+               
+          
 
-                $('input[name="adress"]').val($(this, ':selected').val())
+                $('input[name="customer_adress"]').val(option);
             })
 
         })
