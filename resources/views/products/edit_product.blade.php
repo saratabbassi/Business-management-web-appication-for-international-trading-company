@@ -79,12 +79,10 @@
                                 <select name="categorie_id" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')">
                                     <!--placeholder-->
-                                    <option value=" {{ $products->categorie->id }}">
-                                        {{ $products->categorie->categorie_name }}
-                                    </option>
-                                    @foreach ($categories as $categorie)
-                                        <option value="{{ $categorie->id }}"> {{ $categorie->categorie_name }}</option>
-                                    @endforeach
+                                
+                                    @foreach($categories as $c)
+                                    <option value="{{ $c->id }}" {{$products->categorie_id  == $c->id  ? 'selected' : ''}}>{{ $c->categorie_name}}</option>
+                                @endforeach
                                 </select>
                             </div>
                             

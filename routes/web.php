@@ -46,6 +46,7 @@ Route::get('view_file/{name}/{file_name}', 'ProductsDetailsController@open_file'
 Route::post('delete_file', 'ProductsDetailsController@destroy')->name('delete_file');
 Route::get('/edit_product/{id}', 'ProductsController@edit');
 Route::get('/edit_customer/{id}', 'CustomersController@edit');
+Route::get('/edit_invoice/{id}', 'InvoicesController@edit');
 Route::get('/customers/{id}', 'InvoicesController@getcustomers');
 Route::get('/getProducts/{id}', 'InvoicesController@getProducts');
 Route::get('/getDesignation/{id}', 'InvoicesController@getDesignation');

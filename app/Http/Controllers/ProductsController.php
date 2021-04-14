@@ -177,6 +177,7 @@ class ProductsController extends Controller
         $categories = categories::all();
         $sizes = sizes::where('product_id',$id)->get();
         
+        
         return view('products.edit_product', compact('categories', 'products','sizes'));
     }
 

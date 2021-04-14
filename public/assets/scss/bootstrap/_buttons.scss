@@ -45,12 +45,12 @@ a.btn.disabled, fieldset:disabled a.btn {
 
   &:hover {
     color: $white;
-    background-color: #045cd6;
-    border-color: #045cd6;
+    background-color: #675491;
+    border-color: #675491;
   }
 
   &:focus, &.focus {
-    box-shadow: 0 0 0 0.2rem rgba(1, 98, 232, 0.2);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 
   &.disabled, &:disabled {
@@ -76,12 +76,12 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .btn-primary:not(:disabled):not(.disabled) {
   &:active:focus, &.active:focus {
-    box-shadow: 0 0 0 0.2rem rgba(114, 115, 245, 0.2);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 }
 
 .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(114, 115, 245, 0.2);
+  box-shadow: 0 0 0 0.2rem #675491;
 }
 
 .btn-secondary {
@@ -463,7 +463,7 @@ a.btn.disabled, fieldset:disabled a.btn {
   }
 
   &:focus, &.focus {
-    box-shadow: 0 0 0 0.2rem rgba(51, 102, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
     background-color: $primary !important;
   }
 
@@ -489,12 +489,12 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .btn-outline-primary:not(:disabled):not(.disabled) {
   &:active:focus, &.active:focus {
-    box-shadow: 0 0 0 0.2rem rgba(51, 102, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 }
 
 .show > .btn-outline-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(51, 102, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem #675491;
 }
 
 .btn-outline-secondary {
@@ -1297,11 +1297,11 @@ input {
 .btn-main-primary {
   color: $white;
   background-color: $primary;
-  border-color: #025cd8;
+  border-color: #675491;
 
   &:hover {
     color: $white;
-    background-color: #025cd8;
+    background-color: #675491;
     border-color: $primary;
   }
 
@@ -1332,12 +1332,12 @@ input {
 
 .btn-main-primary:not(:disabled):not(.disabled) {
   &:active:focus, &.active:focus {
-    box-shadow: 0 0 0 0.2rem rgba(1, 98, 232, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 }
 
 .show > .btn-main-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(1, 98, 232, 0.5);
+  box-shadow: 0 0 0 0.2rem #675491;
 }
 
 .btn-main-secondary {
@@ -1352,7 +1352,7 @@ input {
   }
 
   &:focus, &.focus {
-    box-shadow: 0 0 0 0.2rem rgba(60, 109, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 
   &.disabled, &:disabled {
@@ -1378,58 +1378,58 @@ input {
 
 .btn-main-secondary:not(:disabled):not(.disabled) {
   &:active:focus, &.active:focus {
-    box-shadow: 0 0 0 0.2rem rgba(60, 109, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 }
 
 .show > .btn-main-secondary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(60, 109, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem #675491;
 }
 
 .btn-main-secondary {
   color: $white;
   background-color: $primary;
-  border-color: #1a53ff;
+  border-color: #675491;
 
   &:hover {
     color: $white;
-    background-color: #0d49ff;
+    background-color: #675491;
     border-color: #8485fb;
   }
 
   &:focus, &.focus {
-    box-shadow: 0 0 0 0.2rem rgba(60, 109, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 
   &.disabled, &:disabled {
     color: $white;
     background-color: $primary;
-    border-color: #1a53ff;
+    border-color: #675491;
   }
 
   &:not(:disabled):not(.disabled) {
     &:active, &.active {
       color: $white;
-      background-color: #0040ff;
-      border-color: #0036d9;
+      background-color:#675491;
+      border-color: #675491;
     }
   }
 }
 
 .show > .btn-main-secondary.dropdown-toggle {
   color: $white;
-  background-color: #0040ff;
-  border-color: #0036d9;
+  background-color: #675491;
+  border-color: #675491;
 }
 
 .btn-main-secondary:not(:disabled):not(.disabled) {
   &:active:focus, &.active:focus {
-    box-shadow: 0 0 0 0.2rem rgba(60, 109, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 }
 
 .show > .btn-main-secondary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(60, 109, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem #675491;
 }
 
 .btn-rounded {
@@ -1555,19 +1555,19 @@ input {
 
 .btn-primary-gradient{
 	color: $white;
-	background:linear-gradient(to left, #0db2de 0%, #005bea 100%);
+	background:linear-gradient(to left, #0db2de 0%, #675491 100%);
 	border:1px solid #0db2de;
 	
 	&:hover {
     color: $white;
-    background: linear-gradient(to left, #099fc7 0%, #0555d4 100%);
+    background: linear-gradient(to left, #099fc7 0%, #675491 100%);
     border-color: #0db2de;
   }
 }
 
 .btn-primary-gradient{
   &:focus, &.focus {
-	 background:linear-gradient(to left, #099fc7 0%, #0555d4 100%);
+	 background:linear-gradient(to left, #099fc7 0%, #675491 100%);
     box-shadow: 0 0 0 0.2rem rgba(5, 85, 212, 0.5);
   }
 }

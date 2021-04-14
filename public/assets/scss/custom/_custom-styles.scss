@@ -1322,8 +1322,8 @@ body {
 
 @keyframes pulse-primary {
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(40, 92, 247, 0.9);
-    box-shadow: 0 0 0 0 rgba(40, 92, 247, 0.7);
+    -moz-box-shadow: 0 0 0 0 #675491;
+    box-shadow: 0 0 0 0 rgba#675491;
   }
 
   70% {
@@ -1339,7 +1339,7 @@ body {
 
 @-webkit-keyframes pulse-primary {
   0% {
-    -webkit-box-shadow: 0 0 0 0 rgba(40, 92, 247, 0.9);
+    -webkit-box-shadow: 0 0 0 0 #675491;
   }
 
   70% {
@@ -1353,8 +1353,8 @@ body {
 
 @keyframes pulse-primary {
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(40, 92, 247, 0.9);
-    box-shadow: 0 0 0 0 rgba(40, 92, 247, 0.7);
+    -moz-box-shadow: 0 0 0 0 #675491;
+    box-shadow: 0 0 0 0 #675491;
   }
 
   70% {
@@ -1443,7 +1443,7 @@ body {
 /* ###### 4.8 Box-shadows ###### */
 
 .box-shadow-primary {
-  box-shadow: 0 5px 10px rgba(40, 92, 247, 0.25);
+  box-shadow: 0 5px 10px #675491;
 }
 
 .box-shadow-success {
@@ -7497,11 +7497,11 @@ pre {
 }
 
 .main-header-primary {
-  background-color: #0040ff;
+  background-color: #675491;
 
   .main-header-center {
     .form-control {
-      background-color: #0033cc;
+      background-color: #675491;
       border-width: 0;
       height: 38px;
       border-radius: 2px;
@@ -7635,7 +7635,7 @@ pre {
   border-bottom-width: 0;
 
   .main-navbar-header {
-    background-color: #0040ff;
+    background-color: #675491;
     border-bottom-width: 0;
     color: $white;
 
@@ -7646,11 +7646,11 @@ pre {
 
   .nav-item.active {
     &::before {
-      border-bottom-color: #1a53ff;
+      border-bottom-color: #675491;
     }
 
     .nav-link {
-      color: #1a53ff;
+      color: #675491;
     }
   }
 
@@ -7774,7 +7774,7 @@ pre {
   }
 
   &.bg-primary-dark {
-    background-color: #0033cc;
+    background-color: #675491;
   }
 
   .chart-wrapper {
@@ -7844,7 +7844,7 @@ pre {
       }
 
       &.dot-dark-blue::before {
-        border-color: #0033cc;
+        border-color: #675491;
       }
     }
 
@@ -7994,7 +7994,7 @@ pre {
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 15px;
-    color: #0040ff;
+    color: #675491;
   }
 
   .chart-legend {
@@ -8020,7 +8020,7 @@ pre {
       }
 
       &:first-child::before {
-        background-color: #05478f;
+        background-color: #675491;
       }
 
       &:nth-child(2)::before {
@@ -8281,7 +8281,7 @@ pre {
 }
 
 .main-sidebar-indigo-dark {
-  background-color: #4130c5;
+  background-color: #675491;
   border-right-width: 0;
 
   .main-logo {
@@ -8330,7 +8330,7 @@ pre {
           top: -1px;
           left: -20px;
           right: -20px;
-          background-color: #33269c;
+          background-color: #675491;
           height: 41px;
         }
 
@@ -9252,13 +9252,13 @@ pre {
 
   &.card-dark-one {
     background-color: #8485fb;
-    background-image: linear-gradient(to bottom, #1f05f0 0%, #8485fb 100%);
+    background-image: linear-gradient(to bottom, #675491 0%, #8485fb 100%);
     background-repeat: repeat-x;
   }
 
   &.card-dark-two {
-    background-color: #0040ff;
-    background-image: linear-gradient(to bottom, #0a47ff 0%, $primary 100%);
+    background-color: #675491;
+    background-image: linear-gradient(to bottom,#675491 0%, $primary 100%);
     background-repeat: repeat-x;
   }
 }
@@ -9855,7 +9855,7 @@ pre {
 .customers {
   .list-group-item-action {
     &:hover, &:focus {
-      color: #0160e4;
+      color: #675491;
       background-color: $gray-100;
     }
   }

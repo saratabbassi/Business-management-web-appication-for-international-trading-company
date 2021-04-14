@@ -104,19 +104,19 @@ a.badge {
 a.badge-primary {
   &:hover {
     color: $white;
-    background-color: #0040ff;
+    background-color: #675491;
   }
 
   &:focus {
     color: $white;
-    background-color: #0040ff;
+    background-color: #675491;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(51, 102, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 
   &.focus {
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(51, 102, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem #675491;
   }
 }
 

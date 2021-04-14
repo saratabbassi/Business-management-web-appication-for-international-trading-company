@@ -196,19 +196,19 @@
 }
 
 .list-group-item-primary {
-  color: #1b3585;
+  color: #675491;
   background-color: #c6d4ff;
 
   &.list-group-item-action {
     &:hover, &:focus {
-      color: #1b3585;
+      color: #675491;
       background-color: #adc1ff;
     }
 
     &.active {
       color: $white;
-      background-color: #1b3585;
-      border-color: #1b3585;
+      background-color: #675491;
+      border-color: #675491;
     }
   }
 }

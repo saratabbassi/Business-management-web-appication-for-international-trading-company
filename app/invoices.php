@@ -4,6 +4,7 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class invoices extends Model
 {
@@ -16,4 +17,12 @@ class invoices extends Model
   protected $dates =[
      'invoice_date',
   ];
+  public function getInvoiceDateAttribute($value)
+  {
+    return Carbon::parse($value)->format('d-m-Y'); 
+  }
+  public function devises(){
+    return $this->belongsTo('App\devise'); 
+  }
+ 
 }

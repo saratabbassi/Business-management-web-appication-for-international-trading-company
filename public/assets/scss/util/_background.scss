@@ -4,13 +4,13 @@
 
 a.bg-primary {
   &:hover, &:focus {
-    background-color: #0040ff !important;
+    background-color: #675491!important;
   }
 }
 
 button.bg-primary {
   &:hover, &:focus {
-    background-color: #0040ff !important;
+    background-color: #675491 !important;
   }
 }
 
@@ -341,7 +341,7 @@ button.bg-dark {
 }
 
 .bg-primary-gradient {
-  background-image: linear-gradient(to left, #0db2de 0%, #005bea 100%) !important;
+  background-image: linear-gradient(to left, #0db2de 0%, #675491 100%) !important;
 }
 
 .bg-danger-gradient {
