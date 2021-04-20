@@ -92,7 +92,7 @@
                                     <option value="">Choisir Devise</option>
                                     @foreach ($devises as $d)
 
-                                        <option value="{{ $d->id }}"> {{ $d->devise }}</option>
+                                        <option value="{{ $d->devise }}"> {{ $d->devise }}</option>
                                     @endforeach
 
                                 </select>
@@ -122,7 +122,7 @@
                                     <option value="">Choisir Client</option>
                                     @foreach ($customers as $c)
 
-                                        <option value="{{ $c->id }}" adress="{{$c->customer_adress}}">{{ $c->customer_name }}</option>
+                                        <option value="{{ $c->customer_name }}" adress="{{$c->customer_adress}}">{{ $c->customer_name }}</option>
                                     @endforeach
 
                                 </select>
@@ -191,24 +191,15 @@
 
 
 
-                                <select class="form-control select2" id="incoterm" name="incoterm">
-                                    <option label="Choisir">Choisir Incoterm</option>
-                                    <option value=" CFR">
-                                        CFR
-                                    </option>
-                                    <option value="BIO">
-                                        BIO
-                                    </option>
-                                    <option value="FOB">
-                                        FOB
-                                    </option>
-                                    <option value="EXW">
-                                        EXW
-                                    </option>
-                                    <option value="CIF">
-                                        CIF
-                                    </option>
-                                </select>
+                                <select id="incoterm" name="incoterm" class="form-control select2 "
+                                onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                                <option value="">Choisir Incoterm</option>
+                                @foreach ($incoterms as $i)
+
+                                    <option value="{{ $i->id }}" >{{ $i->incoterm }}</option>
+                                @endforeach
+
+                            </select>
 
 
 
@@ -230,7 +221,7 @@
                                     <table class="table table-bordered" id="dynamicAddRemove">
                                         <thead>
                                             <tr>
-                                                <th></th>
+                                            
                                                 <th style="width: 16.66%" scope="col">Catégorie du produit</th>
                                                 <th style="width: 20%" scope="col">Produit</th>
                                                 <th style="width: 20%" scope="col">Designation</th>
@@ -245,7 +236,7 @@
 
 
                                             <tr>
-                                                <td>1</td>
+                                              
                                                 <td>
                                                     <select name="categorie_id[0]" id="categorie_id"
                                                         class="form-control categorie_id ">
@@ -259,7 +250,7 @@
 
                                                     </select>
                                                 </td>
-                                                <td> <select name="product_id[0]" id="categorie_id"
+                                                <td> <select name="product_id[0]" id="product_id"
                                                         class="form-control product_id ">
                                                         <option label="Choisir Produit"></option>
 
@@ -419,7 +410,7 @@
 
             var numberofrow = ($('.addMoreProduct tr').length - 0) + 1;
 
-            var tr = '<tr><td class"no"">' + numberofrow + '</td>' +
+            var tr = '<tr>' +
                 '<td> <select class="form-control categorie_id  "  id="categorie_id" name="categorie_id[' + i +
                 ']" >' + categorie +
                 '</select></td>' +
@@ -489,7 +480,7 @@
                     success: function(data) {
                         sizeEle.append(' <option label="Choisir Designation"></option>');
                         jQuery.each(data, function(key, value) {
-                            sizeEle.append('<option value="' + key + '">' + value +
+                            sizeEle.append('<option value="' + value.id + '" data-price="' + value.selling_price + '">' + value.designation +
                                 '</option>');
 
                         });
@@ -497,8 +488,10 @@
                 });
             }
         });
+      
 
     </script>
+   
     <script>
         function TotalAmount() {
             var total = 0;
@@ -533,10 +526,11 @@
 
             var tr = $(this).parent().parent();
 
-            var price = tr.find('.size_id option:selected').val();
-            tr.find('.unit_price').val(price);
+          var price =   tr.find('.size_id option:selected').attr('data-price');
+          tr.find('.unit_price').val(price);
+      
             var qty = tr.find('.quantity').val() - 0;
-            var price = tr.find('.unit_price').val() - 0;
+          
             var totalprice = (qty * price);
             tr.find('.total_price').val(totalprice);
             TotalAmount();

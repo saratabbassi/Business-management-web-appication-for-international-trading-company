@@ -86,13 +86,10 @@
                                 </select>
                             </div>
                             
-                       
-
-
+                      
                     </div>
 
-                     
-                     
+                                         
                         <br>
                          {{-- 2--}}
                         <div class="row">

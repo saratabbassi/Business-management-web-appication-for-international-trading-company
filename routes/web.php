@@ -35,6 +35,7 @@ Route::resource('invoices', 'InvoicesController');
 Route::resource('ProductAttachments', 'ProductsAttachementController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('devise', 'deviseController');
+Route::resource('incoterm', 'incotermController');
 Route::resource('sizes', 'SizesController');
 
 Route::get('/productDetails/{id}', 'ProductsDetailsController@edit');
@@ -50,6 +51,12 @@ Route::get('/edit_invoice/{id}', 'InvoicesController@edit');
 Route::get('/customers/{id}', 'InvoicesController@getcustomers');
 Route::get('/getProducts/{id}', 'InvoicesController@getProducts');
 Route::get('/getDesignation/{id}', 'InvoicesController@getDesignation');
+Route::get('/Print_invoice_fr/{id}', 'InvoicesController@Print_invoice_fr');
+Route::get('/Print_invoice_en/{id}', 'InvoicesController@Print_invoice_en');
+Route::get('/Print_packing_fr/{id}', 'InvoicesController@Print_packing_fr');
+Route::get('/Print_packing_en/{id}', 'InvoicesController@Print_packing_en');
+
+
 Route::delete('/{id}', 'ProductsController@delete');
 
 

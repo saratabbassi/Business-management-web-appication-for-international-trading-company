@@ -11,7 +11,7 @@ class invoices extends Model
     protected $guarded=[];
     public function details()
     {
-        return $this->hasMany(invoice_products ::class, 'invoice_id', 'id');
+        return $this->hasMany(invoice_products::class, 'invoice_id', 'id');
     }
  
   protected $dates =[
@@ -24,5 +24,9 @@ class invoices extends Model
   public function devises(){
     return $this->belongsTo('App\devise'); 
   }
+  public function customers()
+ {
+ return $this->belongsTo('App\customers');
+ }
  
 }

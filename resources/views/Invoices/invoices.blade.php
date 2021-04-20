@@ -69,8 +69,8 @@
                                     <th class="border-bottom-0">Date</th>
                                     <th class="border-bottom-0">Status</th>
                                     <th class="border-bottom-0">Crée par</th>
-                                     <th class="border-bottom-0">Imprimer Facture</th>
-                                    <th class="border-bottom-0">Imprimer Liste de colisage</th>
+                                     <th class="border-bottom-0">Imprimer </th>
+                                 
 									<th class="border-bottom-0">Operations</th>
 
 
@@ -80,7 +80,10 @@
                                 @php
                                     $i = 0;
                                 @endphp
-
+   <?php
+   use App\invoices;
+   $invoices = invoices::all();
+   ?>
                                 @foreach ($invoices as $invoice)
                                     @php
                                         $i++;
@@ -92,30 +95,52 @@
                                     <td>{{ $invoice->invoice_date }}</td>
                                     <td>paid</td>
                                     <td>{{ $invoice->created_by }}</td>
-                                   
                                     <td>
-
-										<a class="modal-effect btn btn-sm btn-primary" data-effect="effect-scale"
-										href="{{ url('edit_product') }}/{{ $invoice->id }}" title="Modifier"><i
-											class="las la-print"> Fr</i></a>
-											
-											<a class="modal-effect btn btn-sm btn-primary" data-effect="effect-scale"
-											href="{{ url('edit_product') }}/{{ $invoice->id }}" title="Modifier"><i
-												class="las la-print"> Ang</i></a>
-
+                                        <div class="dropdown">
+                                            <button aria-expanded="false" aria-haspopup="true"
+                                                class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
+                                                type="button">Imprimer<i class="fas fa-caret-down ml-1"></i></button>
+                                            <div class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="Print_packing_en/{{ $invoice->id }}"><i
+                                                    class="text-info fas fa-print"></i>&nbsp;&nbsp;Proformat Facture ANG
+                                                
+                                            </a>
+                                            <a class="dropdown-item" href="Print_packing_en/{{ $invoice->id }}"><i
+                                                class="text-info fas fa-print"></i>&nbsp;&nbsp;Proformat Facture ANG
+                                            
+                                        </a>
+                                               
+                                                
+                                                <a class="dropdown-item" href="Print_packing_fr/{{ $invoice->id }}"><i
+                                                    class="text-primary fas fa-print"></i>&nbsp;&nbsp;Liste De Colisage FR
+                                                
+                                            </a>
+                                            <a class="dropdown-item" href="Print_packing_en/{{ $invoice->id }}"><i
+                                                class="text-primary fas fa-print"></i>&nbsp;&nbsp;Liste De Colisage ANG
+                                            
+                                        </a>
+                                        <a class="dropdown-item" href="Print_invoice_fr/{{ $invoice->id }}"><i
+                                            class="text-success fas fa-print"></i>&nbsp;&nbsp;Facture FR
+                                        
+                                    </a>
+                                    <a class="dropdown-item" href="Print_invoice_en/{{ $invoice->id }}"><i
+                                        class="text-success fas fa-print"></i>&nbsp;&nbsp;Facture ANG
+                                    
+                                </a>
+                                     
+                                              
+                                            </div>
+                                        </div>
 
                                     </td>
-                                    <td>
-										<a class="modal-effect btn btn-sm btn-primary" data-effect="effect-scale"
-										href="{{ url('edit_product') }}/{{ $invoice->id }}" title="Modifier"><i
-											class="las la-print"> Fr</i></a>
-											
-											<a class="modal-effect btn btn-sm btn-primary" data-effect="effect-scale"
-											href="{{ url('edit_product') }}/{{ $invoice->id }}" title="Modifier"><i
-												class="las la-print"> Ang</i></a>
-                                    </td>
+                                                                  
+										                                                                       
 									<td>
 
+                                        <a class="modal-effect btn btn-sm btn-success" data-effect="effect-scale"
+                                            data-id="{{ $invoice->id }}" data-name="{{ $invoice->invoice_no }}"
+                                            data-toggle="modal" href="#modaldemo9" title="Supprimer"><i
+                                                class="las la-eye"></i></a>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                             href="{{ url('edit_invoice') }}/{{ $invoice->id }}" title="Modifier"><i
                                                 class="las la-pen"></i></a>
@@ -144,7 +169,7 @@
                                 <h6 class="modal-title">Supprimer Facture </h6><button aria-label="Close" class="close"
                                     data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                             </div>
-                            <form action="products/destroy" method="post">
+                            <form action="invoices/destroy" method="post">
                                 {{ method_field('delete') }}
                                 {{ csrf_field() }}
                                 <div class="modal-body">

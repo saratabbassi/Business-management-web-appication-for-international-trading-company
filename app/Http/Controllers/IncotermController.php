@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\devise;
+use App\incoterm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class DeviseController extends Controller
+class IncotermController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class DeviseController extends Controller
      */
     public function index()
     {
-        $devise = devise::all();
-        return view('Devise.devise',compact('devise'));
+        $incoterm = incoterm::all();
+        return view('incoterm.incoterm',compact('incoterm'));
     }
 
     /**
@@ -26,7 +26,7 @@ class DeviseController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -38,34 +38,34 @@ class DeviseController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'devise' => 'required|unique:devises|max:3',
+            'incoterm' => 'required|unique:incoterms',
         ],[
 
-            'devise.required' =>'Veuillez saisir une devise',
-            'devise.unique' =>' La devise est déjà existante',
-            'devise.max'=>'la devise doit contenir 3 lettres seulement'
+            'incoterm.required' =>'Veuillez saisir un incoterm',
+            'incoterm.unique' =>' L incoterm est déjà existant',
+           
 
 
         ]);
 
-           Devise::create([
-                'devise' => $request->devise,
+           incoterm::create([
+                'incoterm' => $request->incoterm,
                 'created_by' => (Auth::user()->name),
             
               
 
             ]);
-            session()->flash('Add', 'La devise a été ajoutée avec succès ');
+            session()->flash('Add', 'L incoterm a été ajoutée avec succès ');
             return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\devise  $devise
+     * @param  \App\incoterm  $incoterm
      * @return \Illuminate\Http\Response
      */
-    public function show(devise $devise)
+    public function show(incoterm $incoterm)
     {
         //
     }
@@ -73,10 +73,10 @@ class DeviseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\devise  $devise
+     * @param  \App\incoterm  $incoterm
      * @return \Illuminate\Http\Response
      */
-    public function edit(devise $devise)
+    public function edit(incoterm $incoterm)
     {
         //
     }
@@ -85,47 +85,47 @@ class DeviseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\devise  $devise
+     * @param  \App\incoterm  $incoterm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, devise $devise)
+    public function update(Request $request, incoterm $incoterm)
     {
         $id = $request->id;
 
         $this->validate($request, [
 
 
-            'devise' => 'required|max:3|unique:devises,devise,'.$id,
+            'incoterm' => 'required|max:3|unique:incoterm,incoterm,'.$id,
            
         ],[
 
-            'devise.required' =>'Veuillez saisir une devise',
-            'devise.unique' =>'La devise est déjà existante',
-            'devise.max'=>'la devise doit contenir 3 lettres seulement'
+            'incoterm.required' =>'Veuillez saisir un incoterm',
+            'incoterm.unique' =>'L incoterm est déjà existante',
+           
            
 
         ]);
 
-        $devise = Devise::find($id);
-        $devise->update([
-            'devise' => $request->devise,
+        $incoterm = incoterm::find($id);
+        $incoterm->update([
+            'incoterm' => $request->incoterm,
                   ]);
 
-        session()->flash('edit','La devise a été modifiée avec succès');
-        return redirect('/devise');
+        session()->flash('edit','L incoterm a été modifiée avec succès');
+        return redirect('/incoterm');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\devise  $devise
+     * @param  \App\incoterm  $incoterm
      * @return \Illuminate\Http\Response
      */
-    public function destroy(request $request)
+    public function destroy(incoterm $incoterm)
     {
         $id = $request->id;
-        Devise::find($id)->delete();
-        session()->flash('delete','La devise est supprimé avec succès');
-        return redirect('/devise');
+        incoterm::find($id)->delete();
+        session()->flash('delete','L incoterm est supprimé avec succès');
+        return redirect('/incoterm');
     }
 }

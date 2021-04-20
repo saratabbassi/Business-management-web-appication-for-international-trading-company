@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 @endsection
 @section('title')
-    Ajouter Produit
+    Modifier Facture
 @stop
 
 @section('page-header')
@@ -23,7 +23,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">Factures</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Ajouter Facture</span>
+                    Modifier Facture</span>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                 <div class="card-body">
 
 
-                    <form  action="{{url ('invoices/update') }}" method="post" enctype="multipart/form-data"
+                    <form action="{{ url('invoices/update') }}" method="post" enctype="multipart/form-data"
                         autocomplete="off">
                         {{ method_field('patch') }}
                         {{ csrf_field() }}
@@ -69,20 +69,22 @@
                             <div class="col">
 
                                 <label for="inputName" class="control-label">Numéro de facture Précedente</label>
-                                <input type="text" class="form-control" id="last_invoice_no" name="last_invoice_no" value="{{old('last_invoice_no',$invoices->last_invoice_no)}}"
-                                  readonly>
+                                <input type="text" class="form-control" id="last_invoice_no" name="last_invoice_no"
+                                    value="{{ old('last_invoice_no', $invoices->last_invoice_no) }}" readonly>
                             </div>
                             <div class="col">
 
                                 <label for="inputName" class="control-label">Numéro de Facture</label>
                                 <input type="hidden" name="invoice_id" value="{{ $invoices->id }}">
-                                <input type="text" class="form-control" id="invoice_no" name="invoice_no" value="{{old('invoice_no',$invoices->invoice_no)}}"
+                                <input type="text" class="form-control" id="invoice_no" name="invoice_no"
+                                    value="{{ old('invoice_no', $invoices->invoice_no) }}"
                                     title="Saisir le nom du produit ">
                             </div>
                             <div class="col">
                                 <label>Date</label>
-                                <input class="form-control fc-datepicker" data-date-format="dd-mm-yyyy" name="invoice_date" id="invoice_date"
-                                    placeholder="DD-MM-YYYY" type="text" value="{{old('invoice_date',$invoices->invoice_date)}}">
+                                <input class="form-control fc-datepicker" data-date-format="dd-mm-yyyy" name="invoice_date"
+                                    id="invoice_date" placeholder="DD-MM-YYYY" type="text"
+                                    value="{{ old('invoice_date', $invoices->invoice_date) }}">
                             </div>
 
                             <div class="col ">
@@ -91,16 +93,18 @@
 
                                 <select name="devise" class="form-control select2" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')">
-                                   
-                                    @foreach($devises as $d)
-                                    <option value="{{ $d->id }}" {{$invoices->devise == $d->id  ? 'selected' : ''}}>{{ $d->devise}}</option>
-                                @endforeach
+
+                                    @foreach ($devises as $d)
+                                        <option value="{{ $d->id }}"
+                                            {{ $invoices->devise == $d->id ? 'selected' : '' }}>{{ $d->devise }}
+                                        </option>
+                                    @endforeach
 
                                 </select>
 
                             </div>
 
-                           
+
                         </div>
 
                         {{-- 2 --}}
@@ -108,33 +112,27 @@
 
 
                         <div class="row">
-
-
-
                             <div class="col ">
 
-
                                 <label for="inputName" class="control-label">Client</label>
-
-
-
                                 <select id="customer_name" name="customer_name" class="form-control select2 "
                                     onclick="console.log($(this).val())" onchange="console.log('change is firing')">
-                                    <option value="">Choisir Client</option>
-                                    @foreach ($customers as $c)
 
-                                        <option value="{{ $c->id }}" adress="{{$c->customer_adress}}">{{ $c->customer_name }}</option>
+                                    @foreach ($customers as $c)
+                                        <option adress="{{ $c->customer_adress }}" value="{{ $c->id }}"
+                                            {{ $invoices->customer_name == $c->id ? 'selected' : '' }}>
+                                            {{ $c->customer_name }}</option>
                                     @endforeach
 
                                 </select>
                             </div>
-
                             <div class="col">
                                 <label for="inputName" class="control-label">Adresse du client</label>
                                 <input type="text" class="form-control" id="customer_adress" name="customer_adress"
-                                    title="Saisir le nom du produit "  readonly>
+                                    title="Saisir le nom du produit "
+                                    value="{{ old('customer_adress', $invoices->customer_adress) }}" readonly>
                             </div>
-                           
+
                         </div>
 
                         {{-- 3 --}}
@@ -145,18 +143,21 @@
                             <div class="col">
                                 <label for="inputName" class="control-label">Nom Societé</label>
                                 <input type="text" class="form-control" id="company_name" name="company_name"
-                                    title="Saisir le nom du produit " value="TINAST SCI">
+                                    title="Saisir le nom du produit "
+                                    value="{{ old('company_name', $invoices->company_name) }}">
 
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Adresse societé</label>
                                 <input type="text" class="form-control" id="company_adress" name="company_adress"
-                                    title="Saisir le nom du produit " value="Agareb Sfax 3030">
+                                    title="Saisir le nom du produit "
+                                    value="{{ old('company_adress', $invoices->company_adress) }}">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Tel</label>
                                 <input type="text" class="form-control" id="company_phone" name="company_phone"
-                                    title="Saisir le nom du produit " value="+216 26 566 627">
+                                    title="Saisir le nom du produit "
+                                    value="{{ old('company_phone', $invoices->company_phone) }}">
                             </div>
 
 
@@ -168,22 +169,26 @@
                             <div class="col">
                                 <label for="inputName" class="control-label">Poids brut</label>
                                 <input type="text" class="form-control" id="poids_brut" name="poids_brut"
-                                    title="Saisir le nom du produit ">
+                                    title="Saisir le nom du produit "
+                                    value="{{ old('poids_brut', $invoices->poids_brut) }}">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Poids net</label>
                                 <input type="text" class="form-control" id="poids_net" name="poids_net"
-                                    title="Saisir le nom du produit ">
+                                    title="Saisir le nom du produit"
+                                    value="{{ old('poids_net', $invoices->poids_net) }}">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Le nombre de colis</label>
                                 <input type="text" class="form-control" id="packages_number" name="packages_number"
-                                    title="Saisir le nom du produit ">
+                                    title="Saisir le nom du produit "
+                                    value="{{ old('packages_number', $invoices->packages_number) }}">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Livraison</label>
                                 <input type="text" class="form-control" id="livraison" name="livraison"
-                                    title="Saisir le nom du produit ">
+                                    title="Saisir le nom du produit"
+                                    value="{{ old('livraison', $invoices->livraison) }}">
                             </div>
                             <div class="col ">
 
@@ -192,23 +197,15 @@
 
 
 
-                                <select class="form-control select2" id="incoterm" name="incoterm">
-                                    <option label="Choisir">Choisir Incoterm</option>
-                                    <option value=" CFR">
-                                        CFR
-                                    </option>
-                                    <option value="BIO">
-                                        BIO
-                                    </option>
-                                    <option value="FOB">
-                                        FOB
-                                    </option>
-                                    <option value="EXW">
-                                        EXW
-                                    </option>
-                                    <option value="CIF">
-                                        CIF
-                                    </option>
+                                <select id="incoterm" name="incoterm" class="form-control select2 "
+                                    onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+
+                                    @foreach ($incoterms as $i)
+                                        <option value="{{ $i->id }}"
+                                            {{ $invoices->incoterm == $i->id ? 'selected' : '' }}>{{ $i->incoterm }}
+                                        </option>
+                                    @endforeach
+
                                 </select>
 
 
@@ -216,7 +213,8 @@
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Détails de paiement</label>
-                                <input type="text" class="form-control" id="payment_details" name="payment_details">
+                                <input type="text" class="form-control" id="payment_details" name="payment_details"
+                                    value="{{ old('payment_details', $invoices->payment_details) }}">
                             </div>
                         </div>
 
@@ -231,7 +229,7 @@
                                     <table class="table table-bordered" id="dynamicAddRemove">
                                         <thead>
                                             <tr>
-                                                <th></th>
+
                                                 <th style="width: 16.66%" scope="col">Catégorie du produit</th>
                                                 <th style="width: 20%" scope="col">Produit</th>
                                                 <th style="width: 20%" scope="col">Designation</th>
@@ -244,109 +242,135 @@
                                         </thead>
                                         <tbody class="addMoreProduct">
 
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    <select name="categorie_id[0]" id="categorie_id"
-                                                        class="form-control categorie_id ">
-                                                        <option label="Choisir Categorie"></option>
-                                                        @foreach ($categories as $categorie)
-                                                            <option value="{{ $categorie->id }}">
-                                                                {{ $categorie->categorie_name }}
-                                                            </option>
-                                                        @endforeach
+                                            @foreach ($invoices->details as $item)
 
 
-                                                    </select>
-                                                </td>
-                                                <td> <select name="product_id[0]" id="categorie_id"
-                                                        class="form-control product_id ">
-                                                        <option label="Choisir Produit"></option>
+                                                <tr id="{{ $loop->index }}">
+
+                                                    <td>
+                                                        <select name="categorie_id[{{ $loop->index }}]" id="categorie_id"
+                                                            class="form-control categorie_id ">
+                                                            
+                                                            <option label="Choisir Categorie"></option>
+                                                            
+                                                            @foreach ($categories as $categorie)
+                                                                <option value="{{ $categorie->id }}"
+                                                                    {{ $item->categorie_id == $categorie->id ? 'selected' : '' }}>
+                                                                    {{ $categorie->categorie_name }}
+                                                                </option>
+                                                            @endforeach
+
+                                                        </select>
+                                                    </td>
+                                                    <td> <select name="product_id[{{ $loop->index }}]" id="product_id"
+                                                            class="form-control product_id ">
+                                                            <option value="{{ $item->product->id }}">
+                                                                {{ $item->product->name }}</option>
+
+                                                        </select></td>
+                                                    <td> <select name="size_id[{{ $loop->index }}]" id="size_id"
+                                                            class="form-control size_id ">
+
+                                                            <option value="{{ $item->size->id }}">
+                                                                {{ $item->size->designation}}</option>
+
+                                                        </select></td>
 
 
 
-                                                    </select></td>
-                                                <td> <select name="size_id[0]" id="size_id" class="form-control size_id ">
+                                                    <td>
 
-                                                        <option label="Choisir Designation"></option>
+                                                        <input type="text" name="quantity[{{ $loop->index }}]"
+                                                            class="form-control quantity"
+                                                            value="{{ old('quantity', $item->quantity) }}" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="unit_price{{ $loop->index }}]"
+                                                            class="form-control unit_price "
+                                                            value="{{ old('unit_price', $item->unit_price) }}" />
+                                                    </td>
+                                                    <td>
 
-                                                    </select></td>
+                                                        <input type="text" name="total_price[{{ $loop->index }}]"
+                                                            class="form-control total_price"
+                                                            value="{{ old('total_price', $item->total_price) }}"
+                                                            readonly />
+                                                    </td>
+                                                    <td>
+                                                        @if ($loop->index == 0)
+                                                            {{ '#' }}
+                                                        @else
+                                                            <a class="btn btn-danger btn-sm delete "><i
+                                                                    class="fa fa-trash"></i></a>
+                                                        @endif
+                                                    </td>
 
-
-
-                                                <td>
-
-                                                    <input type="text" name="quantity[0]" class="form-control quantity" />
-                                                </td>
-                                                <td>
-                                                    <input type="text" name="unit_price[0]" class="form-control unit_price "
-                                                      />
-                                                </td>
-                                                <td>
-
-                                                    <input type="text" name="total_price[0]"
-                                                        class="form-control total_price" readonly />
-                                                </td>
-                                                <td> <a class="btn btn-danger btn-sm"><i class="fa fa-times"></a></td>
-
-                                            </tr>
+                                                </tr>
+                                                @php
+                                                    $i = $loop->index;
+                                                @endphp
+                                            @endforeach
                                         </tbody>
 
                                     </table>
 
-                                <div class="invoice_details">
-                                <div class="col-md-3 ml-auto">
+                                    <div class="invoice_details">
+                                        <div class="col-md-3 ml-auto">
 
-                                    <label for="sub_total">Sub Total</label>
-
-
-
-                                    <input type="text" id="sub_total" name="sub_total" class="form-control sub_total" readonly>
-                                </div>
-
-                                <div class="col-md-3 ml-auto">
-
-                                    <label for="shipping">Shipping Costs</label>
-
-                                    <input type="text" id="shipping" name="shipping" class="form-control shipping">
-                                </div>
-                                <div class="col-md-3 ml-auto">
-
-                                    <label for="total_due">Total Due</label>
+                                            <label for="sub_total">Sub Total</label>
 
 
 
-                                    <input type="text" id="total_due" name="total_due" class="form-control total_due" readonly>
-                                </div>
-                            </div>
+                                            <input type="text" id="sub_total" name="sub_total"
+                                                class="form-control sub_total"
+                                                value="{{ old('sub_total', $invoices->sub_total) }}" readonly>
+                                        </div>
+
+                                        <div class="col-md-3 ml-auto">
+
+                                            <label for="shipping">Shipping Costs</label>
+
+                                            <input type="text" id="shipping" name="shipping" class="form-control shipping"
+                                                value="{{ old('shipping', $invoices->shipping) }}">
+                                        </div>
+                                        <div class="col-md-3 ml-auto">
+
+                                            <label for="total_due">Total Due</label>
 
 
-                                <br>
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                </div>
+
+                                            <input type="text" id="total_due" name="total_due"
+                                                class="form-control total_due"
+                                                value="{{ old('total_due', $invoices->total_due) }}" readonly>
+                                        </div>
+                                    </div>
+
+
+                                    <br>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary">Modifier</button>
+                                    </div>
 
 
                     </form>
-                    
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Grid modal -->
+
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- End Basic modal -->
+    </div>
+    <!--End Grid modal -->
+    </div>
+    </div>
+    </div>
+    <!-- End Basic modal -->
 
 
 
 
 
 
-        <!-- row closed -->
+    <!-- row closed -->
     </div>
 
 
@@ -384,6 +408,7 @@
         var date = $('.fc-datepicker').datepicker({
             dateFormat: 'dd-mm-yy'
         }).val();
+
     </script>
 
 
@@ -391,8 +416,6 @@
         $(function() {
             $('select[name="customer_name"]').change(function() {
                 var option = $('option:selected', this).attr('adress');
-               
-          
 
                 $('input[name="customer_adress"]').val(option);
             })
@@ -410,17 +433,14 @@
     </script>
 
     <script>
-        var i = 0;
+        var i = '<?php echo $i; ?>';
 
         $('.add_more').on('click', function() {
 
             ++i;
             var categorie = $('.categorie_id').html();
 
-
-            var numberofrow = ($('.addMoreProduct tr').length - 0) + 1;
-
-            var tr = '<tr><td class"no"">' + numberofrow + '</td>' +
+            var tr = '<tr>' +
                 '<td> <select class="form-control categorie_id  "  id="categorie_id" name="categorie_id[' + i +
                 ']" >' + categorie +
                 '</select></td>' +
@@ -443,13 +463,16 @@
             $(this).parent().parent().remove();
         });
 
-    </script> 
+    </script>
     <script>
         $(document).on('change', 'select[name^="categorie_id"]', function() {
+            var s = $(this).find(':selected').data('id');
+            console.log(s, "Hello, world!");
             var curEle = jQuery(this);
             var categorieID = curEle.val();
             var parentEle = curEle.closest('tr');
             var prodEle = parentEle.find('select[name^="product_id"]');
+
             var sizeEle = parentEle.find('select[name^="size_id"]');
             sizeEle.empty();
             prodEle.empty();
@@ -490,7 +513,7 @@
                     success: function(data) {
                         sizeEle.append(' <option label="Choisir Designation"></option>');
                         jQuery.each(data, function(key, value) {
-                            sizeEle.append('<option value="' + key + '">' + value +
+                            sizeEle.append('<option value="' + value.id + '" data-price="' + value.selling_price + '">' + value.designation +
                                 '</option>');
 
                         });
@@ -503,41 +526,42 @@
     <script>
         function TotalAmount() {
             var total = 0;
-          
-            $('.total_price').each(function(i,e) {
+
+            $('.total_price').each(function(i, e) {
                 var amount = $(this).val() - 0;
                 total += amount;
 
             })
-           var subtotal =  total;
+            var subtotal = total;
             $('.sub_total').val(subtotal);
         }
 
     </script>
     <script>
-        let due_total = function(){
-            let due = 0 ;
-            let sub_totalVal = parseFloat($('.sub_total').val())   || 0 ;
-            let shippingVal = parseFloat($('.shipping').val())  || 0 ;
+        let due_total = function() {
+            let due = 0;
+            let sub_totalVal = parseFloat($('.sub_total').val()) || 0;
+            let shippingVal = parseFloat($('.shipping').val()) || 0;
             due += sub_totalVal;
-            due += shippingVal; 
+            due += shippingVal;
             return due;
         }
+
     </script>
 
 
 
 
     <script>
-       
         $('.addMoreProduct').delegate('.size_id', 'change', function() {
 
             var tr = $(this).parent().parent();
 
-            var price = tr.find('.size_id option:selected').val();
+            var price = tr.find('.size_id option:selected').attr('data-price');
             tr.find('.unit_price').val(price);
+
             var qty = tr.find('.quantity').val() - 0;
-            var price = tr.find('.unit_price').val() - 0;
+
             var totalprice = (qty * price);
             tr.find('.total_price').val(totalprice);
             TotalAmount();
@@ -551,12 +575,12 @@
             var price = tr.find('.unit_price').val() - 0;
             var totalprice = (qty * price);
             tr.find('.total_price').val(totalprice);
-           
+
             TotalAmount();
             $('.total_due').val(due_total());
         })
         $('.invoice_details').delegate('.shipping', 'keyup', function() {
-             
+
             TotalAmount();
             $('.total_due').val(due_total());
         })

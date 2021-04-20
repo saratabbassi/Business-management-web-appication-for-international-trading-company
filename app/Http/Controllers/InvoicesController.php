@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\devise;
+use App\incoterm;
 use App\invoices;
 use App\customers;
 use App\categories;
 use App\sizes;
 use App\products;
+use App\Notifications\AddInvoice;
+use Illuminate\Support\Facades\Notification;
+use App\User;
 
 use Illuminate\Http\Request;
 use DB;
@@ -43,18 +47,16 @@ class InvoicesController extends Controller
     $last = "Aucune facture disponible";
  }else{
     $last =invoices::pluck('invoice_no')->last();
- }
-       
-     
-        
-       $devises = devise::all();
+ }       
+    $devises = devise::all();
         $customers =customers::all();
         $categories=categories::all();
+        $incoterms = incoterm::all();
       
        
 
        
-        return view('invoices.add_invoices',compact('last','devises','customers','categories'));
+        return view('invoices.add_invoices',compact('last','devises','customers','categories','incoterms'));
     }
 
     /**
@@ -68,7 +70,7 @@ class InvoicesController extends Controller
     public function store(Request $request)
 
     {   
-        
+        $invoice_id = invoices::latest()->first()->id;
         $data['invoice_no'] = $request->invoice_no;
             
         $data['last_invoice_no'] = $request->last_invoice_no;
@@ -91,10 +93,12 @@ class InvoicesController extends Controller
         $data['total_due'] = $request->total_due;
         $data['created_by'] = (Auth::user()->name);
 
-        $invoice = Invoices::create($data);
+        $invoices = Invoices::create($data);
 
         $details_list = [];
         for ($i = 0; $i < count($request->categorie_id); $i++) {
+           
+                                  
             $details_list[$i]['categorie_id'] = $request->categorie_id[$i];
             $details_list[$i]['product_id'] = $request->product_id[$i];
             $details_list[$i]['size_id'] = $request->size_id[$i];
@@ -102,12 +106,14 @@ class InvoicesController extends Controller
             $details_list[$i]['unit_price'] = $request->unit_price[$i];
             $details_list[$i]['total_price'] = $request->total_price[$i];
             $details_list[$i]['created_by'] = (Auth::user()->name);
-        }
+       
+                   }
 
-        $details = $invoice->details()->createMany($details_list);
-
+        $details = $invoices->details()->createMany($details_list);
+         $user = User::first();
+           Notification::send($user, new AddInvoice($invoice_id));
         if ($details) {
-            return redirect()->back()->with([
+            return redirect('/invoices')->with([
                 'message' => __('la facture est créé avec succès'),
                 'alert-type' => 'success'
             ]);
@@ -144,11 +150,13 @@ class InvoicesController extends Controller
         $devises = devise::all();
          $customers =customers::all();
          $categories=categories::all();
+         $incoterms = incoterm::all();
+         $incoterms = incoterm::all();
        
         
  
         
-         return view('invoices.edit_invoice',compact('devises','customers','categories','invoices'));
+         return view('invoices.edit_invoice',compact('devises','customers','categories','invoices','incoterms'));
     }
 
     /**
@@ -182,10 +190,13 @@ class InvoicesController extends Controller
         $data['total_due'] = $request->total_due;
         $data['created_by'] = (Auth::user()->name);
 
-        $invoice = Invoices::create($data);
+        $invoices->update($data);
+
+        $invoices->details()->delete();
 
         $details_list = [];
         for ($i = 0; $i < count($request->categorie_id); $i++) {
+           
             $details_list[$i]['categorie_id'] = $request->categorie_id[$i];
             $details_list[$i]['product_id'] = $request->product_id[$i];
             $details_list[$i]['size_id'] = $request->size_id[$i];
@@ -195,7 +206,7 @@ class InvoicesController extends Controller
             $details_list[$i]['created_by'] = (Auth::user()->name);
         }
 
-        $details = $invoice->details()->createMany($details_list);
+        $details = $invoices->details()->createMany($details_list);
 
         if ($details) {
             return redirect()->back()->with([
@@ -216,21 +227,49 @@ class InvoicesController extends Controller
      * @param  \App\invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function destroy(invoices $invoices)
+    public function destroy(request $request)
     {
-        //
+        $id = $request->id;
+       invoices::find($id)->delete();
+        session()->flash('delete','La facture est supprimé avec succès');
+        return redirect('/invoices');
     }
-    public function getProducts($id)
+    
+   
+   public function getProducts($id)
     {
-        $products = DB::table("products")->where("categorie_id", $id)->pluck("name", "id","user");
+      
+        $products = DB::table("products")->where("categorie_id", $id)->pluck("name", "id");
         return json_encode($products);
     }
     public function getDesignation($id)
     {
-        $sizes = DB::table("sizes")->where("product_id", $id)->pluck("designation", "selling_price" ,"id");
+    
+      $sizes = DB::table("sizes")->where("product_id", $id)->get();
         return json_encode($sizes);
     }
-  
+    public function Print_invoice_fr($id)
+    {
+        $invoices = invoices::where('id', $id)->first();
+        return view('invoices.Print_invoice_fr',compact('invoices'));
+    }
+    public function Print_invoice_en($id)
+    {
+        $invoices = invoices::where('id', $id)->first();
+        return view('invoices.Print_invoice_en',compact('invoices'));
+    }
+    public function Print_packing_fr($id)
+    {
+        $invoices = invoices::where('id', $id)->first();
+        return view('invoices.Print_packing_fr',compact('invoices'));
+    }
+    public function Print_packing_en($id)
+    {
+        $invoices = invoices::where('id', $id)->first();
+        return view('invoices.Print_packing-en',compact('invoices'));
+    }
+    
+   
    
 
 }
