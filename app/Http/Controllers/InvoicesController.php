@@ -7,6 +7,7 @@ use App\invoices;
 use App\customers;
 use App\categories;
 use App\sizes;
+use App\invoices_details;
 use App\products;
 use App\Notifications\AddInvoice;
 use Illuminate\Support\Facades\Notification;
@@ -96,7 +97,7 @@ class InvoicesController extends Controller
             'invoice_no.required' => 'Saisir le numero de facture',
             'devise.required' => 'Choisir un devise',
             'customer_name.required' => 'Choisir un Client',
-            'customer_name.required' => 'Le champ adresse du client est obligatoire',
+            'customer_adress.required' => 'Le champ adresse du client est obligatoire',
             'company_name.required'=>'Le champ Nom Societé est obligatoire',
             'company_adress.required'=>'Le champ Adresse societé est obligatoire',
             'company_phone.required'=>'Le champ Tel est obligatoire',
@@ -106,9 +107,12 @@ class InvoicesController extends Controller
             'sub_total.required'=>'Le champ Sub Total est obligatoire',
             'total_due.required'=>'Le champ Total due  est obligatoire',
             'incoterm.required' => 'Choisir un Incoterm',
+          
             ]);
         $data['invoice_no'] = $request->invoice_no;
-            
+        $data['Status'] = 'Non Payé';
+        $data['Value_Status'] = 2;
+        
         $data['last_invoice_no'] = $request->last_invoice_no;
         $data['devise'] = $request->devise;
         $data['customer_name'] = $request->customer_name;
@@ -132,6 +136,16 @@ class InvoicesController extends Controller
         $data['created_by'] = (Auth::user()->name);
 
         $invoices = Invoices::create($data);
+        
+        $invoice_id = invoices::latest()->first()->id;
+        invoices_details::create([
+            'id_Invoice' => $invoice_id,
+            'invoice_number' => $request->invoice_no,
+            'Status' => 'Non Payé',
+            'Value_Status' => 2,
+          
+            'user' => (Auth::user()->name),
+        ]);
 
         $details_list = [];
         for ($i = 0; $i < count($request->categorie_id); $i++) {

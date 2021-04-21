@@ -48,16 +48,10 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                   
 
-                        <a href="products/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-                                class="fas fa-plus"></i> &nbsp;Céer Produit</a>
-                    
-                        <a class="modal-effect btn btn-sm btn-success" href="{{ url('export_products') }}"
-                        style="color:white"><i class="fas fa-file-download"></i>&nbsp;Exporter Excel</a>
-               
-                 
 
+                    <a href="products/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
+                            class="fas fa-plus"></i> &nbsp;Céer Produit</a>
 
                 </div>
                 <div class="card-body">
@@ -100,15 +94,15 @@
 
 
                                     <!--			<td> 
-                 @if ($prod->stock == 0)
-                 <span class="text-danger">{{ $prod->stock }}</span>
+                     @if ($prod->stock == 0)
+                     <span class="text-danger">{{ $prod->stock }}</span>
             @elseif ($prod->stock < 6)
-                <span class="text-warning">{{ $prod->stock }}</span>
-                 
+                    <span class="text-warning">{{ $prod->stock }}</span>
+                     
             @else
-                <span class="text-success">{{ $prod->stock }}</span>
-                @endif
-               </td>-->
+                    <span class="text-success">{{ $prod->stock }}</span>
+                    @endif
+                   </td>-->
                                     <td>
 
 
@@ -178,31 +172,31 @@
 
         @endsection
         @section('js')
-        <!-- Internal Data tables -->
-        <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-        <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-        <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-   
-        <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-       
-        
-        <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
-        <!--Internal  Datatable js -->
-        <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-        <script>
-            $('#modaldemo9').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var id = button.data('id')
-                var name = button.data('name')
-                var modal = $(this)
-                modal.find('.modal-body #id').val(id);
-                modal.find('.modal-body #name').val(name);
-            })
+            <!-- Internal Data tables -->
+            <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
 
-        </script>
-    @endsection
+            <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+
+
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+            <!--Internal  Datatable js -->
+            <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+            <script>
+                $('#modaldemo9').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget)
+                    var id = button.data('id')
+                    var name = button.data('name')
+                    var modal = $(this)
+                    modal.find('.modal-body #id').val(id);
+                    modal.find('.modal-body #name').val(name);
+                })
+
+            </script>
+        @endsection

@@ -162,6 +162,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -229,6 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'NumConvert' => 'HnhDigital\LaravelNumberConverter\Facade',
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Form' => Collective\Html\FormFacade::class,
+'Html' => Collective\Html\HtmlFacade::class,
 
     ],
     

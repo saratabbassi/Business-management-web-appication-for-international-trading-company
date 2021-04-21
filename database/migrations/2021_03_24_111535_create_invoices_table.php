@@ -34,6 +34,8 @@ class CreateInvoicesTable extends Migration
             $table->string('shipping');
             $table->string('total_due');
             $table->string('packages')->nullable();
+            $table->string('Status', 50);
+            $table->string('Value_Status', 50);
             $table->string('created_by',999);
              
 

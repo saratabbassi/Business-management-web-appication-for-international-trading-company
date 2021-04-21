@@ -48,14 +48,14 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                  
 
-                        <a href="invoices/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-                                class="fas fa-plus"></i> &nbsp;Céer Facture</a>
-                      
-                        <a class="modal-effect btn btn-sm btn-success" href="{{ url('export_invoices') }}"
-                            style="color:white"><i class="fas fa-file-download"></i>&nbsp;Exporter Excel</a>
-                   
+
+                    <a href="invoices/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
+                            class="fas fa-plus"></i> &nbsp;Céer Facture</a>
+
+                    <a class="modal-effect btn btn-sm btn-success" href="{{ url('export_invoices') }}"
+                        style="color:white"><i class="fas fa-file-download"></i>&nbsp;Exporter Excel</a>
+
 
 
                 </div>
@@ -71,9 +71,9 @@
                                     <th class="border-bottom-0">Date</th>
                                     <th class="border-bottom-0">Status</th>
                                     <th class="border-bottom-0">Crée par</th>
-                                     <th class="border-bottom-0">Imprimer </th>
-                                 
-									<th class="border-bottom-0">Operations</th>
+                                    <th class="border-bottom-0">Imprimer </th>
+
+                                    <th class="border-bottom-0">Operations</th>
 
 
                                 </tr>
@@ -82,10 +82,10 @@
                                 @php
                                     $i = 0;
                                 @endphp
-   <?php
-   use App\invoices;
-   $invoices = invoices::all();
-   ?>
+                                <?php
+                                use App\invoices;
+                                $invoices = invoices::all();
+                                ?>
                                 @foreach ($invoices as $invoice)
                                     @php
                                         $i++;
@@ -95,7 +95,16 @@
                                     <td>{{ $invoice->invoice_no }} </td>
                                     <td>{{ $invoice->customer_name }}</td>
                                     <td>{{ $invoice->invoice_date }}</td>
-                                    <td>paid</td>
+                                    <td>
+                                        @if ($invoice->Value_Status == 1)
+                                            <span class="text-success">{{ $invoice->Status }}</span>
+                                        @elseif($invoice->Value_Status == 2)
+                                            <span class="text-danger">{{ $invoice->Status }}</span>
+                                        @else
+                                            <span class="text-warning">{{ $invoice->Status }}</span>
+                                        @endif
+
+                                    </td>
                                     <td>{{ $invoice->created_by }}</td>
                                     <td>
                                         <div class="dropdown">
@@ -104,54 +113,73 @@
                                                 type="button">Imprimer<i class="fas fa-caret-down ml-1"></i></button>
                                             <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="Print_proforma_fr/{{ $invoice->id }}"><i
-                                                    class="text-info fas fa-print"></i>&nbsp;&nbsp;Proforma Facture FR
-                                                
-                                            </a>
-                                            <a class="dropdown-item" href="Print_proforma_en/{{ $invoice->id }}"><i
-                                                class="text-info fas fa-print"></i>&nbsp;&nbsp;Proforma Facture ANG
-                                            
-                                        </a>
-                                               
-                                                
+                                                        class="text-info fas fa-print"></i>&nbsp;&nbsp;Proforma Facture FR
+
+                                                </a>
+                                                <a class="dropdown-item" href="Print_proforma_en/{{ $invoice->id }}"><i
+                                                        class="text-info fas fa-print"></i>&nbsp;&nbsp;Proforma Facture ANG
+
+                                                </a>
+
+
                                                 <a class="dropdown-item" href="Print_packing_fr/{{ $invoice->id }}"><i
-                                                    class="text-primary fas fa-print"></i>&nbsp;&nbsp;Liste De Colisage FR
-                                                
-                                            </a>
-                                            <a class="dropdown-item" href="Print_packing_en/{{ $invoice->id }}"><i
-                                                class="text-primary fas fa-print"></i>&nbsp;&nbsp;Liste De Colisage ANG
-                                            
-                                        </a>
-                                        <a class="dropdown-item" href="Print_invoice_fr/{{ $invoice->id }}"><i
-                                            class="text-success fas fa-print"></i>&nbsp;&nbsp;Facture FR
-                                        
-                                    </a>
-                                    <a class="dropdown-item" href="Print_invoice_en/{{ $invoice->id }}"><i
-                                        class="text-success fas fa-print"></i>&nbsp;&nbsp;Facture ANG
-                                    
-                                </a>
-                                     
-                                              
+                                                        class="text-primary fas fa-print"></i>&nbsp;&nbsp;Liste De Colisage
+                                                    FR
+
+                                                </a>
+                                                <a class="dropdown-item" href="Print_packing_en/{{ $invoice->id }}"><i
+                                                        class="text-primary fas fa-print"></i>&nbsp;&nbsp;Liste De Colisage
+                                                    ANG
+
+                                                </a>
+                                                <a class="dropdown-item" href="Print_invoice_fr/{{ $invoice->id }}"><i
+                                                        class="text-success fas fa-print"></i>&nbsp;&nbsp;Facture FR
+
+                                                </a>
+                                                <a class="dropdown-item" href="Print_invoice_en/{{ $invoice->id }}"><i
+                                                        class="text-success fas fa-print"></i>&nbsp;&nbsp;Facture ANG
+
+                                                </a>
+
+
                                             </div>
                                         </div>
 
                                     </td>
-                                                                  
-										                                                                       
-									<td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button aria-expanded="false" aria-haspopup="true"
+                                                class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
+                                                type="button">Opérations<i class="fas fa-caret-down ml-1"></i></button>
+                                            <div class="dropdown-menu tx-13">
 
-                                        <a class="modal-effect btn btn-sm btn-success" data-effect="effect-scale"
-                                            data-id="{{ $invoice->id }}" data-name="{{ $invoice->invoice_no }}"
-                                            data-toggle="modal" href="#modaldemo9" title="Supprimer"><i
-                                                class="las la-eye"></i></a>
-                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                            href="{{ url('edit_invoice') }}/{{ $invoice->id }}" title="Modifier"><i
-                                                class="las la-pen"></i></a>
+                                                <a class="dropdown-item" data-effect="effect-scale"
+                                                href="{{ url('edit_invoice') }}/{{ $invoice->id }}" title="Modifier"><i
+                                                    class="text-info fas fa-pen-alt"></i>&nbsp;&nbsp;
+                                               Modifier</a>
 
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                            data-id="{{ $invoice->id }}" data-name="{{ $invoice->invoice_no }}"
-                                            data-toggle="modal" href="#modaldemo9" title="Supprimer"><i
-                                                class="las la-trash"></i></a>
+
+
+                                                    <a class="dropdown-item" 
+                                                    data-id="{{ $invoice->id }}" data-name="{{ $invoice->invoice_no }}"
+                                                    data-toggle="modal" href="#modaldemo9" title="Supprimer"><i
+                                                            class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;
+                                                        Supprimer</a>
+                                                        <a class="dropdown-item" href="Print_invoice/{{ $invoice->id }}"><i
+                                                            class="text-success fas fa-money-bill"></i>&nbsp;&nbsp;
+                                                            Changer l'état de paiment
+                                                    </a>
+
+                                                    <a class="dropdown-item"    href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}"><i
+                                                            class="text-primary fas fa-eye"></i>&nbsp;&nbsp;
+                                                            Afficher les détails
+                                                    </a>
+
+                                            </div>
+                                        </div>
+
                                     </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
