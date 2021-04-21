@@ -11,6 +11,8 @@ use App\products;
 use App\Notifications\AddInvoice;
 use Illuminate\Support\Facades\Notification;
 use App\User;
+use App\Exports\InvoicesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Http\Request;
 use DB;
@@ -70,14 +72,48 @@ class InvoicesController extends Controller
     public function store(Request $request)
 
     {   
-        $invoice_id = invoices::latest()->first()->id;
+        $validatedData = $request->validate([
+            'invoice_no' => 'required|unique:invoices',
+            'devise' =>'required',
+            'customer_name' => 'required',
+            'customer_adress' =>'required',
+            'invoice_date' => 'required',
+            'company_adress' =>'required',
+            'company_name' =>'required',
+            'company_phone' =>'required',
+            'poids_brut'=>'required',
+            'poids_net'=>'required',
+            'incoterm'=>'required',
+            'payment_details'=>'required',
+            'sub_total'=>'required',
+            'total_due'=>'required',
+
+           
+
+
+        ],[
+            'invoice_no.unique'=>'Le numero de facture a déjà été pris',
+            'invoice_no.required' => 'Saisir le numero de facture',
+            'devise.required' => 'Choisir un devise',
+            'customer_name.required' => 'Choisir un Client',
+            'customer_name.required' => 'Le champ adresse du client est obligatoire',
+            'company_name.required'=>'Le champ Nom Societé est obligatoire',
+            'company_adress.required'=>'Le champ Adresse societé est obligatoire',
+            'company_phone.required'=>'Le champ Tel est obligatoire',
+            'poids_brut.required'=>'Le champ Poids brut est obligatoire',
+            'poids_net.required'=>'Le champ Poids net est obligatoire',
+            'payment_details.required'=>'Le champ Détails de paiement est obligatoire',
+            'sub_total.required'=>'Le champ Sub Total est obligatoire',
+            'total_due.required'=>'Le champ Total due  est obligatoire',
+            'incoterm.required' => 'Choisir un Incoterm',
+            ]);
         $data['invoice_no'] = $request->invoice_no;
             
         $data['last_invoice_no'] = $request->last_invoice_no;
         $data['devise'] = $request->devise;
         $data['customer_name'] = $request->customer_name;
         $data['customer_adress'] = $request->customer_adress;
-        $data['invoice_no'] = $request->invoice_no;
+     
         $data['invoice_date'] = $request->invoice_date;
       
         $data['company_adress'] = $request->company_adress;
@@ -85,7 +121,9 @@ class InvoicesController extends Controller
         $data['company_phone'] = $request->company_phone;
         $data['poids_brut'] = $request->poids_brut;
         $data['poids_net'] = $request->poids_net;
+        $data['poids_emballage'] = $request->poids_emballage;
         $data['livraison'] = $request->livraison;
+        $data['packages'] = $request->packages;
         $data['incoterm'] = $request->incoterm;
         $data['payment_details'] = $request->payment_details;
         $data['sub_total'] = $request->sub_total;
@@ -104,12 +142,15 @@ class InvoicesController extends Controller
             $details_list[$i]['size_id'] = $request->size_id[$i];
             $details_list[$i]['quantity'] = $request->quantity[$i];
             $details_list[$i]['unit_price'] = $request->unit_price[$i];
+            $details_list[$i]['weight'] = $request->weight[$i];
+            $details_list[$i]['total_weight'] = $request->total_weight[$i];
             $details_list[$i]['total_price'] = $request->total_price[$i];
             $details_list[$i]['created_by'] = (Auth::user()->name);
        
                    }
 
         $details = $invoices->details()->createMany($details_list);
+        $invoice_id = invoices::latest()->first()->id;
          $user = User::first();
            Notification::send($user, new AddInvoice($invoice_id));
         if ($details) {
@@ -266,10 +307,23 @@ class InvoicesController extends Controller
     public function Print_packing_en($id)
     {
         $invoices = invoices::where('id', $id)->first();
-        return view('invoices.Print_packing-en',compact('invoices'));
+        return view('invoices.Print_packing_en',compact('invoices'));
+    }
+    public function Print_proforma_en($id)
+    {
+        $invoices = invoices::where('id', $id)->first();
+        return view('invoices.Print_proforma_en',compact('invoices'));
+    }
+    public function Print_proforma_fr($id)
+    {
+        $invoices = invoices::where('id', $id)->first();
+        return view('invoices.Print_proforma_fr',compact('invoices'));
     }
     
-   
+    public function export() 
+    {
+        return Excel::download(new InvoicesExport, 'invoices.xlsx');
+    }
    
 
 }

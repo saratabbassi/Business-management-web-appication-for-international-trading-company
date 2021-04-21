@@ -11,6 +11,8 @@ use App\products_attachement;
 use Validator,Redirect,Response;
 
 use Illuminate\Support\Facades\Auth;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductsController extends Controller
 {
@@ -276,4 +278,8 @@ public function delete(Request $request){
        
     }
 }
+public function export() 
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+    }
 }

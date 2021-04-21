@@ -24,15 +24,16 @@ class CreateInvoicesTable extends Migration
             $table->string('company_name');
             $table->string('company_adress');
             $table->string('company_phone');
-            $table->string('poids_brut');
-            $table->string('poids_net');
-            $table->string('livraison');   
+            $table->decimal('poids_brut');
+            $table->decimal('poids_emballage');
+            $table->decimal('poids_net');
+            $table->string('livraison')->nullable();   
             $table->string('incoterm');   
             $table->string('payment_details');
             $table->string('sub_total');
             $table->string('shipping');
             $table->string('total_due');
-            $table->string('packages');
+            $table->string('packages')->nullable();
             $table->string('created_by',999);
              
 

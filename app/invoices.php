@@ -5,6 +5,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use NumberToWords\NumberToWords;
 
 class invoices extends Model
 {
@@ -28,5 +29,5 @@ class invoices extends Model
  {
  return $this->belongsTo('App\customers');
  }
- 
+
 }

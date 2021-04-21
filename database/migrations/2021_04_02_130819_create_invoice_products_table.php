@@ -21,6 +21,8 @@ class CreateInvoiceProductsTable extends Migration
             $table->unsignedInteger('quantity');
             $table->decimal('total_price');
             $table->decimal('unit_price');
+            $table->decimal('weight');
+            $table->decimal('total_weight');
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->string('created_by',999);

@@ -153,20 +153,27 @@
 
 
                         </div>
-                        <div class="row mg-t-20">
+                        <br>
+                        <span class="tx-bold">Total Amount :  @php
+                            echo NumConvert::word($invoices->total_due);
 
+                         @endphp </span>
+                        <div class="row mg-t-20">
+                           
+                          
+                           
                             <div class="col-md-3">
-                                <label class="tx-gray-600">Total Amount : </label>
+                               
                                 <p class="invoice-info-row"><span>
                                         
-Gross weight: </span> <span>{{ $invoices->poids_brut }} kg</span></p>
+Gross weight: </span> <span> {{ number_format( $invoices->poids_brut , 2) }} kg</span></p>
 
                                 <p class="invoice-info-row"><span>
                                     Net weight:</span>
-                                    <span>{{ $invoices->poids_net }} kg</span>
+                                    <span> {{ number_format( $invoices->poids_net , 2) }} kg</span>
                                 </p>
                                 <p class="invoice-info-row"><span>Number Of packages:</span>
-                                    <!--<span>{{ $invoices->packages }}--></span>
+                                    {{ $invoices->packages }}</span>
                                 </p>
                                 <p class="invoice-info-row"><span>
                                         Delivery:</span> <span>{{ $invoices->livraison }}</span></p>

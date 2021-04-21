@@ -32,7 +32,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Factures</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                <h4 class="content-title mb-0 my-auto">Proforma Factures</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                     Imprimer</span>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <div class="card card-invoice">
                     <div class="card-body">
                         <div class="invoice-header">
-                            <h1 class="invoice-title">Facture</h1>
+                            <h1 class="invoice-title">Proforma Facture</h1>
                             <div class="col-md-1 invoice-info-row">
 
                                 <img src="{{ asset('assets/img/brand/logo.png') }}" class="logo-1" alt="logo">
@@ -78,9 +78,9 @@
 
                             </div>
                             <div class="col-md">
-                                <label class="tx-gray-600">Informations sur la facture</label>
+                                <label class="tx-gray-600">Informations sur la proforma facture</label>
                                 <p class="invoice-info-row"><span>
-                                        Numéro de facture</span> <span>{{ $invoices->invoice_no }}</span></p>
+                                        Numéro de proforma facture</span> <span>{{ $invoices->invoice_no }}</span></p>
 
                                 <p class="invoice-info-row"><span>Date:</span> <span>{{ $invoices->invoice_date }}</span>
                                 </p>
@@ -122,26 +122,21 @@
                                     @endforeach
 
                                     <tr>
-                                        <td class="valign-middle" colspan="2" rowspan="3">
+                                        <td class="valign-middle" colspan="2" rowspan="2">
                                             <div class="invoice-notes">
 
 
                                             </div><!-- invoice-notes -->
                                         </td>
-                                        <td class="tx-right">Sous-Total</td>
-                                        <td class="tx-right" colspan="2">{{ number_format( $invoices->sub_total , 2) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tx-right">Frais de livraison</td>
-                                        <td class="tx-right" colspan="2">{{ number_format( $invoices->shipping , 2) }}</td>
-                                    </tr>
+                                      
+                                   
 
 
 
                                     <tr>
                                         <td class="tx-right tx-uppercase tx-bold tx-inverse">Total de la facture </td>
                                         <td class="tx-right" colspan="2">
-                                            <h4 class="tx-primary tx-bold">{{ number_format( $invoices->total_due , 2) }}</h4>
+                                            <h4 class="tx-primary tx-bold">{{ number_format( $invoices->sub_total , 2) }}</h4>
                                         </td>
                                     </tr>
 
@@ -157,23 +152,12 @@
                            
                         </div>
                         <br>
-                        <span class="tx-bold">Arrêter la présente facture à la somme de : {{$f->format($invoices->total_due)}} </span>
+                        <span class="tx-bold">Arrêter la présente facture à la somme de : {{$f->format($invoices->sub_total)}} </span>
                         <div class="row mg-t-20">
 
                             <div class="col-md-3">
-                               
-                                <p class="invoice-info-row"><span>
-                                        Poids brut: </span> <span>{{ $invoices->poids_brut }} kg</span></p>
-
-                                <p class="invoice-info-row"><span>Poids net:</span>
-                                    <span>{{ $invoices->poids_net }} kg</span>
-                                </p>
-                                <p class="invoice-info-row"><span>Nombre de colis:</span>
-                                    {{ $invoices->packages }}</span>
-                                </p>
-                                <p class="invoice-info-row"><span>
-                                        Livraison:</span> <span>{{ $invoices->livraison }}</span></p>
-                                <p class="invoice-info-row"><span>
+                                                              
+                              <p class="invoice-info-row"><span>
                                         Incoterm:</span> <span>{{ $invoices->incoterm }}</span></p>
                                 <p class="invoice-info-row"><span>Origine:</span> <span>Tunisie</span></p>
                                 <p class="invoice-info-row"><span>Détails de paiement:</span>

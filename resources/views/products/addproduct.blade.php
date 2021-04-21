@@ -124,7 +124,7 @@
                                 <th>Prix d'achat</th>
                                 <th>Prix de vente</th>
                                 <th>Stock</th>
-                                <th>Pois</th>
+                                <th>Poids en Kg</th>
                                 <th>Opérations</th>
                             </tr>
                             <tr>

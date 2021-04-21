@@ -148,7 +148,7 @@
                                     <span>{{ $invoices->poids_net }} kg</span>
                                 </p>
                                 <p class="invoice-info-row"><span>Nombre de colis:</span>
-                                    <!--<span>{{ $invoices->packages }}--></span>
+                                  {{ $invoices->packages }}</span>
                                 </p>
                                 <p class="invoice-info-row"><span>
                                         Livraison:</span> <span>{{ $invoices->livraison }}</span></p>

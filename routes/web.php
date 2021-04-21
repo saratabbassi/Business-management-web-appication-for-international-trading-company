@@ -55,7 +55,10 @@ Route::get('/Print_invoice_fr/{id}', 'InvoicesController@Print_invoice_fr');
 Route::get('/Print_invoice_en/{id}', 'InvoicesController@Print_invoice_en');
 Route::get('/Print_packing_fr/{id}', 'InvoicesController@Print_packing_fr');
 Route::get('/Print_packing_en/{id}', 'InvoicesController@Print_packing_en');
-
+Route::get('/Print_proforma_fr/{id}', 'InvoicesController@Print_proforma_fr');
+Route::get('/Print_proforma_en/{id}', 'InvoicesController@Print_proforma_en');
+Route::get('export_invoices', 'InvoicesController@export');
+Route::get('export_products', 'ProductsController@export');
 
 Route::delete('/{id}', 'ProductsController@delete');
 

@@ -48,12 +48,14 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
+                  
 
                         <a href="invoices/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
                                 class="fas fa-plus"></i> &nbsp;Céer Facture</a>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
+                      
+                        <a class="modal-effect btn btn-sm btn-success" href="{{ url('export_invoices') }}"
+                            style="color:white"><i class="fas fa-file-download"></i>&nbsp;Exporter Excel</a>
+                   
 
 
                 </div>
@@ -101,12 +103,12 @@
                                                 class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
                                                 type="button">Imprimer<i class="fas fa-caret-down ml-1"></i></button>
                                             <div class="dropdown-menu tx-13">
-                                                <a class="dropdown-item" href="Print_packing_en/{{ $invoice->id }}"><i
-                                                    class="text-info fas fa-print"></i>&nbsp;&nbsp;Proformat Facture ANG
+                                                <a class="dropdown-item" href="Print_proforma_fr/{{ $invoice->id }}"><i
+                                                    class="text-info fas fa-print"></i>&nbsp;&nbsp;Proforma Facture FR
                                                 
                                             </a>
-                                            <a class="dropdown-item" href="Print_packing_en/{{ $invoice->id }}"><i
-                                                class="text-info fas fa-print"></i>&nbsp;&nbsp;Proformat Facture ANG
+                                            <a class="dropdown-item" href="Print_proforma_en/{{ $invoice->id }}"><i
+                                                class="text-info fas fa-print"></i>&nbsp;&nbsp;Proforma Facture ANG
                                             
                                         </a>
                                                

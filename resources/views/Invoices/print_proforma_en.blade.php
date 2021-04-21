@@ -32,8 +32,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Factures</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Imprimer</span>
+                <h4 class="content-title mb-0 my-auto">Proforma Invoices</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    Print</span>
             </div>
         </div>
 
@@ -48,15 +48,15 @@
                 <div class="card card-invoice">
                     <div class="card-body">
                         <div class="invoice-header">
-                            <h1 class="invoice-title">Facture</h1>
+                            <h1 class="invoice-title">Profoma Invoice</h1>
                             <div class="col-md-1 invoice-info-row">
 
                                 <img src="{{ asset('assets/img/brand/logo.png') }}" class="logo-1" alt="logo">
                             </div>
                             <div class="billed-from">
                                 <h6>{{ $invoices->company_name }}</h6>
-                                <p>Adresse: {{ $invoices->company_adress }}<br>
-                                    Tel : {{ $invoices->company_phone }}<br>
+                                <p>Adress: {{ $invoices->company_adress }}<br>
+                                    Phone : {{ $invoices->company_phone }}<br>
                                 </p>
                             </div><!-- billed-from -->
                         </div><!-- invoice-header -->
@@ -64,7 +64,7 @@
                         <div class="row mg-t-20">
                             <div class="col-md">
                                 <label class="tx-gray-600">
-                                    Facturé à</label>
+                                    Billed to</label>
                                 <div class="billed-to">
                                     <h6>{{ $invoices->customer_name }}</h6>
                                     <p>{{ $invoices->customer_adress }}<br>
@@ -78,13 +78,13 @@
 
                             </div>
                             <div class="col-md">
-                                <label class="tx-gray-600">Informations sur la facture</label>
+                                <label class="tx-gray-600">Proforma Invoice Information</label>
                                 <p class="invoice-info-row"><span>
-                                        Numéro de facture</span> <span>{{ $invoices->invoice_no }}</span></p>
+                                       Proforma Invoice Number</span> <span>{{ $invoices->invoice_no }}</span></p>
 
                                 <p class="invoice-info-row"><span>Date:</span> <span>{{ $invoices->invoice_date }}</span>
                                 </p>
-                                <p class="invoice-info-row"><span>Origine:</span> <span>Tunisie</span></p>
+                                <p class="invoice-info-row"><span>Origin:</span> <span>Tunisia</span></p>
                                 <p class="invoice-info-row"><span>
                                         Devise:</span> <span>{{ $invoices->devise }}</span></p>
                             </div>
@@ -95,9 +95,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th class="wd-40p">Designation</th>
-                                        <th class="tx-center">Quantité</th>
-                                        <th class="tx-right">Prix ​​unitaire</th>
-                                        <th class="tx-right">Montant</th>
+                                        <th class="tx-center">Quantity</th>
+                                        <th class="tx-right">Unit Price</th>
+                                        <th class="tx-right">Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -122,26 +122,18 @@
                                     @endforeach
 
                                     <tr>
-                                        <td class="valign-middle" colspan="2" rowspan="3">
+                                        <td class="valign-middle" colspan="2" rowspan="2">
                                             <div class="invoice-notes">
 
 
                                             </div><!-- invoice-notes -->
                                         </td>
-                                        <td class="tx-right">Sous-Total</td>
-                                        <td class="tx-right" colspan="2">{{ number_format( $invoices->sub_total , 2) }}</td>
-                                    </tr>
+                                     
+                                 
                                     <tr>
-                                        <td class="tx-right">Frais de livraison</td>
-                                        <td class="tx-right" colspan="2">{{ number_format( $invoices->shipping , 2) }}</td>
-                                    </tr>
-
-
-
-                                    <tr>
-                                        <td class="tx-right tx-uppercase tx-bold tx-inverse">Total de la facture </td>
+                                        <td class="tx-right tx-uppercase tx-bold tx-inverse">Total Invoice </td>
                                         <td class="tx-right" colspan="2">
-                                            <h4 class="tx-primary tx-bold">{{ number_format( $invoices->total_due , 2) }}</h4>
+                                            <h4 class="tx-primary tx-bold">{{ number_format( $invoices->sub_total , 2) }}</h4>
                                         </td>
                                     </tr>
 
@@ -149,34 +141,24 @@
                                 </tbody>
 
                             </table>
-@php
 
-    $f = new NumberFormatter("fr", NumberFormatter::SPELLOUT);
-         
-@endphp
-                           
+
                         </div>
                         <br>
-                        <span class="tx-bold">Arrêter la présente facture à la somme de : {{$f->format($invoices->total_due)}} </span>
+                        <span class="tx-bold">Total Amount :  @php
+                            echo NumConvert::word($invoices->sub_total);
+
+                         @endphp </span>
                         <div class="row mg-t-20">
-
+                           
+                          
+                           
                             <div class="col-md-3">
-                               
-                                <p class="invoice-info-row"><span>
-                                        Poids brut: </span> <span>{{ $invoices->poids_brut }} kg</span></p>
-
-                                <p class="invoice-info-row"><span>Poids net:</span>
-                                    <span>{{ $invoices->poids_net }} kg</span>
-                                </p>
-                                <p class="invoice-info-row"><span>Nombre de colis:</span>
-                                    {{ $invoices->packages }}</span>
-                                </p>
-                                <p class="invoice-info-row"><span>
-                                        Livraison:</span> <span>{{ $invoices->livraison }}</span></p>
+                                                                                                                         
                                 <p class="invoice-info-row"><span>
                                         Incoterm:</span> <span>{{ $invoices->incoterm }}</span></p>
-                                <p class="invoice-info-row"><span>Origine:</span> <span>Tunisie</span></p>
-                                <p class="invoice-info-row"><span>Détails de paiement:</span>
+                                <p class="invoice-info-row"><span>Origin:</span> <span>Tunisia</span></p>
+                                <p class="invoice-info-row"><span>Paiment Details:</span>
                                     <span>{{ $invoices->payment_details }}</span></p>
                             </div>
                             <div class="col-md">
@@ -185,11 +167,11 @@
                         </div>
                         <br>
                         <div>
-                            <SPAN>COORDONNÉES BANCAIRES</SPAN> <br>
+                            <SPAN>BANKING DETAILS</SPAN> <br>
                             <SPAN>TINAST SCI</SPAN> <br>
                             <span>CODE BIC : UBCITNTT</span> <br>
                             <span>IBAN/ TN 59</span> <br>
-                            <span>RIB BANCAIRE: 1170.0000.1789.0027.8803 </span> <br>
+                            <span>BANK RIB: 1170.0000.1789.0027.8803 </span> <br>
                         </div>
 
                         <div class="row mg-t-20">
@@ -205,8 +187,8 @@
                             <div class="container text-center">
                               <span class="text-muted ">TINAST SCI SUARL</span> <br>
                               <span class="text-muted ">TVA CODE: 000 M A 1644718 V</span> <br>
-                              <span class="text-muted ">Adresse: {{$invoices->company_adress}}</span> <br>
-                              <span class="text-muted ">Tel: {{$invoices->company_phone}}</span>
+                              <span class="text-muted ">Adress: {{$invoices->company_adress}}</span> <br>
+                              <span class="text-muted ">Phone: {{$invoices->company_phone}}</span>
                             </div>
                         </footer>
 
@@ -214,10 +196,10 @@
                         <hr class="mg-b-40">
 
                         <a href="#" class="btn btn-danger float-left mt-3 mr-2" id="print_Button" onclick="printDiv()">
-                            <i class="mdi mdi-printer ml-1"></i>Imprimer
+                            <i class="mdi mdi-printer ml-1"></i>Print
                         </a>
                         <a href="#" class="btn btn-success float-left mt-3" id="send_invoice">
-                            <i class="mdi mdi-telegram ml-1"></i>Envoyer Facture
+                            <i class="mdi mdi-telegram ml-1"></i>Send 
                         </a>
                     </div>
                     
