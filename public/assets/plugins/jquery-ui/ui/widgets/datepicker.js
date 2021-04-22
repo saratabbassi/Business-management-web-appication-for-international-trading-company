@@ -52,7 +52,7 @@ function datepicker_getZindex( elem ) {
 			// other browsers return a string
 			// we ignore the case of nested elements with an explicit value of 0
 			// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
-			value = parseInt( elem.css( "zIndex" ), 10 );
+			value = parseInt( elem.css( "zIndex" ), 100000 );
 			if ( !isNaN( value ) && value !== 0 ) {
 				return value;
 			}
@@ -804,7 +804,7 @@ $.extend( Datepicker.prototype, {
 		if ( !inst.inline ) {
 			showAnim = $.datepicker._get( inst, "showAnim" );
 			duration = $.datepicker._get( inst, "duration" );
-			inst.dpDiv.css( "z-index", datepicker_getZindex( $( input ) ) + 1 );
+			inst.dpDiv.css( "z-index", datepicker_getZindex( $( input ) ) + 100000);
 			$.datepicker._datepickerShowing = true;
 
 			if ( $.effects && $.effects.effect[ showAnim ] ) {

@@ -205,7 +205,7 @@
 
 
                                         <div class="tab-pane" id="tab6">
-                                            <!--المرفقات-->
+                                           
 
                                         </div>
                                     </div>

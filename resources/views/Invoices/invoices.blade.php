@@ -43,6 +43,28 @@
             </button>
         </div>
     @endif
+    @if (session()->has('delete_invoice'))
+    <script>
+        window.onload = function() {
+            notif({
+                msg: "La Facture est supprimer avec succés",
+                type: "success"
+            })
+        }
+    </script>
+@endif
+
+
+@if (session()->has('Status_Update'))
+    <script>
+        window.onload = function() {
+            notif({
+                msg: "L'etat de paiement est modifier avec succés",
+                type: "success"
+            })
+        }
+    </script>
+@endif
     <div row>
         <!--div-->
         <div class="col-xl-12">
@@ -154,26 +176,31 @@
                                             <div class="dropdown-menu tx-13">
 
                                                 <a class="dropdown-item" data-effect="effect-scale"
-                                                href="{{ url('edit_invoice') }}/{{ $invoice->id }}" title="Modifier"><i
-                                                    class="text-info fas fa-pen-alt"></i>&nbsp;&nbsp;
-                                               Modifier</a>
+                                                    href="{{ url('edit_invoice') }}/{{ $invoice->id }}"
+                                                    title="Modifier"><i class="text-info fas fa-pen-alt"></i>&nbsp;&nbsp;
+                                                    Modifier</a>
 
 
 
-                                                    <a class="dropdown-item" 
-                                                    data-id="{{ $invoice->id }}" data-name="{{ $invoice->invoice_no }}"
-                                                    data-toggle="modal" href="#modaldemo9" title="Supprimer"><i
-                                                            class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;
-                                                        Supprimer</a>
-                                                        <a class="dropdown-item" href="Print_invoice/{{ $invoice->id }}"><i
-                                                            class="text-success fas fa-money-bill"></i>&nbsp;&nbsp;
-                                                            Changer l'état de paiment
+                                                <a class="dropdown-item" data-id="{{ $invoice->id }}"
+                                                    data-name="{{ $invoice->invoice_no }}" data-toggle="modal"
+                                                    href="#modaldemo9" title="Supprimer"><i
+                                                        class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;
+                                                    Supprimer</a>
+                                             
+                                                    <a class="dropdown-item"
+                                                    href="{{ URL::route('Status_show', [$invoice->id]) }}"><i
+                                                        class=" text-success fas
+                                                    fa-money-bill"></i>&nbsp;&nbsp;   Changer l'état de paiment
                                                     </a>
 
-                                                    <a class="dropdown-item"    href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}"><i
-                                                            class="text-primary fas fa-eye"></i>&nbsp;&nbsp;
-                                                            Afficher les détails
-                                                    </a>
+
+
+                                                <a class="dropdown-item"
+                                                    href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}"><i
+                                                        class="text-primary fas fa-eye"></i>&nbsp;&nbsp;
+                                                    Afficher les détails
+                                                </a>
 
                                             </div>
                                         </div>
@@ -188,7 +215,7 @@
 
                 </div>
 
-
+               
 
 
                 <!-- delete -->
@@ -215,6 +242,67 @@
                         </form>
                     </div>
                 </div>
+                 <!-- update paiment -->
+                 <div class="modal" id="modaldemo1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content modal-content-demo">
+                            <div class="modal-header">
+                                <h6 class="modal-title">Changer l'etat de paiment</h6><button aria-label="Close" class="close"
+                                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('Status_Update', ['id' => $invoice->id]) }}" method="post">
+                                    {{ csrf_field() }}
+
+                                    <div class="col">
+                                        <label for="inputName" class="control-label">Numéro de Facture : </label>
+                                        <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
+                                        <input type="text" class="form-control" id="inputName" name="invoice_no"
+                                        value="{{ $invoice->invoice_no }}" required
+                                            readonly>
+                                    </div>
+        
+                                    <div class="col">
+                                        <label>Date de Facture :</label>
+                                        <input class="form-control fc-datepicker" name="invoice_Date" 
+                                            type="text" value="{{ $invoice->invoice_Date }}" required readonly>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <label>Client :</label>
+                                        <input class="form-control " name="customer_name" 
+                                            type="text" value="{{ $invoice->customer_name }}" required readonly>
+                                    </div>
+            
+                                    <div class="col">
+                                        <label for="exampleTextarea">Etat de  paiement :</label>
+                                        <select class="form-control" id="Status" name="Status" required>
+                                            <option selected="true" disabled="disabled">--Sélectionnez l'état du paiement--</option>
+                                          
+                                            <option value="Partiellement payé">Partiellement payé</option>
+                                            <option value="Totalement payé">Totalement payé</option>
+                                        
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label>Date de Paiement</label>
+                                       
+                                            <input class="form-control fc-datepicker" data-date-format="dd-mm-yyyy" name="Payment_Date"
+                                            id="Payment_Date" placeholder="DD-MM-YYYY" type="text" value="{{ date('d-m-Y') }}" required>
+                                    </div>
+                                    <br><br>
+            
+            
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">Changer l'etat de paiment</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            Annuler</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Basic modal -->
             </div>
 
             <!--/div-->
@@ -234,7 +322,7 @@
             <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
             <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
             <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-
+            <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
             <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
 
 

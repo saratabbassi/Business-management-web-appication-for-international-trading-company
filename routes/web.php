@@ -59,6 +59,9 @@ Route::get('/Print_proforma_fr/{id}', 'InvoicesController@Print_proforma_fr');
 Route::get('/Print_proforma_en/{id}', 'InvoicesController@Print_proforma_en');
 Route::get('/InvoicesDetails/{id}', 'InvoicesDetailsController@edit');
 Route::get('export_invoices', 'InvoicesController@export');
+Route::post('/Status_Update/{id}', 'InvoicesController@Status_Update')->name('Status_Update');
+Route::get('/Status_show/{id}', 'InvoicesController@show')->name('Status_show');
+
 Route::get('export_products', 'ProductsController@export');
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
