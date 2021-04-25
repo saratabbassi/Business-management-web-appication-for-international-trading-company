@@ -56,7 +56,7 @@ $input['password'] = Hash::make($input['password']);
 $user = User::create($input);
 $user->assignRole($request->input('roles_name'));
 return redirect()->route('users.index')
-->with('success','تم اضافة المستخدم بنجاح');
+->with('success','Un employée a été ajouté avec succès');
 }
 
 /**
@@ -120,6 +120,6 @@ return redirect()->route('users.index')
 public function destroy(Request $request)
 {
 User::find($request->user_id)->delete();
-return redirect()->route('users.index')->with('success','تم حذف المستخدم بنجاح');
+return redirect()->route('users.index')->with('success','Un employée a  été supprimé avec succées');
 }
 }

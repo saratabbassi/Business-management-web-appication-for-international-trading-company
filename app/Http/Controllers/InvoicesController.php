@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Notification;
 use App\User;
 use App\Exports\InvoicesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Notifications\Add_invoice;
 
 use Illuminate\Http\Request;
 use DB;
@@ -137,6 +138,7 @@ class InvoicesController extends Controller
 
         $invoices = Invoices::create($data);
         
+        
         $invoice_id = invoices::latest()->first()->id;
         invoices_details::create([
             'id_Invoice' => $invoice_id,
@@ -166,21 +168,29 @@ class InvoicesController extends Controller
         $details = $invoices->details()->createMany($details_list);
         $invoice_id = invoices::latest()->first()->id;
            
+        
   
-         $user = User::first();
-           Notification::send($user, new AddInvoice($invoice_id));
+         //$user = User::first();
+          // Notification::send($user, new AddInvoice($invoice_id));
+           
+           $user = User::get();
+        $invoices = invoices::latest()->first();
+        Notification::send($user, new Add_invoice($invoices));
+       
+       
+      //  
+        //return redirect('/invoices');
         if ($details) {
             return redirect('/invoices')->with([
-                'message' => __('la facture est créé avec succès'),
-                'alert-type' => 'success'
+                session()->flash('Add', 'la facture est créé avec succès')
             ]);
         } else {
             return redirect()->back()->with([
-                'message' => __('la creation de facture a échoué'),
+                'message' => __('la modification de facture a échoué'),
                 'alert-type' => 'danger'
             ]);
         }
-       
+
 
        }
     /**
@@ -408,4 +418,38 @@ class InvoicesController extends Controller
         $invoices = Invoices::where('Value_Status',3)->get();
         return view('invoices.invoices_Partial',compact('invoices'));
     }
+    public function MarkAsRead_all (Request $request)
+    {
+
+        $userUnreadNotification= auth()->user()->unreadNotifications;
+
+        if($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+            return back();
+            
+        }
+
+
+    }
+    
+
+    
+
+    public function unreadNotifications_count()
+
+    {
+        return auth()->user()->unreadNotifications->count();
+    }
+
+    public function unreadNotifications()
+
+    {
+        foreach (auth()->user()->unreadNotifications as $notification){
+
+return $notification->data['title'];
+
+        }
+
+    }
+
 }
