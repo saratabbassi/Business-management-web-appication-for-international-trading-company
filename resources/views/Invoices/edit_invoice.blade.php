@@ -66,12 +66,7 @@
 
                         <div class="row">
 
-                            <div class="col">
-
-                                <label for="inputName" class="control-label">Numéro de facture Précedente</label>
-                                <input type="text" class="form-control" id="last_invoice_no" name="last_invoice_no"
-                                    value="{{ old('last_invoice_no', $invoices->last_invoice_no) }}" readonly>
-                            </div>
+                          
                             <div class="col">
 
                                 <label for="inputName" class="control-label">Numéro de Facture</label>
@@ -180,9 +175,9 @@
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Le nombre de colis</label>
-                                <input type="text" class="form-control" id="packages_number" name="packages_number"
+                                <input type="text" class="form-control" id="packages" name="packages"
                                     title="Saisir le nom du produit "
-                                    value="{{ old('packages_number', $invoices->packages_number) }}">
+                                    value="{{ old('packages', $invoices->packages) }}">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Livraison</label>
@@ -234,6 +229,8 @@
                                                 <th style="width: 20%" scope="col">Produit</th>
                                                 <th style="width: 20%" scope="col">Designation</th>
                                                 <th style="width: 9%" scope="col">Quantité</th>
+                                                <th style="width: 9%" scope="col">Poids en Kg</th>
+                                                <th style="width: 9%" scope="col">Poids Total en Kg</th>
                                                 <th scope="col">Prix unitaire</th>
                                                 <th scope="col">Prix total</th>
                                                 <th scope="col"><a class="btn btn-success btn-sm add_more "><i
@@ -285,7 +282,15 @@
                                                             value="{{ old('quantity', $item->quantity) }}" />
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="unit_price{{ $loop->index }}]"
+                                                        <input type="text" name="weight[{{ $loop->index }}]" class="form-control weight "
+                                                        value="{{ old('unit_price', $item->weight) }}"   readonly />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="total_weight[{{ $loop->index }}]"
+                                                            class="form-control total_weight " value="{{ old('unit_price', $item->total_weight) }}" readonly />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="unit_price[{{ $loop->index }}]"
                                                             class="form-control unit_price "
                                                             value="{{ old('unit_price', $item->unit_price) }}" />
                                                     </td>
@@ -313,36 +318,63 @@
                                         </tbody>
 
                                     </table>
+                                  
 
                                     <div class="invoice_details">
-                                        <div class="col-md-3 ml-auto">
 
-                                            <label for="sub_total">Sub Total</label>
+                                        <div class="row">
+                                            <div class="col ">
+                                                <label for="poids_net">Poids net en Kg</label>
+                                                <input type="text" id="poids_net" name="poids_net"
+                                                    class="form-control poids_net"     value="{{ old('poids_net', $invoices->poids_net) }}">
+                                            </div>
+                                            <div class="col"></div>
+                                            <div class="col"></div>
+                                            <div class="col ml-auto">
 
-
-
-                                            <input type="text" id="sub_total" name="sub_total"
-                                                class="form-control sub_total"
-                                                value="{{ old('sub_total', $invoices->sub_total) }}" readonly>
+                                                <label for="sub_total">Sub Total</label>
+                                                <input type="text" id="sub_total" name="sub_total"
+                                                    class="form-control sub_total"  value="{{ old('poids_net', $invoices->poids_net) }}" readonly>
+                                            </div>
                                         </div>
+                                        <div class="row">
 
-                                        <div class="col-md-3 ml-auto">
+                                            <div class="col ">
 
-                                            <label for="shipping">Shipping Costs</label>
+                                                <label for="poids_emballage">Poids d'emballage en Kg</label>
 
-                                            <input type="text" id="shipping" name="shipping" class="form-control shipping"
-                                                value="{{ old('shipping', $invoices->shipping) }}">
+                                                <input type="text" id="poids_emballage" name="poids_emballage"
+                                                    class="form-control poids_emballage"  value="{{ old('poids_net', $invoices->poids_net) }}">
+                                            </div>
+                                            <div class="col"></div>
+                                            <div class="col"></div>
+                                            <div class="col ml-auto ">
+
+                                                <label for="shipping">Shipping Costs</label>
+
+                                                <input type="text" id="shipping" name="shipping"
+                                                    class="form-control shipping"  value="{{ old('shipping', $invoices->shipping) }}">
+                                            </div>
                                         </div>
-                                        <div class="col-md-3 ml-auto">
+                                        <div class="row">
+                                            <div class="col ml-auto">
 
-                                            <label for="total_due">Total Due</label>
+                                                <label for="poids_brut">Poids Brut en Kg</label>
+                                                <input type="text" id="poids_brut" name="poids_brut"
+                                                    class="form-control poids_brut" value="{{ old('poids_brut', $invoices->poids_brut) }}"readonly>
+                                            </div>
 
+                                            <div class="col"></div>
+                                            <div class="col"></div>
+                                            <div class="col">
 
+                                                <label for="total_due">Total Due</label>
+                                                <input type="text" id="total_due" name="total_due"
+                                                    class="form-control total_due"  value="{{ old('total_due', $invoices->total_due) }}" readonly>
+                                            </div>
 
-                                            <input type="text" id="total_due" name="total_due"
-                                                class="form-control total_due"
-                                                value="{{ old('total_due', $invoices->total_due) }}" readonly>
                                         </div>
+                                        <br>
                                     </div>
 
 
@@ -448,7 +480,9 @@
                 ']" ><option label="Choisir Produit"></option></select></td>' +
                 '<td>  <select class="form-control size_id  "  id="size_id" name="size_id[' + i +
                 ']" ><option label="Choisir Designation"></option></select></td>' +
-                '<td> <input type="text" name="quantity[' + i + ']" class="form-control quantity" ></td>' +
+                '<td> <input type="text" name="quantity[' + i + ']" class="form-control quantity" value="0" ></td>' +
+                '<td> <input type="text" name="weight[' + i + ']" class="form-control weight" ></td>' +
+                '<td> <input type="text" name="total_weight[' + i + ']" class="form-control total_weight" ></td>' +
                 '<td> <input type="text" name="unit_price[' + i + ']" class="form-control unit_price" ></td>' +
                 '<td> <input type="text" name="total_price[' + i +
                 ']" class="form-control total_price" readonly></td>' +
@@ -513,8 +547,11 @@
                     success: function(data) {
                         sizeEle.append(' <option label="Choisir Designation"></option>');
                         jQuery.each(data, function(key, value) {
-                            sizeEle.append('<option value="' + value.id + '" data-price="' + value.selling_price + '">' + value.designation +
-                                '</option>');
+                            sizeEle.append('<option value="' + value.id + '" data-price="' +
+                                value.selling_price + '" data-weight="' + value.weight +
+                                '">' + value.designation +
+                                '</option>'
+                               );
 
                         });
                     }
@@ -523,74 +560,116 @@
         });
 
     </script>
-    <script>
-        function TotalAmount() {
-            var total = 0;
+   <script>
+    function TotalAmount() {
+        var total = 0;
 
-            $('.total_price').each(function(i, e) {
-                var amount = $(this).val() - 0;
-                total += amount;
+        $('.total_price').each(function(i, e) {
+            var amount = $(this).val() - 0;
+            total += amount;
 
-            })
-            var subtotal = total;
-            $('.sub_total').val(subtotal);
-        }
-
-    </script>
-    <script>
-        let due_total = function() {
-            let due = 0;
-            let sub_totalVal = parseFloat($('.sub_total').val()) || 0;
-            let shippingVal = parseFloat($('.shipping').val()) || 0;
-            due += sub_totalVal;
-            due += shippingVal;
-            return due;
-        }
-
-    </script>
-
-
-
-
-    <script>
-        $('.addMoreProduct').delegate('.size_id', 'change', function() {
-
-            var tr = $(this).parent().parent();
-
-            var price = tr.find('.size_id option:selected').attr('data-price');
-            tr.find('.unit_price').val(price);
-
-            var qty = tr.find('.quantity').val() - 0;
-
-            var totalprice = (qty * price);
-            tr.find('.total_price').val(totalprice);
-            TotalAmount();
-            $('.total_due').val(due_total());
-
-
-        });
-        $('.addMoreProduct').delegate('.quantity,.unit_price', 'keyup', function() {
-            var tr = $(this).parent().parent();
-            var qty = tr.find('.quantity').val() - 0;
-            var price = tr.find('.unit_price').val() - 0;
-            var totalprice = (qty * price);
-            tr.find('.total_price').val(totalprice);
-
-            TotalAmount();
-            $('.total_due').val(due_total());
         })
-        $('.invoice_details').delegate('.shipping', 'keyup', function() {
+        var subtotal = total;
+        $('.sub_total').val(subtotal);
+    }
 
-            TotalAmount();
-            $('.total_due').val(due_total());
+</script>
+<script>
+    function TotalWeight() {
+        var weight = 0;
+
+        $('.total_weight').each(function(i, e) {
+            var amount = $(this).val() - 0;
+            weight += amount;
+
         })
+        var subtotal = weight;
+        $('.poids_net').val(subtotal);
+    }
 
-    </script>
+</script>
+
+<script>
+    let due_total = function() {
+        let due = 0;
+        let sub_totalVal = parseFloat($('.sub_total').val()) || 0;
+        let shippingVal = parseFloat($('.shipping').val()) || 0;
+        due += sub_totalVal;
+        due += shippingVal;
+        return due;
+    }
+
+</script>
+<script>
+    let gross_weight = function() {
+        let w = 0;
+        let poids_net = parseFloat($('.poids_net').val()) || 0;
+        let poids_emballage = parseFloat($('.poids_emballage').val()) || 0;
+        w += poids_net;
+        w += poids_emballage;
+        return w;
+    }
+
+</script>
 
 
 
 
 
+<script>
+    $('.addMoreProduct').delegate('.size_id', 'change', function() {
+
+        var tr = $(this).parent().parent();
+        var price = tr.find('.size_id option:selected').attr('data-price');
+        tr.find('.unit_price').val(price);
+        var qty = tr.find('.quantity').val() - 0;
+        var totalprice = (qty * price);
+        tr.find('.total_price').val(totalprice);
+        TotalAmount();
+        $('.total_due').val(due_total());
+
+        var weight = tr.find('.size_id option:selected').attr('data-weight');
+        tr.find('.weight').val(weight);
+        var totalweight = (qty * weight);
+        tr.find('.total_weight').val(totalweight);
+        TotalWeight();
+        $('.poids_brut').val(gross_weight());
+
+
+
+    });
+    $('.addMoreProduct').delegate('.quantity,.unit_price', 'keyup', function() {
+        var tr = $(this).parent().parent();
+        var qty = tr.find('.quantity').val() - 0;
+        var price = tr.find('.unit_price').val() - 0;
+        var totalprice = (qty * price);
+        tr.find('.total_price').val(totalprice);
+        TotalAmount();
+        $('.total_due').val(due_total());
+        var weight = tr.find('.weight').val() - 0;
+        var totalweight = (qty * weight);
+        tr.find('.total_weight').val(totalweight);
+        TotalWeight();
+        $('.poids_brut').val(gross_weight());
+
+
+
+    })
+    $('.invoice_details').delegate('.shipping', 'keyup', function() {
+
+
+        $('.total_due').val(due_total());
+
+    })
+    $('.invoice_details').delegate('.poids_emballage', 'keyup', function() {
+
+
+        $('.poids_brut').val(gross_weight());
+
+    })
+ 
+
+</script>
 
 
 @endsection

@@ -30,7 +30,7 @@ class InvoicesController extends Controller
     {
         
         $invoices= invoices::all();
-
+      
         return view('invoices.invoices', compact('invoices'));
         
     }
@@ -165,6 +165,8 @@ class InvoicesController extends Controller
 
         $details = $invoices->details()->createMany($details_list);
         $invoice_id = invoices::latest()->first()->id;
+           
+  
          $user = User::first();
            Notification::send($user, new AddInvoice($invoice_id));
         if ($details) {
@@ -227,25 +229,30 @@ class InvoicesController extends Controller
         $invoices = invoices::findOrFail($request->invoice_id);
     
         $data['invoice_no'] = $request->invoice_no;
+      //  $data['Status'] = 'Non Payé';
+       // $data['Value_Status'] = 2;
+        
         $data['last_invoice_no'] = $request->last_invoice_no;
         $data['devise'] = $request->devise;
         $data['customer_name'] = $request->customer_name;
         $data['customer_adress'] = $request->customer_adress;
-        $data['invoice_no'] = $request->invoice_no;
+     
         $data['invoice_date'] = $request->invoice_date;
+      
         $data['company_adress'] = $request->company_adress;
         $data['company_name'] = $request->company_name;
         $data['company_phone'] = $request->company_phone;
         $data['poids_brut'] = $request->poids_brut;
         $data['poids_net'] = $request->poids_net;
+        $data['poids_emballage'] = $request->poids_emballage;
         $data['livraison'] = $request->livraison;
+        $data['packages'] = $request->packages;
         $data['incoterm'] = $request->incoterm;
         $data['payment_details'] = $request->payment_details;
         $data['sub_total'] = $request->sub_total;
         $data['shipping'] = $request->shipping;
         $data['total_due'] = $request->total_due;
         $data['created_by'] = (Auth::user()->name);
-
         $invoices->update($data);
 
         $invoices->details()->delete();
@@ -257,6 +264,8 @@ class InvoicesController extends Controller
             $details_list[$i]['product_id'] = $request->product_id[$i];
             $details_list[$i]['size_id'] = $request->size_id[$i];
             $details_list[$i]['quantity'] = $request->quantity[$i];
+            $details_list[$i]['weight'] = $request->weight[$i];
+            $details_list[$i]['total_weight'] = $request->total_weight[$i];
             $details_list[$i]['unit_price'] = $request->unit_price[$i];
             $details_list[$i]['total_price'] = $request->total_price[$i];
             $details_list[$i]['created_by'] = (Auth::user()->name);
@@ -265,13 +274,13 @@ class InvoicesController extends Controller
         $details = $invoices->details()->createMany($details_list);
 
         if ($details) {
-            return redirect()->back()->with([
-                'message' => __('la facture est créé avec succès'),
+            return redirect('/invoices')->with([
+                'message' => __('la facture est modifiée avec succès'),
                 'alert-type' => 'success'
             ]);
         } else {
             return redirect()->back()->with([
-                'message' => __('la creation de facture a échoué'),
+                'message' => __('la modification de facture a échoué'),
                 'alert-type' => 'danger'
             ]);
         }
@@ -286,11 +295,12 @@ class InvoicesController extends Controller
     public function destroy(request $request)
     {
         $id = $request->id;
+     
        invoices::find($id)->delete();
         session()->flash('delete','La facture est supprimé avec succès');
         return redirect('/invoices');
     }
-    
+ 
    
    public function getProducts($id)
     {
@@ -366,7 +376,7 @@ class InvoicesController extends Controller
             $invoices->update([
                 'Value_Status' => 3,
                 'Status' => $request->Status,
-               // 'Payment_Date' => $request->Payment_Date,
+             
             ]);
             invoices_Details::create([
                 'id_Invoice' => $request->invoice_id,
@@ -380,5 +390,22 @@ class InvoicesController extends Controller
         session()->flash('Status_Update');
         return redirect('/invoices');
 
+    }
+     public function Invoice_Paid()
+    {
+        $invoices = Invoices::where('Value_Status', 1)->get();
+        return view('invoices.invoices_paid',compact('invoices'));
+    }
+
+    public function Invoice_unPaid()
+    {
+        $invoices = Invoices::where('Value_Status',2)->get();
+        return view('invoices.invoices_unpaid',compact('invoices'));
+    }
+
+    public function Invoice_Partial()
+    {
+        $invoices = Invoices::where('Value_Status',3)->get();
+        return view('invoices.invoices_Partial',compact('invoices'));
     }
 }

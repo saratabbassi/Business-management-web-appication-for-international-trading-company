@@ -14,11 +14,11 @@ public function run()
 
 $permissions = [
 
-     /*   'Factures',
+       'Factures',
         
         'Factures payées',
         'Factures partiellement payées',
-        'Factures impayées',
+        'Factures non payées',
         'Employés',
         'Liste des Employés',
         'Autorisations des Employés',
@@ -40,28 +40,36 @@ $permissions = [
         'Ajouter Produit',
         'Modifier Produit',
         'Supprimer Produit',
+
         'Ajouter Categorie',
         'Modifier Categorie',
         'Supprimer Categorie',
+
         'Ajouter Client',
         'Modifier Client',
         'Supprimer Client',
+
         'Ajouter Devise',
         'Modifier Devise',
         'Supprimer Devise',
+
         'Ajouter Incoterm',
         'Modifier Incoterm',
         'Supprimer Incoterm',
+
         'Ajouter Image',
         'Supprimer Image',
+
         'Ajouter Employés',
         'Modifier Employés',
         'Supprimer Employés',
+
         'Afficher  Permission',
         'Ajouter  Permission',
         'Modifier  Permission',
         'Supprimer  Permission',
-        'Notifications',*/
+        
+        'Notifications',
 
 
 

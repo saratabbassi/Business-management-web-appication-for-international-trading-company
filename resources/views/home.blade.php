@@ -10,28 +10,21 @@
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between" dir="ltr">
+				<div class="breadcrumb-header justify-content-between">
 					<div class="left-content">
 						<div>
-						  <h2  class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-						  <p class="mg-b-0">Sales monitoring dashboard template.</p>
+						  <h2  class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Bienvenue {{ Auth::user()->name }} !</h2>
+						  <p class="mg-b-0">Tableau de Bord , Tinast SCI</p>
 						</div>
 					</div>
 					<div class="main-dashboard-header-right">
+						
 						<div>
-							<label class="tx-13">Customer Ratings</label>
-							<div class="main-star">
-								<i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star"></i> <span>(14,873)</span>
-							</div>
-						</div>
-						<div>
-							<label class="tx-13">Online Sales</label>
+							<label class="tx-13">
+								Ventes Total</label>
 							<h5>563,275</h5>
 						</div>
-						<div>
-							<label class="tx-13">Offline Sales</label>
-							<h5>783,675</h5>
-						</div>
+					
 					</div>
 				</div>
 				<!-- /breadcrumb -->
@@ -43,17 +36,19 @@
 						<div class="card overflow-hidden sales-card bg-primary-gradient">
 							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 								<div class="">
-									<h6 class="mb-3 tx-12 text-white">TODAY ORDERS</h6>
+									<h6 class="mb-3 tx-12 text-white">
+										
+Total des Factures</h6>
 								</div>
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$5,74.12</h4>
-											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">      {{ number_format(\App\invoices::sum('total_due'), 2) }}</h4>
+											<p class="mb-0 tx-12 text-white op-7">Nombres : {{ \App\invoices::count() }}</p>
 										</div>
-										<span class="float-right my-auto mr-auto">
+										<span class=" my-auto ml-auto">
 											<i class="fas fa-arrow-circle-up text-white"></i>
-											<span class="text-white op-7"> +427</span>
+											<span class="text-white op-7">100%</span>
 										</span>
 									</div>
 								</div>
@@ -65,17 +60,32 @@
 						<div class="card overflow-hidden sales-card bg-danger-gradient">
 							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 								<div class="">
-									<h6 class="mb-3 tx-12 text-white">TODAY EARNINGS</h6>
+									<h6 class="mb-3 tx-12 text-white">
+										
+
+Factures Non Payées</h6>
 								</div>
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$1,230.17</h4>
-											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{ number_format(\App\invoices::where('Value_Status', 2)->sum('total_due'), 2) }}</h4>
+											<p class="mb-0 tx-12 text-white op-7">Nombres : {{ \App\invoices::where('Value_Status', 2)->count() }}</p>
 										</div>
-										<span class="float-right my-auto mr-auto">
+										<span class=" my-auto ml-auto">
 											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7"> -23.09%</span>
+											<span class="text-white op-7"> 
+												@php
+												$count_all= \App\invoices::count();
+												$count_invoices2 = \App\invoices::where('Value_Status', 2)->count();
+												if($count_invoices2 == 0){
+												    $count_invoices2 = 0;
+												}
+												else{
+												    $count_invoices2 = $count_invoices2 / $count_all *100;
+												}
+												@endphp
+												{{$count_invoices2}}%
+												</span>
 										</span>
 									</div>
 								</div>
@@ -87,17 +97,27 @@
 						<div class="card overflow-hidden sales-card bg-success-gradient">
 							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 								<div class="">
-									<h6 class="mb-3 tx-12 text-white">TOTAL EARNINGS</h6>
+									<h6 class="mb-3 tx-12 text-white">Factures Payées</h6>
 								</div>
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$7,125.70</h4>
-											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{ number_format(\App\invoices::where('Value_Status', 1)->sum('total_due'), 2) }}</h4>
+											<p class="mb-0 tx-12 text-white op-7">Nombre :   {{ \App\invoices::where('Value_Status', 1)->count() }}</p>
 										</div>
-										<span class="float-right my-auto mr-auto">
+										<span class=" my-auto ml-auto">
 											<i class="fas fa-arrow-circle-up text-white"></i>
-											<span class="text-white op-7"> 52.09%</span>
+											<span class="text-white op-7"> @php
+												$count_all= \App\invoices::count();
+												$count_invoices1 = \App\invoices::where('Value_Status', 1)->count();
+												if($count_invoices1 == 0){
+												    $count_invoices1 = 0;
+												}
+												else{
+												    $count_invoices1 = $count_invoices1 / $count_all *100;
+												}
+											@endphp
+											{{$count_invoices1}}%</span>
 										</span>
 									</div>
 								</div>
@@ -109,17 +129,27 @@
 						<div class="card overflow-hidden sales-card bg-warning-gradient">
 							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
 								<div class="">
-									<h6 class="mb-3 tx-12 text-white">PRODUCT SOLD</h6>
+									<h6 class="mb-3 tx-12 text-white">Facture Partiellement Payées</h6>
 								</div>
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$4,820.50</h4>
-											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">   {{ number_format(\App\invoices::where('Value_Status', 3)->sum('total_due'), 2) }}</h4>
+											<p class="mb-0 tx-12 text-white op-7">Nombres : {{ \App\invoices::where('Value_Status', 3)->count() }}</p>
 										</div>
-										<span class="float-right my-auto mr-auto">
+										<span class=" my-auto ml-auto">
 											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7"> -152.3</span>
+											<span class="text-white op-7">@php
+												$count_all= \App\invoices::count();
+												$count_invoices1 = \App\invoices::where('Value_Status', 1)->count();
+												if($count_invoices1 == 0){
+													 $count_invoices1 = 0;
+												}
+												else{
+												  $count_invoices1 = $count_invoices1 / $count_all *100;
+												}
+											@endphp
+											{{$count_invoices1}}%</span>
 										</span>
 									</div>
 								</div>
@@ -136,24 +166,24 @@
 						<div class="card">
 							<div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title mb-0">Order status</h4>
+									<h4 class="card-title mb-0">Etat des Factures</h4>
 									<i class="mdi mdi-dots-horizontal text-gray"></i>
 								</div>
-								<p class="tx-12 text-muted mb-0">Order Status and Tracking. Track your order from ship date to arrival. To begin, enter your order number.</p>
+								
 							</div>
 							<div class="card-body">
 								<div class="total-revenue">
 									<div>
 									  <h4>120,750</h4>
-									  <label><span class="bg-primary"></span>success</label>
+									  <label><span class="bg-primary"></span>Payées</label>
 									</div>
 									<div>
 									  <h4>56,108</h4>
-									  <label><span class="bg-danger"></span>Pending</label>
+									  <label><span class="bg-danger"></span>Partiellemnt Payées</label>
 									</div>
 									<div>
 									  <h4>32,895</h4>
-									  <label><span class="bg-warning"></span>Failed</label>
+									  <label><span class="bg-warning"></span>Non Payées</label>
 									</div>
 								  </div>
 								<div id="bar" class="sales-bar mt-4"></div>

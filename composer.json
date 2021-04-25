@@ -11,6 +11,7 @@
         "php": "^7.2.5|^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
+        "fx3costa/laravelchartjs": "^2.8",
         "gentritxhema/laravel-currency": "dev-master",
         "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
         "hnhdigital-os/laravel-number-converter": "^1.4",

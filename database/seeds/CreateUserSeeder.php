@@ -18,7 +18,7 @@ public function run()
         'email' => 'sara.tabbassi@gmail.com',
         'password' => bcrypt('123456'),
         'roles_name' => ["owner"],
-        'Status' => 'active',
+        'Status' => 'activé',
         ]);
   
         $role = Role::create(['name' => 'owner']);

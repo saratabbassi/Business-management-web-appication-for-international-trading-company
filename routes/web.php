@@ -67,8 +67,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
     });
+    Route::get('Invoice_Paid','InvoicesController@Invoice_Paid');
 
+    Route::get('Invoice_UnPaid','InvoicesController@Invoice_UnPaid');
+    
+    Route::get('Invoice_Partial','InvoicesController@Invoice_Partial');
+    Route::resource('Archive', 'InvoiceArchiveController');
 Route::delete('/{id}', 'ProductsController@delete');
+
 
 
 

@@ -13,17 +13,17 @@ class RoleController extends Controller
 * @return \Illuminate\Http\Response
 */
 
-/*
+
 function __construct()
 {
 
-$this->middleware('permission:عرض صلاحية', ['only' => ['index']]);
-$this->middleware('permission:اضافة صلاحية', ['only' => ['create','store']]);
-$this->middleware('permission:تعديل صلاحية', ['only' => ['edit','update']]);
-$this->middleware('permission:حذف صلاحية', ['only' => ['destroy']]);
+$this->middleware('permission:Afficher  Permission', ['only' => ['index']]);
+$this->middleware('permission:Ajouter  Permission', ['only' => ['create','store']]);
+$this->middleware('permission:Modifier  Permission', ['only' => ['edit','update']]);
+$this->middleware('permission:Supprimer  Permission', ['only' => ['destroy']]);
 
 }
-*/
+
 
 
 

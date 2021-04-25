@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('title')
 
-    Factures
+    
+Factures Archivées
 @stop
 @section('css')
     <!-- Internal Data table css -->
@@ -17,7 +18,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Factures</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"></span>
+                <h4 class="content-title mb-0 my-auto">Factures</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">
+                    Factures Archivées</span>
             </div>
         </div>
 
@@ -44,29 +46,27 @@
         </div>
     @endif
     @if (session()->has('delete_invoice'))
-        <script>
-            window.onload = function() {
-                notif({
-                    msg: "La Facture est supprimer avec succés",
-                    type: "success"
-                })
-            }
+    <script>
+        window.onload = function() {
+            notif({
+                msg: "La Facture est supprimer avec succés",
+                type: "success"
+            })
+        }
+    </script>
+@endif
 
-        </script>
-    @endif
 
-
-    @if (session()->has('Status_Update'))
-        <script>
-            window.onload = function() {
-                notif({
-                    msg: "L'etat de paiement est modifier avec succés",
-                    type: "success"
-                })
-            }
-
-        </script>
-    @endif
+@if (session()->has('Status_Update'))
+    <script>
+        window.onload = function() {
+            notif({
+                msg: "L'etat de paiement est modifier avec succés",
+                type: "success"
+            })
+        }
+    </script>
+@endif
     <div row>
         <!--div-->
         <div class="col-xl-12">
@@ -74,8 +74,6 @@
                 <div class="card-header pb-0">
 
 
-                    <a href="invoices/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-                            class="fas fa-plus"></i> &nbsp;Céer Facture</a>
 
                     <a class="modal-effect btn btn-sm btn-success" href="{{ url('export_invoices') }}"
                         style="color:white"><i class="fas fa-file-download"></i>&nbsp;Exporter Excel</a>
@@ -189,15 +187,13 @@
                                                     href="#modaldemo9" title="Supprimer"><i
                                                         class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;
                                                     Supprimer</a>
-
-                                                <a class="dropdown-item"
-                                                    href="{{ URL::route('Status_show', [$invoice->id]) }}"><i class=" text-success fas
-                                                                            fa-money-bill"></i>&nbsp;&nbsp; Changer l'état
-                                                    de
-                                                    paiment
-                                                </a>
-
                                              
+                                                    <a class="dropdown-item"
+                                                    href="{{ URL::route('Status_show', [$invoice->id]) }}"><i
+                                                        class=" text-success fas
+                                                    fa-money-bill"></i>&nbsp;&nbsp;   Changer l'état de paiment
+                                                    </a>
+
 
 
                                                 <a class="dropdown-item"
@@ -216,76 +212,74 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
-            </div>
-        </div>
-        <!--/div-->
-    </div>
-    <div class="modal" id="modaldemo9">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">Supprimer Facture </h6><button aria-label="Close" class="close"
-                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+
+               
+
+
+                <!-- delete -->
+                <div class="modal" id="modaldemo9">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content modal-content-demo">
+                            <div class="modal-header">
+                                <h6 class="modal-title">Supprimer Facture </h6><button aria-label="Close" class="close"
+                                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <form action="invoices/destroy" method="post">
+                                {{ method_field('delete') }}
+                                {{ csrf_field() }}
+                                <div class="modal-body">
+                                    <p>Voulez-vous supprimer la facture ?</p><br>
+                                    <input type="hidden" name="id" id="id" value="">
+                                    <input class="form-control" name="name" id="name" type="text" readonly>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                    <button type="submit" class="btn btn-danger">Oui</button>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
                 </div>
-                <form action="invoices/destroy" method="post">
-                    {{ method_field('delete') }}
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <p>Voulez-vous supprimer la facture ?</p><br>
-                        <input type="hidden" name="id" id="id" value="">
-                        <input class="form-control" name="name" id="name" type="text" readonly>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                        <button type="submit" class="btn btn-danger">Oui</button>
-                    </div>
+                 <!-- update paiment -->
+                
             </div>
-            </form>
-        </div>
-    </div>
 
-    
-
-
-
-    </div>
-    <!-- row closed -->
-    </div>
-    <!-- Container closed -->
-    </div>
-    <!-- main-content closed -->
+            <!--/div-->
 
 
 
 
-@endsection
-@section('js')
-    <!-- Internal Data tables -->
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
 
 
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
-    <!--Internal  Datatable js -->
-    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-    <script>
-        $('#modaldemo9').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var name = button.data('name')
-            var modal = $(this)
-            modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #name').val(name);
-        })
+        @endsection
+        @section('js')
+            <!-- Internal Data tables -->
+            <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
 
-    </script>
-@endsection
+
+            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+            <!--Internal  Datatable js -->
+            <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+            <script>
+                $('#modaldemo9').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget)
+                    var id = button.data('id')
+                    var name = button.data('name')
+                    var modal = $(this)
+                    modal.find('.modal-body #id').val(id);
+                    modal.find('.modal-body #name').val(name);
+                })
+
+            </script>
+        @endsection

@@ -116,9 +116,9 @@
                                                         </tr>
                                                         <tr>
 
-                                                            <th>Poids Brut : </th>
-                                                            <td>{{ $invoices->poids_bru }}</td>
-                                                            <th>Poids Net : </th>
+                                                            <th>Poids Brut en Kg : </th>
+                                                            <td>{{ $invoices->poids_brut }}</td>
+                                                            <th>Poids Net en Kg : </th>
                                                             <td>{{ $invoices->poids_net }}</td>
                                                             <th>Nombre de Colis : </th>
                                                             <td>{{ $invoices->packages }}</td>
@@ -160,7 +160,7 @@
                                                     style="text-align:center">
                                                     <thead>
                                                         <tr class="text-dark">
-                                                          <th>#</th>
+                                                            <th>#</th>
                                                             <th>Numéro de facture</th>
                                                             <th>Date de creation:</th>
                                                             <th>Etat de paiment:</th>
@@ -176,7 +176,7 @@
                                                                 <td>{{ $i }}</td>
                                                                 <td>{{ $x->invoice_number }}</td>
                                                                 <td>{{ $x->created_at }}</td>
-                                                          
+
                                                                 @if ($x->Value_Status == 1)
                                                                     <td><span
                                                                             class="badge badge-pill badge-success">{{ $x->Status }}</span>
@@ -191,8 +191,8 @@
                                                                     </td>
                                                                 @endif
                                                                 <td>{{ $x->Payment_Date }}</td>
-                                                              
-                                                             
+
+
                                                                 <td>{{ $x->user }}</td>
                                                             </tr>
                                                         @endforeach
@@ -205,7 +205,52 @@
 
 
                                         <div class="tab-pane" id="tab6">
-                                           
+
+                                            <div class="table-responsive">
+                                                <table id="example" class="table key-buttons text-md-nowrap "
+                                                    data-page-length='50' style="text-align: center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="border-bottom-0">#</th>
+                                                            <th class="border-bottom-0">Désignation</th>
+                                                            <th class="border-bottom-0">Quantité</th>
+                                                            <th class="border-bottom-0">Poids en Kg</th>
+                                                            <th class="border-bottom-0">Poids Total en Kg</th>
+                                                            <th class="border-bottom-0">Prix Unitaire</th>
+                                                            <th class="border-bottom-0">MONTANT</th>
+
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 0;
+                                                        @endphp
+
+                                                        @foreach ($invoices->details as $item)
+                                                            @php
+                                                                $i++;
+                                                            @endphp
+                                                            <tr>
+                                                                <td>{{ $i }}</td>
+                                                                <td>{{ $item->product->name }},{{ $item->size->designation }}
+                                                                </td>
+                                                                <td>{{ $item->quantity }}</td>
+                                                                <td>{{ $item->weight }}</td>
+                                                                <td>{{ $item->total_weight }}</td>
+                                                                <td>{{ $item->unit_price }}</td>
+                                                                <td>{{ $item->total_price }}</td>
+
+
+
+
+
+                                                            </tr>
+                                                                @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
                                         </div>
                                     </div>
