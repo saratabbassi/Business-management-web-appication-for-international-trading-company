@@ -14,7 +14,7 @@ use HasRoles;
 * @var array
 */
 protected $fillable = [
-'name', 'email', 'password','roles_name','Status'
+'name', 'email', 'password','roles_name','Status','adress','phone','facebook','linkedin','github'
 ];
 /**
 * The attributes that should be hidden for arrays.

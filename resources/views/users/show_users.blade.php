@@ -86,7 +86,8 @@ Employés
                                         @endif
                                     </td>
 
-                                    <td>
+                                    <td>     
+                                       
                                       
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info"
                                                ><i class="las la-pen"></i></a>

@@ -134,6 +134,7 @@ class InvoicesController extends Controller
         $data['sub_total'] = $request->sub_total;
         $data['shipping'] = $request->shipping;
         $data['total_due'] = $request->total_due;
+        $data['total_ben'] = $request->total_ben;
         $data['created_by'] = (Auth::user()->name);
 
         $invoices = Invoices::create($data);
@@ -161,6 +162,8 @@ class InvoicesController extends Controller
             $details_list[$i]['weight'] = $request->weight[$i];
             $details_list[$i]['total_weight'] = $request->total_weight[$i];
             $details_list[$i]['total_price'] = $request->total_price[$i];
+            $details_list[$i]['buying_price'] = $request->buying_price[$i];
+            $details_list[$i]['benefice'] = $request->benefice[$i];
             $details_list[$i]['created_by'] = (Auth::user()->name);
        
                    }
@@ -432,7 +435,18 @@ class InvoicesController extends Controller
 
     }
     
-
+    public function ReadNotification($id)
+    {
+      $userUnreadNotification = auth()->user()
+                                      ->unreadNotifications
+                                      ->where('id', $id)
+                                      ->first();
+        
+      if($userUnreadNotification) {
+        $userUnreadNotification->markAsRead();
+      }
+      return redirect('/invoices') ;
+    }
     
 
     public function unreadNotifications_count()

@@ -217,10 +217,11 @@
                                                 <th style="width: 20%" scope="col">Produit</th>
                                                 <th style="width: 20%" scope="col">Designation</th>
                                                 <th style="width: 9%" scope="col">Quantité</th>
-                                                <th style="width: 9%" scope="col">Poids en Kg</th>
-                                                <th style="width: 9%" scope="col">Poids Total en Kg</th>
+                                           
                                                 <th scope="col">Prix unitaire</th>
                                                 <th scope="col">Prix total</th>
+                                                <th style="display: none" scope="col">Prix total</th>
+                                                <th style="display: none" scope="col">Prix total</th>
 
 
                                                 <th scope="col"><a class="btn btn-success btn-sm add_more "><i
@@ -264,12 +265,12 @@
 
                                                     <input type="text" name="quantity[0]" class="form-control quantity" value="0" />
                                                 </td>
-                                                <td>
-                                                    <input type="text" name="weight[0]" class="form-control weight "
+                                                <td style="display:none;">
+                                                    <input type="hidden" name="weight[0]" class="form-control weight "
                                                         readonly />
                                                 </td>
-                                                <td>
-                                                    <input type="text" name="total_weight[0]"
+                                                <td style="display:none;">
+                                                    <input type="hidden" name="total_weight[0]"
                                                         class="form-control total_weight " readonly />
                                                 </td>
                                                 <td>
@@ -281,8 +282,21 @@
                                                     <input type="text" name="total_price[0]"
                                                         class="form-control total_price" readonly />
                                                 </td>
+                                                <td>
 
-                                                <td> <a class="btn btn-danger btn-sm"><i class="fa fa-times"></a></td>
+                                                </td>
+                                                <td style="display:none;">
+
+                                                    <input type="hidden" name="buying_price[0]"
+                                                        class="form-control buying_price"   />
+                                                </td>
+                                                <td style="display:none;">
+
+                                                    <input type="hidden" name="benefice[0]"
+                                                        class="form-control benefice"   />
+                                                </td>
+
+                                                
 
                                             </tr>
                                         </tbody>
@@ -299,11 +313,17 @@
                                             </div>
                                             <div class="col"></div>
                                             <div class="col"></div>
-                                            <div class="col ml-auto">
+                                            <div class="col ml-auto" >
 
                                                 <label for="sub_total">Sub Total</label>
                                                 <input type="text" id="sub_total" name="sub_total"
                                                     class="form-control sub_total" value="0" readonly>
+                                            </div>
+                                            <div class="col ml-auto" style="display: none">
+
+                                              
+                                                <input type="hidden" id="total_ben" name="total_ben"
+                                                    class="form-control total_ben" value="0" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -456,13 +476,15 @@
                 '<td>  <select class="form-control size_id  "  id="size_id" name="size_id[' + i +
                 ']" ><option label="Choisir Designation"></option></select></td>' +
                 '<td> <input type="text" name="quantity[' + i + ']" class="form-control quantity" value="0" ></td>' +
-                '<td> <input type="text" name="weight[' + i + ']" class="form-control weight" readonly></td>' +
-                '<td> <input type="text" name="total_weight[' + i +
+                '<td style="display:none;"> <input type="hidden" name="weight[' + i + ']" class="form-control weight" readonly></td>' +
+                '<td style="display:none;"> <input type="hidden" name="total_weight[' + i +
                 ']" class="form-control total_weight" readonly ></td>' +
                 '<td> <input type="text" name="unit_price[' + i + ']" class="form-control unit_price" ></td>' +
 
                 '<td> <input type="text" name="total_price[' + i +
                 ']" class="form-control total_price" readonly></td>' +
+                '<td style="display:none;"> <input type="hidden" name="buying_price[' + i + ']" class="form-control buying_price" ></td>' +
+                '<td style="display:none;"> <input type="hidden" name="benefice[' + i + ']" class="form-control benefice" ></td>' +
                 '<td> <a class="btn btn-danger btn-sm delete "><i class="fa fa-trash"></a></td></tr>';
 
 
@@ -522,7 +544,7 @@
                         sizeEle.append(' <option label="Choisir Designation"></option>');
                         jQuery.each(data, function(key, value) {
                             sizeEle.append('<option value="' + value.id + '" data-price="' +
-                                value.selling_price + '" data-weight="' + value.weight +
+                                value.selling_price + '" data-weight="' + value.weight + '" data-buy="' + value.buying_price +
                                 '">' + value.designation +
                                 '</option>');
 
@@ -562,6 +584,20 @@
         }
 
     </script>
+     <script>
+        function TotalBenefice() {
+            var b = 0;
+
+            $('.benefice').each(function(i, e) {
+                var ben = $(this).val() - 0;
+                b += ben;
+
+            })
+            var bb = b;
+            $('.total_ben').val(bb);
+        }
+
+    </script>
 
     <script>
         let due_total = function() {
@@ -585,7 +621,7 @@
         }
 
     </script>
-
+ 
 
 
 
@@ -609,6 +645,14 @@
             TotalWeight();
             $('.poids_brut').val(gross_weight());
 
+            var buying = tr.find('.size_id option:selected').attr('data-buy');
+            tr.find('.buying_price').val(buying);
+            
+            var benefice = (qty * (price - buying));
+            tr.find('.benefice').val(benefice);
+            TotalBenefice();
+           
+
 
 
         });
@@ -620,11 +664,19 @@
             tr.find('.total_price').val(totalprice);
             TotalAmount();
             $('.total_due').val(due_total());
+
             var weight = tr.find('.weight').val() - 0;
             var totalweight = (qty * weight);
             tr.find('.total_weight').val(totalweight);
             TotalWeight();
             $('.poids_brut').val(gross_weight());
+
+             var buying = tr.find('.buying_price').val() - 0;;
+           
+            
+            var benefice = (qty * (price - buying));
+            tr.find('.benefice').val(benefice);
+            TotalBenefice();
 
 
 

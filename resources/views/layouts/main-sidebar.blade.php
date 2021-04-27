@@ -15,8 +15,9 @@
         <div class="app-sidebar__user clearfix">
             <div class="dropdown user-pro-body">
                 <div class="">
-                    <img alt="user-img" class="avatar avatar-xl brround"
-                        src="{{ URL::asset('assets/img/faces/6.jpg') }}"><span
+                     <img alt="user-img" class="avatar avatar-xl brround"
+                    src="/uploads/avatars/{{ Auth::user()->avatar }}"> 
+                        <span
                         class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">

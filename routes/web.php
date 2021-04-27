@@ -61,6 +61,10 @@ Route::get('/InvoicesDetails/{id}', 'InvoicesDetailsController@edit');
 Route::get('export_invoices', 'InvoicesController@export');
 Route::post('/Status_Update/{id}', 'InvoicesController@Status_Update')->name('Status_Update');
 Route::get('/Status_show/{id}', 'InvoicesController@show')->name('Status_show');
+Route::get('/edit_profile', 'UserController@profile')->name('edit_profile');
+
+
+Route::post('/edit_profile','UserController@update_avatar')->name('profile_update');
 
 Route::get('export_products', 'ProductsController@export');
 Route::group(['middleware' => ['auth']], function() {
@@ -80,7 +84,7 @@ Route::get('MarkAsRead_all','InvoicesController@MarkAsRead_all')->name('MarkAsRe
 Route::get('unreadNotifications_count', 'InvoicesController@unreadNotifications_count')->name('unreadNotifications_count');
 
 Route::get('unreadNotifications', 'InvoicesController@unreadNotifications')->name('unreadNotifications');
-
+Route::get('ReadNotification/{id}','InvoicesController@ReadNotification')->name('ReadNotification');
 
 
 

@@ -63,6 +63,21 @@ Modifier Employée
                     </div>
 
                 </div>
+                <div class="">
+
+                    <div class="row mg-b-20">
+                        <div class="parsley-input col-md-6" id="fnWrapper">
+                            <label>Adresse :  </label>
+                            {!! Form::text('adress', null, array('class' => 'form-control','required')) !!}
+                        </div>
+
+                        <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
+                            <label>Numéro de Téléphone : </label>
+                            {!! Form::text('phone', null, array('class' => 'form-control','required')) !!}
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="row mg-b-20">
                     <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
@@ -78,7 +93,7 @@ Modifier Employée
 
                 <div class="row row-sm mg-b-20">
                     <div class="col-lg-6">
-                        <label class="form-label">Status</label>
+                        <label class="form-label">Status : </label>
                         <select name="Status" id="select-beast" class="form-control  nice-select  custom-select">
                             <option value="{{ $user->Status}}">{{ $user->Status}}</option>
                             <option value="activé">Activé</option>

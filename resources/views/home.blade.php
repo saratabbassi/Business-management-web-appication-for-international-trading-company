@@ -84,13 +84,15 @@ Factures Non Payées</h6>
 												    $count_invoices2 = $count_invoices2 / $count_all *100;
 												}
 												@endphp
-												{{$count_invoices2}}%
+												{{round($count_invoices2)}}%
 												</span>
 										</span>
 									</div>
 								</div>
 							</div>
-							<span id="compositeline2" class="pt-1">3,2,4,6,12,14,8,7,14,16,12,7,8,4,3,2,2,5,6,7</span>
+							<span id="compositeline2" class="pt-1">
+							
+								3,2,4,6,12,14,8,7,14,16,12,7,8,4,3,2,2,5,6,7</span>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
@@ -117,12 +119,12 @@ Factures Non Payées</h6>
 												    $count_invoices1 = $count_invoices1 / $count_all *100;
 												}
 											@endphp
-											{{$count_invoices1}}%</span>
+											{{round($count_invoices1)}}%</span>
 										</span>
 									</div>
 								</div>
 							</div>
-							<span id="compositeline3" class="pt-1">5,10,5,20,22,12,15,18,20,15,8,12,22,5,10,12,22,15,16,10</span>
+							<span id="compositeline3" class="pt-1">5,10,5,20,22,12,15,18,20,15,8,12,22,5,10,12,22,15,16,10,20</span>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
@@ -141,7 +143,7 @@ Factures Non Payées</h6>
 											<i class="fas fa-arrow-circle-down text-white"></i>
 											<span class="text-white op-7">@php
 												$count_all= \App\invoices::count();
-												$count_invoices1 = \App\invoices::where('Value_Status', 1)->count();
+												$count_invoices1 = \App\invoices::where('Value_Status', 3)->count();
 												if($count_invoices1 == 0){
 													 $count_invoices1 = 0;
 												}
@@ -149,7 +151,7 @@ Factures Non Payées</h6>
 												  $count_invoices1 = $count_invoices1 / $count_all *100;
 												}
 											@endphp
-											{{$count_invoices1}}%</span>
+											{{round($count_invoices1)}}%</span>
 										</span>
 									</div>
 								</div>

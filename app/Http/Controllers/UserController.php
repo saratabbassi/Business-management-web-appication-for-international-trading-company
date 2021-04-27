@@ -5,7 +5,9 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Spatie\Permission\Models\Role;
 use DB;
+use Auth;
 use Hash;
+use Image;
 class UserController extends Controller
 {
 /**
@@ -45,7 +47,12 @@ $this->validate($request, [
 'name' => 'required',
 'email' => 'required|email|unique:users,email',
 'password' => 'required|same:confirm-password',
-'roles_name' => 'required'
+'roles_name' => 'required',
+'phone' => 'nullable',
+'adress' => 'nullable',
+'facebook' => 'nullable',
+'linkedin' => 'nullable',
+'github' => 'nullable',
 ]);
 
 $input = $request->all();
@@ -96,7 +103,12 @@ $this->validate($request, [
 'name' => 'required',
 'email' => 'required|email|unique:users,email,'.$id,
 'password' => 'same:confirm-password',
-'roles' => 'required'
+'roles' => 'required',
+'phone' => 'nullable',
+'adress' => 'nullable',
+'facebook' => 'nullable',
+'linkedin' => 'nullable',
+'github' => 'nullable',
 ]);
 $input = $request->all();
 if(!empty($input['password'])){
@@ -109,7 +121,8 @@ $user->update($input);
 DB::table('model_has_roles')->where('model_id',$id)->delete();
 $user->assignRole($request->input('roles'));
 return redirect()->route('users.index')
-->with('success','تم تحديث معلومات المستخدم بنجاح');
+->with('success','
+Les informations  ont été mises à jour avec succès');
 }
 /**
 * Remove the specified resource from storage.
@@ -122,4 +135,45 @@ public function destroy(Request $request)
 User::find($request->user_id)->delete();
 return redirect()->route('users.index')->with('success','Un employée a  été supprimé avec succées');
 }
+public function profile(Request $request){
+    return view('users.edit_profile',array('user'=>Auth::user()));
+}
+
+
+public function update_avatar(Request $request){
+   
+   
+        $user = Auth::user();   
+     
+   
+     $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,'.$user->id,
+    ]);
+        
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->phone = $request['phone'];
+        $user->adress = $request['adress'];
+        $user->facebook = $request['facebook'];
+        $user->linkedin = $request['linkedin'];
+        $user->github = $request['github'];
+        $user->save();
+      
+     
+   if($request->hasfile('avatar')){
+       $avatar = $request->file('avatar');
+       $filename = time().'.'.$avatar->getClientOriginalExtension();
+       Image::make($avatar)->resize(300, 300)->save(public_path('uploads/avatars/'.$filename ));
+       $user = Auth::user();
+       $user->avatar = $filename;
+       $user->save(); 
+      
+   }
+
+
+session()->flash('edit', 'Votre Profile est modifié avec succès');
+return redirect('users.edit_profile');
+} 
+
 }

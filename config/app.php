@@ -165,6 +165,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
 Collective\Html\HtmlServiceProvider::class,
 Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
+Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -234,6 +235,7 @@ Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Form' => Collective\Html\FormFacade::class,
 'Html' => Collective\Html\HtmlFacade::class,
+'Image' => Intervention\Image\Facades\Image::class,
 
     ],
     

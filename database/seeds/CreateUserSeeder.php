@@ -19,6 +19,12 @@ public function run()
         'password' => bcrypt('123456'),
         'roles_name' => ["owner"],
         'Status' => 'activé',
+        'avatar' => 'default.png',
+        'adress' => 'adreseeee',
+        'phone' => '99906497',
+        'facebook' => 'fbfbfb',
+        'linkedin' => 'linkedinnn',
+        'github' => 'gittthub',
         ]);
   
         $role = Role::create(['name' => 'owner']);

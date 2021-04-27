@@ -30,9 +30,10 @@ class CreateInvoicesTable extends Migration
             $table->string('livraison')->nullable();   
             $table->string('incoterm');   
             $table->string('payment_details');
-            $table->string('sub_total');
-            $table->string('shipping');
-            $table->string('total_due');
+            $table->decimal('sub_total');
+            $table->decimal('shipping');
+            $table->decimal('total_due');
+            $table->decimal('total_ben');
             $table->string('packages')->nullable();
             $table->string('Status', 50);
             $table->string('Value_Status', 50);
