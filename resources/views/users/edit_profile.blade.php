@@ -78,7 +78,7 @@
                                         </div>
                                     </div>
                                     <div class="media">
-                                        <div class="media-icon bg-primary text-white">
+                                        <div class="media-icon  text-white" style="background-color : #4267B2">
                                             <i class="icon ion-logo-facebook"></i>
                                         </div>
                                         <div class="media-body">
@@ -110,7 +110,7 @@
                         </div>
                         <div class="main-profile-contact-list">
                             <div class="media">
-                                <div class="media-icon bg-primary-transparent text-primary">
+                                <div class="media-icon  text-primary">
                                     <i class="icon ion-md-phone-portrait"></i>
                                 </div>
                                 <div class="media-body">
@@ -122,7 +122,7 @@
                             </div>
 
                             <div class="media">
-                                <div class="media-icon bg-info-transparent text-info">
+                                <div class="media-icon text-info">
                                     <i class="icon ion-md-locate"></i>
                                 </div>
                                 <div class="media-body">

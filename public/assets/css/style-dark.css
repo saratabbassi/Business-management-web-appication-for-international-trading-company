@@ -349,9 +349,9 @@ body.dark-theme {
   border-left: 0; }
 
 .dark-theme .main-nav-column .nav-link.active {
-  color: #0162e8 !important; }
+  color: #675491 !important; }
   .dark-theme .main-nav-column .nav-link.active:hover, .dark-theme .main-nav-column .nav-link.active:focus {
-    color: #0162e8 !important; }
+    color: #675491 !important; }
 
 .dark-theme .main-mail-header .btn-group .btn {
   border-color: #555c6e;
@@ -453,11 +453,11 @@ body.dark-theme {
   box-shadow: 2px 3px 14px #1a233a; }
 
 .dark-theme .main-nav-line-chat .nav-link.active {
-  color: #0162e8 !important;
+  color: #675491 !important;
   background: transparent; }
 
 .dark-theme .main-chat-contacts-more {
-  background-color: #0162e8; }
+  background-color: #675491; }
 
 .dark-theme .main-chat-list .media {
   border-bottom: 1px solid rgba(226, 232, 245, 0.1); }
@@ -524,7 +524,7 @@ body.dark-theme {
   border-bottom: 1px solid rgba(227, 227, 227, 0.1); }
 
 .dark-theme .ui-datepicker .ui-datepicker-calendar td a:hover {
-  background-color: #0162e8;
+  background-color:   #675491;
   color: #fff; }
 
 .dark-theme .main-calendar .fc-view > table {
@@ -559,7 +559,7 @@ body.dark-theme {
   background-color: transparent; }
 
 .dark-theme .main-calendar td.fc-today {
-  background-color: #0162e8; }
+  background-color: #675491; }
 
 .dark-theme .main-calendar .fc-view > table > thead th, .dark-theme .main-calendar .fc-view > table > thead td {
   border-color: rgba(255, 255, 255, 0.1); }
@@ -571,7 +571,7 @@ body.dark-theme {
   background-color: #384361;
   border: 1px solid rgba(226, 232, 245, 0.1); }
   .dark-theme .main-calendar .fc-header-toolbar button.fc-state-active {
-    background-color: #0162e8; }
+    background-color: #675491; }
 
 .dark-theme .main-calendar .fc-view.fc-listMonth-view .fc-list-item, .dark-theme .main-calendar .fc-view.fc-listWeek-view .fc-list-item {
   background-color: #333d5a; }
@@ -611,7 +611,7 @@ body.dark-theme {
   color: rgba(255, 255, 255, 0.8); }
 
 .dark-theme .main-contact-item.selected {
-  border-left-color: #0162e8;
+  border-left-color: #675491;
   border-top-color: rgba(226, 232, 245, 0.01) !important;
   border-bottom-color: rgba(226, 232, 245, 0.01) !important;
   background-color: #2a3754; }
@@ -893,7 +893,7 @@ body.dark-theme {
 
 .dark-theme .accordion .card-header a.collapsed:hover, .dark-theme .accordion .card-header a.collapsed:focus {
   color: #fff;
-  background-color: #0162e8; }
+  background-color: #675491; }
 
 .dark-theme .modal-content {
   background-color: #1f2940;
@@ -967,28 +967,28 @@ body.dark-theme {
     color: #f1c40f !important; }
 
 .dark-theme .br-theme-bars-horizontal .br-widget a.br-active, .dark-theme .br-theme-bars-horizontal .br-widget a.br-selected {
-  background-color: #0162e8 !important; }
+  background-color: #675491 !important; }
 
 .dark-theme .br-theme-bars-pill .br-widget a.br-active, .dark-theme .br-theme-bars-pill .br-widget a.br-selected {
-  background-color: #0162e8 !important;
+  background-color: #675491 !important;
   color: white; }
 
 .dark-theme .br-theme-bars-1to10 .br-widget a, .dark-theme .br-theme-bars-movie .br-widget a, .dark-theme .br-theme-bars-horizontal .br-widget a {
   background-color: #2e3954; }
 
 .dark-theme .br-theme-bars-1to10 .br-widget a.br-active, .dark-theme .br-theme-bars-1to10 .br-widget a.br-selected {
-  background-color: #0162e8 !important; }
+  background-color: #675491 !important; }
 
 .dark-theme .br-theme-bars-movie .br-widget a.br-active, .dark-theme .br-theme-bars-movie .br-widget a.br-selected {
-  background-color: #0162e8 !important; }
+  background-color: #675491 !important; }
 
 .dark-theme .br-theme-bars-square .br-widget a {
   border: 2px solid #4f576f;
   background-color: #141b2d;
   color: #8694a5; }
   .dark-theme .br-theme-bars-square .br-widget a.br-active, .dark-theme .br-theme-bars-square .br-widget a.br-selected {
-    border: 2px solid #0162e8;
-    color: #0162e8; }
+    border: 2px solid #675491;
+    color: #675491; }
 
 .dark-theme .br-theme-bars-pill .br-widget a {
   background-color: #141b2d; }
@@ -999,8 +999,8 @@ body.dark-theme {
   border: 1px solid rgba(255, 255, 255, 0.07); }
   .dark-theme .custom-file-label::after {
     color: #fff;
-    background-color: #0162e8;
-    border: 1px solid #0162e8; }
+    background-color: #675491;
+    border: 1px solid #675491; }
 
 .dark-theme .input-group-text {
   color: rgba(255, 255, 255, 0.5);
@@ -1205,7 +1205,7 @@ body.dark-theme {
   background-color: rgba(244, 245, 248, 0.1);
   border-top-color: 1px dotted rgba(226, 232, 245, 0.1);
   border-bottom-color: rgba(226, 232, 245, 0.1);
-  border-left-color: #0162e8; }
+  border-left-color: #675491; }
 
 .dark-theme .main-invoice-list .media {
   border: 1px dotted rgba(226, 232, 245, 0.1); }

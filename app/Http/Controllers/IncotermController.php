@@ -38,11 +38,12 @@ class IncotermController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'incoterm' => 'required|unique:incoterms',
+            'incoterm' => 'required|unique:incoterm',
         ],[
 
             'incoterm.required' =>'Veuillez saisir un incoterm',
             'incoterm.unique' =>' L incoterm est déjà existant',
+            
            
 
 
@@ -88,14 +89,14 @@ class IncotermController extends Controller
      * @param  \App\incoterm  $incoterm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, incoterm $incoterm)
+    public function update(Request $request)
     {
         $id = $request->id;
 
         $this->validate($request, [
 
 
-            'incoterm' => 'required|max:3|unique:incoterm,incoterm,'.$id,
+            'incoterm' => 'required|unique:incoterms,incoterm,'.$id,
            
         ],[
 

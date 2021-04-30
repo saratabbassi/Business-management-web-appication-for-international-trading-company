@@ -88,7 +88,7 @@ class DeviseController extends Controller
      * @param  \App\devise  $devise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, devise $devise)
+    public function update(Request $request)
     {
         $id = $request->id;
 

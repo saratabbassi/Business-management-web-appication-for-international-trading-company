@@ -92,7 +92,7 @@ class ProductsDetailsController extends Controller
     {
         $products = products_attachement::findOrFail($request->id_file);
         $products->delete();
-        Storage::disk('public_uploads')->delete($request->name.'/'.$request->file_name);
+        Storage::disk('public_uploads')->delete($request->product_id.'/'.$request->file_name);
         session()->flash('delete', 'L image est supprimer avec succés');
         return back();
     }

@@ -55,7 +55,8 @@ class ProductsAttachementController extends Controller
                
             // move pic
             $imageName = $request->file_name->getClientOriginalName();
-            $request->file_name->move(public_path('Attachements/'. $request->name), $imageName);
+          
+            $request->file_name->move(public_path('Attachments/' . $request->product_name), $imageName);
             
             session()->flash('Add', 'Image Ajouté avec succées');
             return back();
