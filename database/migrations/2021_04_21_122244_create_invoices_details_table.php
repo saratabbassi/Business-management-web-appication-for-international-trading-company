@@ -21,6 +21,8 @@ class CreateInvoicesDetailsTable extends Migration
           
             $table->string('Status', 50);
             $table->integer('Value_Status');
+            $table->decimal('paid_amount');
+            $table->decimal('total_due');
             $table->date('Payment_Date')->nullable();
           
             $table->string('user',300);

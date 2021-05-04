@@ -113,6 +113,7 @@ class InvoicesController extends Controller
         $data['invoice_no'] = $request->invoice_no;
         $data['Status'] = 'Non Payé';
         $data['Value_Status'] = 2;
+        $data['paid_amount'] = 0;
         
         $data['last_invoice_no'] = $request->last_invoice_no;
         $data['devise'] = $request->devise;
@@ -144,8 +145,10 @@ class InvoicesController extends Controller
         invoices_details::create([
             'id_Invoice' => $invoice_id,
             'invoice_number' => $request->invoice_no,
+            'total_due' => $request->total_due,
             'Status' => 'Non Payé',
             'Value_Status' => 2,
+            'paid_amount' => 0,
           
             'user' => (Auth::user()->name),
         ]);
@@ -245,7 +248,7 @@ class InvoicesController extends Controller
       //  $data['Status'] = 'Non Payé';
        // $data['Value_Status'] = 2;
         
-        $data['last_invoice_no'] = $request->last_invoice_no;
+        
         $data['devise'] = $request->devise;
         $data['customer_name'] = $request->customer_name;
         $data['customer_adress'] = $request->customer_adress;
@@ -280,6 +283,7 @@ class InvoicesController extends Controller
             $details_list[$i]['weight'] = $request->weight[$i];
             $details_list[$i]['total_weight'] = $request->total_weight[$i];
             $details_list[$i]['unit_price'] = $request->unit_price[$i];
+            $details_list[$i]['buying_price'] = $request->buying_price[$i];
             $details_list[$i]['total_price'] = $request->total_price[$i];
             $details_list[$i]['created_by'] = (Auth::user()->name);
         }
@@ -379,6 +383,8 @@ class InvoicesController extends Controller
                 'id_Invoice' => $request->invoice_id,
                 'invoice_number' => $request->invoice_no,
                 'Status' => $request->Status,
+                'paid_amount'=>$request->paid_amount,
+                'total_due'=>$request->total_due,
                 'Value_Status' => 1,
                 'Payment_Date' => $request->Payment_Date,
                 'user' => (Auth::user()->name),
@@ -389,12 +395,15 @@ class InvoicesController extends Controller
             $invoices->update([
                 'Value_Status' => 3,
                 'Status' => $request->Status,
+                
              
             ]);
             invoices_Details::create([
                 'id_Invoice' => $request->invoice_id,
                 'invoice_number' => $request->invoice_no,
                 'Status' => $request->Status,
+                'paid_amount'=>$request->paid_amount,
+                'total_due'=>$request->total_due,
                 'Value_Status' => 3,
                'Payment_Date' => $request->Payment_Date,
                 'user' => (Auth::user()->name),

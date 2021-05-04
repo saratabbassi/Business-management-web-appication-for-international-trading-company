@@ -94,7 +94,7 @@
                                     <th class="border-bottom-0">Client</th>
                                     <th class="border-bottom-0">Date</th>
                                     <th class="border-bottom-0">Status</th>
-                                    <th class="border-bottom-0">Crée par</th>
+                                    <th class="border-bottom-0">Montant</th>
                                     <th class="border-bottom-0">Imprimer </th>
 
                                     <th class="border-bottom-0">Operations</th>
@@ -129,7 +129,7 @@
                                         @endif
 
                                     </td>
-                                    <td>{{ $invoice->created_by }}</td>
+                                    <td>{{ $invoice->total_due }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button aria-expanded="false" aria-haspopup="true"

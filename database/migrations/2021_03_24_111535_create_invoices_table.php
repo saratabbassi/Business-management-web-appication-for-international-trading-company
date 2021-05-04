@@ -34,6 +34,7 @@ class CreateInvoicesTable extends Migration
             $table->decimal('shipping');
             $table->decimal('total_due');
             $table->decimal('total_ben');
+            $table->decimal('paid_amount');
             $table->string('packages')->nullable();
             $table->string('Status', 50);
             $table->string('Value_Status', 50);

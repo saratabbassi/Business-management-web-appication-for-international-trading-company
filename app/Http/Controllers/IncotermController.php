@@ -38,7 +38,7 @@ class IncotermController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'incoterm' => 'required|unique:incoterm',
+            'incoterm' => 'required|unique:incoterms',
         ],[
 
             'incoterm.required' =>'Veuillez saisir un incoterm',

@@ -164,12 +164,15 @@
                                                             <th>Numéro de facture</th>
                                                             <th>Date de creation:</th>
                                                             <th>Etat de paiment:</th>
+                                                            <th>Montant Payé:</th>
+                                                            <th>Montant Restant:</th>
                                                             <th>Date de paiment :</th>
                                                             <th>Créé par :</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php $i = 0; ?>
+                                                        <?php $i = 0;
+                                                        $montant=0; ?>
                                                         @foreach ($details as $x)
                                                             <?php $i++; ?>
                                                             <tr>
@@ -190,6 +193,38 @@
                                                                             class="badge badge-pill badge-warning">{{ $x->Status }}</span>
                                                                     </td>
                                                                 @endif
+
+
+                                                                @if ($x->Value_Status == 1)
+                                                                <td>{{$x->total_due}}
+                                                                </td>
+                                                            @elseif($x->Value_Status ==2)
+                                                                <td>0
+                                                                </td>
+                                                            @else
+                                                                <td> 
+                                                                    @php
+                                                                        $montant=$montant+$x->paid_amount;
+                                                                    @endphp
+                                                                    {{$montant}}
+                                                                </td>
+                                                            @endif
+
+                                                            @if ($x->Value_Status == 1)
+                                                            <td>0
+                                                            </td>
+                                                        @elseif($x->Value_Status ==2)
+                                                            <td>{{$x->total_due}}
+                                                            </td>
+                                                        @else
+                                                            <td> 
+                                                                @php
+                                                                   $restant= $x->total_due-$montant;
+                                                                @endphp
+                                                                {{ $restant}}
+                                                            </td>
+                                                        @endif
+
                                                                 <td>{{ $x->Payment_Date }}</td>
 
 
@@ -267,37 +302,7 @@
     <!-- /row -->
 
     <!-- delete -->
-    <div class="modal fade" id="delete_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">حذف المرفق</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('delete_file') }}" method="post">
-
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <p class="text-center">
-                        <h6 style="color:red"> هل انت متاكد من عملية حذف المرفق ؟</h6>
-                        </p>
-
-                        <input type="hidden" name="id_file" id="id_file" value="">
-                        <input type="hidden" name="file_name" id="file_name" value="">
-                        <input type="hidden" name="invoice_number" id="invoice_number" value="">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+   
     </div>
     <!-- Container closed -->
     </div>

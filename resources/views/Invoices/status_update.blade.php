@@ -41,7 +41,7 @@
                                         value="{{ $invoice->invoice_no }}" required
                                             readonly>
                                     </div>
-        
+        <input type="hidden" id="total_due" name="total_due" value="{{ $invoice->total_due }}" class="total_due">
                                     <div class="col">
                                         <label>Date de Facture :</label>
                                         <input class="form-control fc-datepicker" name="invoice_Date" 
@@ -56,7 +56,7 @@
             
                                     <div class="col">
                                         <label for="exampleTextarea">Etat de  paiement :</label>
-                                        <select class="form-control" id="Status" name="Status" required>
+                                        <select class="form-control" id="Status" name="Status" onchange="yesnoCheck(this);" required>
                                             <option selected="true" disabled="disabled">--Sélectionnez l'état du paiement--</option>
                                           
                                             <option value="Partiellement payé">Partiellement payé</option>
@@ -69,6 +69,12 @@
                                        
                                             <input class="form-control fc-datepicker" data-date-format="dd-mm-yyyy" name="Payment_Date"
                                             id="Payment_Date" placeholder="DD-MM-YYYY" type="text" value="{{ date('d-m-Y') }}" required>
+                                    </div>
+                                    <div class="col" id="yes" style="display: none">
+                                        <label>Montant Payé:</label>
+                                       
+                                            <input class="form-control paid_amount "  name="paid_amount"
+                                            id="paid_amount" placeholder="Saisir le Montant Payé " type="text"  required>
                                     </div>
                                     <br><br>
             
@@ -115,5 +121,26 @@
   <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <script>
+      function yesnoCheck(that) {
+    if (that.value == "Partiellement payé") {
+       
+      
+      document.getElementById("paid_amount").value=""
+      document.getElementById("yes").style.display = "block";
+        
+       
+    } else if (that.value == "Totalement payé") {
+        document.getElementById("yes").style.display = "block";
+        total_due = $('.total_due').val();
+        $('.paid_amount').val(total_due);
+    }else{
+        document.getElementById("yes").style.display = "none";
+    }
+    
+
+    
+}
+  </script>
 
 @endsection
