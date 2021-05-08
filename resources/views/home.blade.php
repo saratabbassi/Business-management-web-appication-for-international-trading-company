@@ -40,7 +40,7 @@
                                 <p class="mb-0 tx-12 text-white op-7">Nombres : {{ \App\invoices::count() }}</p>
                             </div>
                             <span class=" my-auto ml-auto">
-                             
+
                                 <span class="text-white op-7">100%</span>
                             </span>
                         </div>
@@ -67,7 +67,7 @@
                                     {{ \App\invoices::where('Value_Status', 2)->count() }}</p>
                             </div>
                             <span class=" my-auto ml-auto">
-                               
+
                                 <span class="text-white op-7">
                                     @php
                                         $count_all = \App\invoices::count();
@@ -104,7 +104,7 @@
                                     {{ \App\invoices::where('Value_Status', 1)->count() }}</p>
                             </div>
                             <span class=" my-auto ml-auto">
-                               
+
                                 <span class="text-white op-7"> @php
                                     $count_all = \App\invoices::count();
                                     $count_invoices1 = \App\invoices::where('Value_Status', 1)->count();
@@ -126,7 +126,7 @@
             <div class="card overflow-hidden sales-card bg-warning-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">Facture Partiellement Payées</h6>
+                        <h6 class="mb-3 tx-12 text-white">Factures Partiellement Payées</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
@@ -138,7 +138,7 @@
                                     {{ \App\invoices::where('Value_Status', 3)->count() }}</p>
                             </div>
                             <span class=" my-auto ml-auto">
-                              
+
                                 <span class="text-white op-7">@php
                                     $count_all = \App\invoices::count();
                                     $count_invoices1 = \App\invoices::where('Value_Status', 3)->count();
@@ -160,28 +160,76 @@
     <!-- row closed -->
 
     <!-- row opened -->
-	<div class="row row-sm">
+    <div class="row row-sm">
         <div class="col-md-12 col-lg-12 col-xl-7">
             <div class="card">
                 <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mb-0">
-							Produits en rupture de stock</h4>
+                            Produits en rupture de stock</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
 
                 </div>
                 <div class="card-body" style="width: 70%">
-				
+                    @php
+                        $i = 0;
+                        $j = 0;
+                    @endphp
+                    @foreach ($sizes as $size)
+                        @php
+                            $j++;
+                        @endphp
+                        @if ($size->stock == 0 and $i < 4)
+                            @php
+                                $i++;
+                            @endphp
+
+
+
+                            <div class="list-group-item d-flex align-items-center">
+                                
+                                              
+                                          
+
+
+
+                                <div class="px-5">
+
+                                    <h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">
+                                        @foreach ($products as $product)
+                                            @if ($size->product_id == $product->id)
+                                            <span style="color: red" > {{ $product->name }}</span>   
+                                            @endif
+                                        @endforeach
+                                    </h6>
+                                    <span class="d-block tx-13 text-muted">{{ $size->designation }}</span>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                        @endif
+                    @endforeach
+
+
 
                 </div>
+
+
+
             </div>
         </div>
 
 
         <div class="col-lg-12 col-xl-5">
             <div class="card card-dashboard-map-one">
-                <label class="main-content-label">Revenus Totaux</label>
+                <label class="main-content-label">Revenus du dernier mois </label>
                 <div class="" style="width: 100%">
                     {!! $chartjs_2->render() !!}
                 </div>
@@ -233,65 +281,67 @@
 
 
                             </div>
-							
-						</div>
+
+                        </div>
                     @endforeach
 
+                </div>
+            </div>
+
+
+        </div>
+        <!-- row close -->
+        <div class="col-md-12 col-lg-8 col-xl-8">
+            <div class="card card-table-two">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title mb-1">Vos revenus les plus récents</h4>
+                    <i class="mdi mdi-dots-horizontal text-gray"></i>
+                </div>
+
+                <div class="table-responsive country-table">
+                    <table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="wd-lg-25p">Date</th>
+                                <th class="wd-lg-25p tx-right">
+                                    Nombre de produits</th>
+                                <th class="wd-lg-25p tx-right">Revenus</th>
+                                <th class="wd-lg-25p tx-right">
+                                    Frais de livraison</th>
+                                <th class="wd-lg-25p tx-right">
+                                    Devise</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($invoices as $invoice)
+
+
+                                <tr>
+                                    
+                                    <td  ><a href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->invoice_date }}</a></td>
+                                    <td class="tx-right tx-medium tx-inverse">
+                                        @php
+                                            $i = 0;
+                                        @endphp
+
+                                        @foreach ($invoice->details as $item)
+                                            @php
+                                                $i++;
+                                            @endphp
+                                        @endforeach
+                                        {{ $i }}
+                                    </td>
+                                    <td class="tx-right tx-medium tx-inverse">{{ $invoice->sub_total }}</td>
+                                    <td class="tx-right tx-medium tx-danger">{{ $invoice->shipping }}</td>
+                                    <td class="tx-right tx-medium tx-inverse">{{ $invoice->devise }}</td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-       
-
-    </div>
-    <!-- row close -->
-	<div class="col-md-12 col-lg-8 col-xl-8">
-		<div class="card card-table-two">
-			<div class="d-flex justify-content-between">
-				<h4 class="card-title mb-1">Vos revenus les plus récents</h4>
-				<i class="mdi mdi-dots-horizontal text-gray"></i>
-			</div>
-
-			<div class="table-responsive country-table">
-				<table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap">
-					<thead>
-						<tr>
-							<th class="wd-lg-25p">Date</th>
-							<th class="wd-lg-25p tx-right">
-								Nombre de produits</th>
-							<th class="wd-lg-25p tx-right">Revenus</th>
-							<th class="wd-lg-25p tx-right">
-								Frais de livraison</th>
-								<th class="wd-lg-25p tx-right">
-									Devise</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach ($invoices as $invoice)
-
-
-							<tr>
-								<td>{{ $invoice->invoice_date }}</td>
-								<td class="tx-right tx-medium tx-inverse">
-									@php
-									$i = 0;
-								@endphp
-
-								@foreach ($invoice->details as $item)
-									@php
-										$i++;
-									@endphp
-								@endforeach	
-									{{$i}}</td>
-								<td class="tx-right tx-medium tx-inverse">{{ $invoice->sub_total }}</td>
-								<td class="tx-right tx-medium tx-danger">{{ $invoice->shipping }}</td>
-								<td class="tx-right tx-medium tx-inverse">{{ $invoice->devise }}</td>
-							</tr>
-						@endforeach
-
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
 
     </div>
     </div>

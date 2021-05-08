@@ -112,8 +112,9 @@ Modifier Employée
                         </div>
                     </div>
                 </div>
-                <div class="mg-t-30">
-                    <button class="btn btn-main-primary pd-x-20" type="submit">Modifier</button>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
+                    <button class="btn btn-primary pd-x-20" type="submit">Modifier</button>
                 </div>
                 {!! Form::close() !!}
             </div>

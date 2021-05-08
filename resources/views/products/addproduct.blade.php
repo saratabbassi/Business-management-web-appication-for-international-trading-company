@@ -146,7 +146,8 @@
                        
                         <br>
                         <br>
-                        <div class="d-flex justify-content-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div> -->
                     </form>

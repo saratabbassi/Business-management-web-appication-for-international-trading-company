@@ -69,13 +69,13 @@
 
                                 <label for="inputName" class="control-label">Dernier numéro de facture</label>
                                 <input type="text" class="form-control" id="last_invoice_no" name="last_invoice_no"
-                                    value="{{ $last }}" readonly>
+                                    value="{{ $last }}"  readonly>
                             </div>
                             <div class="col">
 
                                 <label for="inputName" class="control-label">Numéro de Facture</label>
                                 <input type="text" class="form-control" id="invoice_no" name="invoice_no"
-                                    title="Saisir le nom du produit ">
+                                    title="Saisir le nom du produit " value="{{old('invoice_no')}}">
                             </div>
                             <div class="col">
                                 <label>Date</label>
@@ -92,8 +92,9 @@
                                     <option value="">Choisir Devise</option>
                                     @foreach ($devises as $d)
 
-                                        <option value="{{ $d->devise }}"> {{ $d->devise }}</option>
+                                        <option value="{{ $d->devise}}" {{ old("devise") == $d->devise  ? "selected":"" }}> {{ $d->devise }}</option>
                                     @endforeach
+                               
 
                                 </select>
 
@@ -122,8 +123,7 @@
                                     <option value="">Choisir Client</option>
                                     @foreach ($customers as $c)
 
-                                        <option value="{{ $c->customer_name }}" adress="{{ $c->customer_adress }}">
-                                            {{ $c->customer_name }}</option>
+                                            <option value="{{ $c->customer_name}}" adress="{{ $c->customer_adress }}" {{ old("customer_name") == $c->customer_name  ? "selected":"" }}> {{ $c->customer_name }}</option>
                                     @endforeach
 
                                 </select>
@@ -132,14 +132,14 @@
                             <div class="col">
                                 <label for="inputName" class="control-label">Adresse du client</label>
                                 <input type="text" class="form-control" id="customer_adress" name="customer_adress"
-                                    title="Saisir le nom du produit " readonly>
+                                    title="Saisir le nom du produit " value="{{old('customer_adress')}}" readonly>
                             </div>
 
                         </div>
 
                         {{-- 3 --}}
                         <br>
-                        <div class="row">
+                        <div class="row" style="display: none">
 
 
                             <div class="col">
@@ -168,11 +168,11 @@
 
                             <div class="col">
                                 <label for="inputName" class="control-label">Le nombre de colis</label>
-                                <input type="text" class="form-control" id="packages" name="packages">
+                                <input type="text" class="form-control" id="packages" name="packages" value="{{old('packages')}}">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Livraison</label>
-                                <input type="text" class="form-control" id="livraison" name="livraison"
+                                <input type="text" class="form-control" id="livraison" name="livraison" value="{{old('livraison')}}"
                                     title="Saisir le nom du produit ">
                             </div>
                             <div class="col ">
@@ -186,8 +186,8 @@
                                     onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                     <option value="">Choisir Incoterm</option>
                                     @foreach ($incoterms as $i)
-
-                                        <option value="{{ $i->id }}">{{ $i->incoterm }}</option>
+                                    <option value="{{  $i->id}}"  {{ old("incoterm") == $c->customer_name  ? "selected":"" }}> {{ $i->incoterm }}</option>
+                                       
                                     @endforeach
 
                                 </select>
@@ -197,7 +197,7 @@
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Détails de paiement</label>
-                                <input type="text" class="form-control" id="payment_details" name="payment_details">
+                                <input type="text" class="form-control" id="payment_details" name="payment_details" value="{{old('payment_details')}}">
                             </div>
                         </div>
 
@@ -241,6 +241,7 @@
                                                             <option value="{{ $categorie->id }}">
                                                                 {{ $categorie->categorie_name }}
                                                             </option>
+                                                            
                                                         @endforeach
 
 
@@ -369,7 +370,9 @@
 
 
                                 <br>
-                                <div class="d-flex justify-content-center">
+                               
+                                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                        <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
                                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                                 </div>
 

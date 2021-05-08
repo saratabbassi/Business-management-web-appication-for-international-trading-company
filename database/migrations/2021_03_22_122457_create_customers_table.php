@@ -19,7 +19,10 @@ class CreateCustomersTable extends Migration
             $table->string('customer_email')->nullable()->unique();
             $table->string('customer_phone')->nullable()->unique();
             $table->string('customer_adress');
-            $table->string('created_by');
+            $table->string('Matricule')->nullable();
+    
+            $table->string('fax')->nullable();
+          
             $table->timestamps();
         });
     }

@@ -3,7 +3,7 @@
     <!--Internal   Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
 @section('title')
-    Autorisations des employés
+    Permissions des employés
 @stop
 
 
@@ -14,7 +14,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">Employées</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-          Autorisations</span>
+          Permissions</span>
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
         window.onload = function() {
             notif({
                
-msg: "L'autorisation a été ajoutée avec succès",
+msg: "La permission a été ajoutée avec succès",
                 type: "success"
             });
         }
@@ -40,7 +40,7 @@ msg: "L'autorisation a été ajoutée avec succès",
     <script>
         window.onload = function() {
             notif({
-                msg: "Les données d'autorisation ont été mises à jour avec succès",
+                msg: "Les données de permission ont été mises à jour avec succès",
                 type: "success"
             });
         }
@@ -52,7 +52,7 @@ msg: "L'autorisation a été ajoutée avec succès",
     <script>
         window.onload = function() {
             notif({
-                msg: "L'autorisation a été supprimée avec succès",
+                msg: "La permission a été supprimée avec succès",
                 type: "error"
             });
         }

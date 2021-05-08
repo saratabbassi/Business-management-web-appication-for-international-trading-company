@@ -62,6 +62,9 @@ class CustomersController extends Controller
                 
                 'customer_phone' => $request->customer_phone,
                 'customer_adress' => $request->customer_adress,
+                'matricule' => $request->matricule,
+                'fax' => $request->fax,
+                'home_phone' => $request->home_phone,
                 
             
                 'created_by' => (Auth::user()->name),

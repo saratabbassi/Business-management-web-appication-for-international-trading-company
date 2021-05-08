@@ -98,13 +98,14 @@ Ajouter Employées
                     <div class="row mg-b-20">
                         <div class="col-xs-12 col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Autorisations</label>
+                                <label class="form-label">Permissions</label>
                                 {!! Form::select('roles_name[]', $roles,[], array('class' => 'form-control','multiple')) !!}
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button class="btn btn-main-primary pd-x-20" type="submit">Enregistrer</button>
+                        <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
+                        <button class="btn btn-primary  pd-x-20" type="submit">Enregistrer</button>
                     </div>
                 </form>
             </div>

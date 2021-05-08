@@ -10,6 +10,7 @@
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">Employée</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Modifier
                     le profil</span>
+
             </div>
         </div>
 
@@ -238,8 +239,14 @@
 
                     </div>
                     <div class="card-footer text-center">
+                        <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
                         <button type="submit" class="btn btn-primary waves-effect waves-light ">Modifier le Profile</button>
+                       
+
+
+
                     </div>
+
 
                 </div>
             </div>

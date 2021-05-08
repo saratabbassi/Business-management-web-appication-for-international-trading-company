@@ -79,8 +79,10 @@
                                     <br><br>
             
             
-                                    <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-success">Changer l'etat de paiment</button>
+                                   
+                                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                            <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
+                                        <button type="submit" class="btn btn-primary">Changer l'etat de paiment</button>
                                     </div>
                                 </form>
                             </div>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\invoices;
+use App\sizes;
+use App\products;
+use App\products_attachement;
 class HomeController extends Controller
 {
     /**
@@ -57,6 +60,9 @@ class HomeController extends Controller
               ->options([]);
 
         $invoices = invoices::orderBy('id', 'desc')->take(5)->get();
-        return view('home',compact('invoices','chartjs_2'));
+        $sizes = sizes::get();
+        $products = products::get();
+        $image = products_attachement::get();
+        return view('home',compact('invoices','chartjs_2','sizes','products','image'));
     }
 }

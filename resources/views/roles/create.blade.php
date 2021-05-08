@@ -5,7 +5,7 @@
     <!--Internal  treeview -->
     <link href="{{ URL::asset('assets/plugins/treeview/treeview-rtl.css') }}" rel="stylesheet" type="text/css" />
 @section('title')
-    Ajouter Autorisation
+    Ajouter Permission
 @stop
 
 @endsection
@@ -14,7 +14,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Autorisations</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+            <h4 class="content-title mb-0 my-auto">Permissions</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                 Ajouter un Type d'employée
             </span>
         </div>
@@ -60,7 +60,7 @@
                     <!-- col -->
                     <div class="col">
                       <div>
-                           <a href="#">Autorisations : </a>
+                           <a href="#">Permissions : </a>
                         </div>
                          <br>
                          <br>
@@ -81,7 +81,8 @@
                     </div>
                     <!-- /col -->
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-main-primary">Enregistrer</button>
+                        <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
 
                 </div>

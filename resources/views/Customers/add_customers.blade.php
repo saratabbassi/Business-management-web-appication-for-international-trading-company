@@ -52,17 +52,24 @@ Ajouter Clients
 										{{ csrf_field() }}
 										<div class="control-group form-group">
 											<label class="form-label">Name</label>
-											<input type="text"  id="inputName" name="customer_name" value="{{old('customer_name')}}" class="form-control required" placeholder="Name">
+											<input type="text"  id="inputName" name="customer_name" value="{{old('customer_name')}}" class="form-control required" placeholder="Nom">
 										</div>
 										<div class="control-group form-group">
 											<label class="form-label">Email</label>
 											<input type="email"  id="customer_email" name="customer_email" value="{{old('customer_email')}}" class="form-control required" placeholder=" Addresse mail">
 										</div>
 										<div class="control-group form-group">
+											<label class="form-label">Matricule Fiscale</label>
+											<input type="text"  id="matricule" name="matricule" value="{{old('matricule')}}" class="form-control required" placeholder=" Matricule Fiscle">
+										</div>
+										<div class="control-group form-group">
 											<label class="form-label">Numéro de téléphone</label>
 											<input type="text"  id="customer_phone" name="customer_phone" value="{{old('customer_phone')}}" class="form-control required" placeholder=" Numéro de téléphone">
 										</div>
-										
+										<div class="control-group form-group">
+											<label class="form-label">Fax</label>
+											<input type="text"  id="fax" name="fax" value="{{old('fax')}}" class="form-control required" placeholder="Fax">
+										</div>
 										<div class="control-group form-group mb-0">
 											<label class="form-label">Adresse</label>
 											<input type="text" id="customer_adress" name="customer_adress" value="{{old('customer_adress')}}" class="form-control required" placeholder="Addresse">
@@ -72,7 +79,8 @@ Ajouter Clients
 									
 									<br>
 									
-									<div class="d-flex justify-content-center">
+									<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+										<a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
 										<button type="submit" class="btn btn-primary">Enregistrer</button>
 									</div>
 								</section>

@@ -38,14 +38,7 @@
                     </svg><span class="side-menu__label">Tableau de Bord</span></a>
             </li>
             <li class="side-item side-item-category">Contact</li>
-            <li class="slide">
-                <a class="side-menu__item" href="{{ url('/' . ($page = 'customers')) }}"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-people-fill"  viewBox="0 0 16 16">
-                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
-                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-                    </svg><span class="side-menu__label">Clients</span></a>
-            </li>
+           
 
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
@@ -54,32 +47,16 @@
                         <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/> 
                     </svg><span class="side-menu__label">Employés</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">Afficher les employés</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">Liste les employés</a></li>
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'roles')) }}">
-                            Autorisations des employés</a></li>
+                        Permissions des employés</a></li>
 
 
                 </ul>
             </li>
 
 
-
-
-
-            <li class="side-item side-item-category">Gestion de commerce</li>
-            <li class="slide">
-                <a class="side-menu__item" href="{{ url('/' . ($page = 'devise')) }}"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-cash-stack"   viewBox="0 0 16 16">
-                        <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
-                        <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
-                    </svg><span class="side-menu__label">Devises</span></a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" href="{{ url('/' . ($page = 'incoterm')) }}"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-truck"  viewBox="0 0 16 16">
-                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-                    </svg><span class="side-menu__label">Incoterm</span></a>
-            </li>
+            <li class="side-item side-item-category">Gestion de produit</li>
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/' . ($page = 'categories')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-diagram-3-fill" viewBox="0 0 16 16">
@@ -93,6 +70,32 @@
                     </svg><span class="side-menu__label">Produits</span></a>
 
             </li>
+
+            <li class="side-item side-item-category">Gestion de commerce</li>
+            <li class="slide">
+                <a class="side-menu__item" href="{{ url('/' . ($page = 'customers')) }}"><svg
+                        xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-people-fill"  viewBox="0 0 16 16">
+                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                    </svg><span class="side-menu__label">Clients</span></a>
+            </li>
+      <!--      <li class="slide">
+                <a class="side-menu__item" href="{{ url('/' . ($page = 'devise')) }}"><svg
+                        xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-cash-stack"   viewBox="0 0 16 16">
+                        <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                        <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
+                    </svg><span class="side-menu__label">Devises</span></a>
+            </li> -->
+            <li class="slide">
+                <a class="side-menu__item" href="{{ url('/' . ($page = 'incoterm')) }}"><svg
+                        xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-truck"  viewBox="0 0 16 16">
+                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    </svg><span class="side-menu__label">Incoterm</span></a>
+
+            </li>
+           
+         
             @can('Factures')
                 
            

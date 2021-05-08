@@ -5,7 +5,7 @@
 <!--Internal  treeview -->
 <link href="{{URL::asset('assets/plugins/treeview/treeview-rtl.css')}}" rel="stylesheet" type="text/css" />
 @section('title')
-Modifier Autorisations
+Modifier Permissions
 @stop
 @endsection
 @section('page-header')
@@ -13,7 +13,8 @@ Modifier Autorisations
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Autorisation</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Modifier
+            
+            <h4 class="content-title mb-0 my-auto">Permission</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Modifier
               </span>
         </div>
     </div>
@@ -53,7 +54,7 @@ Modifier Autorisations
                     <!-- col -->
                     <div class="col-lg-4">
                         <ul id="treeview1">
-                        <li><a href="#">Autorisations</a>
+                        <li><a href="#">Permissions</a>
                                 <ul>
                                     <li>
                                         @foreach($permission as $value)
@@ -68,6 +69,7 @@ Modifier Autorisations
                         </ul>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
                         <button type="submit" class="btn btn-main-primary">Mise a Jour</button>
                     </div>
                     <!-- /col -->
