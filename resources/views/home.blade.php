@@ -175,25 +175,24 @@
                     @php
                         $i = 0;
                         $j = 0;
+                        $s=0;
                     @endphp
                     @foreach ($sizes as $size)
                         @php
                             $j++;
                         @endphp
+                        @if ($size->stock == 0)
+                        @php
+                          $s++;   
+                        @endphp
+                           
+                        @endif
                         @if ($size->stock == 0 and $i < 4)
                             @php
                                 $i++;
                             @endphp
-
-
-
                             <div class="list-group-item d-flex align-items-center">
-                                
-                                              
-                                          
-
-
-
+                               
                                 <div class="px-5">
 
                                     <h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">
@@ -207,20 +206,24 @@
                                 </div>
 
                             </div>
-
-
-
-
-
-
-
                         @endif
+                     
+                      
                     @endforeach
-
-
+                 
+               
 
                 </div>
-
+                
+                @if ($s>=5)
+                    
+                <div class="col-sm-6 col-md-3 ml-auto" >
+                    <button class="btn btn-primary btn-block">Voir Plus</button>
+                </div>
+                <div>
+                    <br>
+                </div>
+            @endif
 
 
             </div>

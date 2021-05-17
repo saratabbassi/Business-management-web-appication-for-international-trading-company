@@ -87,7 +87,7 @@
 
                                 <label for="inputName" class="control-label">Devise</label>
 
-                                <select name="devise" class="form-control select2" onclick="console.log($(this).val())"
+                                <select required name="devise" class="form-control select2" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')">
                                     <option value="">Choisir Devise</option>
                                     @foreach ($devises as $d)
@@ -118,7 +118,7 @@
 
 
 
-                                <select id="customer_name" name="customer_name" class="form-control select2 "
+                                <select required id="customer_name" name="customer_name" class="form-control select2 "
                                     onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                     <option value="">Choisir Client</option>
                                     @foreach ($customers as $c)
@@ -182,7 +182,7 @@
 
 
 
-                                <select id="incoterm" name="incoterm" class="form-control select2 "
+                                <select required id="incoterm" name="incoterm" class="form-control select2 "
                                     onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                     <option value="">Choisir Incoterm</option>
                                     @foreach ($incoterms as $i)
@@ -235,7 +235,7 @@
 
                                                 <td>
                                                     <select name="categorie_id[0]" id="categorie_id"
-                                                        class="form-control categorie_id ">
+                                                        class="form-control categorie_id " required>
                                                         <option label="Choisir Categorie"></option>
                                                         @foreach ($categories as $categorie)
                                                             <option value="{{ $categorie->id }}">
@@ -248,13 +248,13 @@
                                                     </select>
                                                 </td>
                                                 <td> <select name="product_id[0]" id="product_id"
-                                                        class="form-control product_id ">
+                                                        class="form-control product_id " required>
                                                         <option label="Choisir Produit"></option>
 
 
 
                                                     </select></td>
-                                                <td> <select name="size_id[0]" id="size_id" class="form-control size_id ">
+                                                <td> <select name="size_id[0]" id="size_id" class="form-control size_id " required>
 
                                                         <option label="Choisir Designation"></option>
 
@@ -264,24 +264,24 @@
 
                                                 <td>
 
-                                                    <input type="text" name="quantity[0]" class="form-control quantity" value="0" />
+                                                    <input type="text" name="quantity[0]" class="form-control quantity" value="0" required />
                                                 </td>
                                                 <td style="display:none;">
                                                     <input type="hidden" name="weight[0]" class="form-control weight "
-                                                        readonly />
+                                                        readonly required />
                                                 </td>
                                                 <td style="display:none;">
                                                     <input type="hidden" name="total_weight[0]"
-                                                        class="form-control total_weight " readonly />
+                                                        class="form-control total_weight " readonly required />
                                                 </td>
                                                 <td>
                                                     <input type="text" name="unit_price[0]"
-                                                        class="form-control unit_price " />
+                                                        class="form-control unit_price " required />
                                                 </td>
                                                 <td>
 
                                                     <input type="text" name="total_price[0]"
-                                                        class="form-control total_price" readonly />
+                                                        class="form-control total_price" readonly required />
                                                 </td>
                                                 <td>
 
@@ -310,7 +310,7 @@
                                             <div class="col ">
                                                 <label for="poids_net">Poids net en Kg</label>
                                                 <input type="text" id="poids_net" name="poids_net"
-                                                    class="form-control poids_net" value="0">
+                                                    class="form-control poids_net" value="0" required>
                                             </div>
                                             <div class="col"></div>
                                             <div class="col"></div>
@@ -318,7 +318,7 @@
 
                                                 <label for="sub_total">Sub Total</label>
                                                 <input type="text" id="sub_total" name="sub_total"
-                                                    class="form-control sub_total" value="0" readonly>
+                                                    class="form-control sub_total" value="0" readonly required>
                                             </div>
                                             <div class="col ml-auto" style="display: none">
 
@@ -334,7 +334,7 @@
                                                 <label for="poids_emballage">Poids d'emballage en Kg</label>
 
                                                 <input type="text" id="poids_emballage" name="poids_emballage"
-                                                    class="form-control poids_emballage" value="0">
+                                                    class="form-control poids_emballage" value="0" >
                                             </div>
                                             <div class="col"></div>
                                             <div class="col"></div>
@@ -360,7 +360,7 @@
 
                                                 <label for="total_due">Total Due</label>
                                                 <input type="text" id="total_due" name="total_due"
-                                                    class="form-control total_due" value="0" readonly>
+                                                    class="form-control total_due" value="0" readonly required>
                                             </div>
 
                                         </div>
@@ -471,18 +471,18 @@
             var numberofrow = ($('.addMoreProduct tr').length - 0) + 1;
 
             var tr = '<tr>' +
-                '<td> <select class="form-control categorie_id  "  id="categorie_id" name="categorie_id[' + i +
+                '<td> <select required class="form-control categorie_id  "  id="categorie_id" name="categorie_id[' + i +
                 ']" >' + categorie +
-                '</select></td>' +
-                '<td>  <select class="form-control product_id  "  id=product_id" name="product_id[' + i +
+                '  </select></td>' +
+                '<td>  <select  required class="form-control product_id  "  id=product_id" name="product_id[' + i +
                 ']" ><option label="Choisir Produit"></option></select></td>' +
-                '<td>  <select class="form-control size_id  "  id="size_id" name="size_id[' + i +
+                '<td>  <select  required class="form-control size_id  "  id="size_id" name="size_id[' + i +
                 ']" ><option label="Choisir Designation"></option></select></td>' +
-                '<td> <input type="text" name="quantity[' + i + ']" class="form-control quantity" value="0" ></td>' +
+                '<td> <input required type="text" name="quantity[' + i + ']" class="form-control quantity" value="0" ></td>' +
                 '<td style="display:none;"> <input type="hidden" name="weight[' + i + ']" class="form-control weight" readonly></td>' +
                 '<td style="display:none;"> <input type="hidden" name="total_weight[' + i +
                 ']" class="form-control total_weight" readonly ></td>' +
-                '<td> <input type="text" name="unit_price[' + i + ']" class="form-control unit_price" ></td>' +
+                '<td> <input required type="text" name="unit_price[' + i + ']" class="form-control unit_price" ></td>' +
 
                 '<td> <input type="text" name="total_price[' + i +
                 ']" class="form-control total_price" readonly></td>' +

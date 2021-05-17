@@ -136,7 +136,7 @@
                                         class="form-control" required /></td>
                                 <td><input type="text" name="moreFields[0][stock]" value="{{ old('moreFields.0.stock') }}" placeholder="Entrer le stock"
                                         class="form-control" required /></td>
-                                <td><input type="text" name="moreFields[0][weight]" value="{{ old('moreFields.0.weight') }}" placeholder="Entrer le pois"
+                                <td><input type="text" name="moreFields[0][weight]" value="{{ old('moreFields.0.weight') }}" placeholder="Entrer le poids"
                                         class="form-control" required /></td>
                                 <td><button type="button" name="add" id="add-btn" class="btn btn-success">Ajouter plus</button>
                                 </td>
@@ -149,7 +149,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <a href="{{ route('home') }}" class="btn btn-danger waves-effect waves-light ">Annuler</a>
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
-                        </div> -->
+                        </div> 
                     </form>
                 </div>
             </div>
@@ -193,7 +193,7 @@
         var i = 0;
         $("#add-btn").click(function(){
         ++i;
-        $("#dynamicAddRemove").append('<tr><td><input type="text" name="moreFields['+i+'][designation]" value="{{ old('moreFields.$i.designation') }}" placeholder="Enter designation" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][buying_price]" placeholder="Entrer le proix d achat" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][selling_price]" placeholder="Entrer le prix de vente" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][stock]" placeholder="Entrer le stock" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][weight]" placeholder="Entrer le pois" class="form-control" required /></td><td><button type="button" class="btn btn-danger remove-tr ">Supprimer</button></td></tr>');
+        $("#dynamicAddRemove").append('<tr><td><input type="text" name="moreFields['+i+'][designation]" value="{{ old('moreFields.$i.designation') }}" placeholder="Enter designation" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][buying_price]" placeholder="Entrer le prix d achat" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][selling_price]" placeholder="Entrer le prix de vente" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][stock]" placeholder="Entrer le stock" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][weight]" placeholder="Entrer le poids" class="form-control" required /></td><td><button type="button" class="btn btn-danger remove-tr ">Supprimer</button></td></tr>');
         });
         $(document).on('click', '.remove-tr', function(){  
         $(this).parents('tr').remove();

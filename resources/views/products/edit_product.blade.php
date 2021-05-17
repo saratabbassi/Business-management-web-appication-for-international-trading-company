@@ -76,7 +76,7 @@
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Categorie</label>
-                                <select name="categorie_id" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                <select required name="categorie_id" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')">
                                     <!--placeholder-->
                                 
@@ -109,7 +109,7 @@
                                 <th>Prix d'achat</th>
                                 <th>Prix de vente</th>
                                 <th>Stock</th>
-                                <th>Pois</th>
+                                <th>Poids</th>
                                 <th>Opérations</th>
                             </tr>
                             @php
@@ -128,7 +128,7 @@
                                         class="form-control" required /></td>
                                 <td><input type="text" name="moreFields[{{ $s }}][stock]" value="{{ $size->stock }}"  placeholder="Entrer le stock"
                                         class="form-control" required /></td>
-                                <td><input type="text" name="moreFields[{{ $s }}][weight]" value="{{ $size->weight }}" placeholder="Entrer le pois"
+                                <td><input type="text" name="moreFields[{{ $s }}][weight]" value="{{ $size->weight }}" placeholder="Entrer le poids"
                                         class="form-control" required /></td>
                                       
                                        
@@ -234,7 +234,7 @@
         var i = '<?php echo $s; ?>';
         $("#add-btn").click(function(){
         ++i;
-        $("#dynamicAddRemove").append('<tr> <td><input type="text" name="moreFields['+i+'][designation]"  placeholder="Enter designation" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][buying_price]" placeholder="Entrer le proix d achat" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][selling_price]" placeholder="Entrer le prix de vente" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][stock]" placeholder="Entrer le stock" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][weight]" placeholder="Entrer le pois" class="form-control" required /></td><td><button type="button" class="btn btn-danger remove-tr ">Supprimer</button></td></tr>');
+        $("#dynamicAddRemove").append('<tr> <td><input type="text" name="moreFields['+i+'][designation]"  placeholder="Enter designation" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][buying_price]" placeholder="Entrer le proix d achat" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][selling_price]" placeholder="Entrer le prix de vente" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][stock]" placeholder="Entrer le stock" class="form-control" required /></td><td><input type="text" name="moreFields['+i+'][weight]" placeholder="Entrer le poids" class="form-control" required /></td><td><button type="button" class="btn btn-danger remove-tr ">Supprimer</button></td></tr>');
         });
         $(document).on('click', '.remove-tr', function(){  
         $(this).parents('tr').remove();

@@ -89,6 +89,7 @@ class InvoicesController extends Controller
             'payment_details'=>'required',
             'sub_total'=>'required',
             'total_due'=>'required',
+      
 
            
 
@@ -108,6 +109,7 @@ class InvoicesController extends Controller
             'sub_total.required'=>'Le champ Sub Total est obligatoire',
             'total_due.required'=>'Le champ Total due  est obligatoire',
             'incoterm.required' => 'Choisir un Incoterm',
+           
           
             ]);
         $data['invoice_no'] = $request->invoice_no;
@@ -156,7 +158,12 @@ class InvoicesController extends Controller
         $details_list = [];
         for ($i = 0; $i < count($request->categorie_id); $i++) {
            
-                                  
+            $validatedData = $request->validate([
+                'categorie_id]'=>'required',
+            ],[
+
+                ]); 
+
             $details_list[$i]['categorie_id'] = $request->categorie_id[$i];
             $details_list[$i]['product_id'] = $request->product_id[$i];
             $details_list[$i]['size_id'] = $request->size_id[$i];
@@ -243,7 +250,7 @@ class InvoicesController extends Controller
     public function update(Request $request, invoices $invoices)
     {
         $invoices = invoices::findOrFail($request->invoice_id);
-    
+
         $data['invoice_no'] = $request->invoice_no;
       //  $data['Status'] = 'Non Payé';
        // $data['Value_Status'] = 2;
@@ -268,7 +275,7 @@ class InvoicesController extends Controller
         $data['sub_total'] = $request->sub_total;
         $data['shipping'] = $request->shipping;
         $data['total_due'] = $request->total_due;
-        $data['created_by'] = (Auth::user()->name);
+  
         $invoices->update($data);
 
         $invoices->details()->delete();
@@ -285,6 +292,7 @@ class InvoicesController extends Controller
             $details_list[$i]['unit_price'] = $request->unit_price[$i];
             $details_list[$i]['buying_price'] = $request->buying_price[$i];
             $details_list[$i]['total_price'] = $request->total_price[$i];
+            $details_list[$i]['benefice'] = $request->benefice[$i];
             $details_list[$i]['created_by'] = (Auth::user()->name);
         }
 

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Ajouter Clients
+Modifier Clients
 @endsection
 @section('css')
 <!--- Internal Select2 css-->
@@ -11,7 +11,7 @@ Ajouter Clients
 				<div class="breadcrumb-header justify-content-between" >
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Clients</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Ajouter </span>
+							<h4 class="content-title mb-0 my-auto">Clients</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Modifier </span>
 						</div>
 					</div>
 					

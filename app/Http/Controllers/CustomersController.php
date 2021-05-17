@@ -64,10 +64,10 @@ class CustomersController extends Controller
                 'customer_adress' => $request->customer_adress,
                 'matricule' => $request->matricule,
                 'fax' => $request->fax,
-                'home_phone' => $request->home_phone,
+               
                 
             
-                'created_by' => (Auth::user()->name),
+             
 
             ]);
             session()->flash('Add', 'Le client a été ajoutée avec succès ');

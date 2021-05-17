@@ -22,7 +22,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto"> Details</h4>
+                <h4 class="content-title mb-0 my-auto">Produits</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    Détails</span>
 
             </div>
         </div>
@@ -110,7 +111,7 @@
                                                                     <th class="wd-15p border-bottom-0">Prix d'achat</th>
                                                                     <th class="wd-20p border-bottom-0">Prix de vente</th>
                                                                     <th class="wd-15p border-bottom-0">Stock</th>
-                                                                    <th class="wd-10p border-bottom-0">Pois</th>
+                                                                    <th class="wd-10p border-bottom-0">Poids</th>
                                                                     
                                                                 </tr>
                                                             </thead>

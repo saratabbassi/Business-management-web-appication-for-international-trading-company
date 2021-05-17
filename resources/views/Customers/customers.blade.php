@@ -65,7 +65,7 @@
 												<th class="wd-20p border-bottom-0">
                                                     Numéro de téléphone</th>
 												<th class="wd-15p border-bottom-0">Adresse</th>
-												<th class="wd-10p border-bottom-0">Crée par</th>
+												
 												<th class="wd-25p border-bottom-0">Operations</th>
 											</tr>
 										</thead>
@@ -83,7 +83,7 @@
 												<td>{{$customer->customer_email}}</td>
 												<td>{{$customer->customer_phone}}</td>
 												<td>{{$customer->customer_adress}}</td>
-												<td>{{$customer->created_by}}</td>
+											
 													<td>
 													<a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
 												   

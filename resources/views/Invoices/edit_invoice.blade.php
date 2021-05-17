@@ -132,7 +132,7 @@
 
                         {{-- 3 --}}
                         <br>
-                        <div class="row">
+                        <div class="row" style="display: none">
 
 
                             <div class="col">
@@ -161,18 +161,7 @@
                         {{-- 4 --}}
                         <br>
                         <div class="row">
-                            <div class="col">
-                                <label for="inputName" class="control-label">Poids brut</label>
-                                <input type="text" class="form-control" id="poids_brut" name="poids_brut"
-                                    title="Saisir le nom du produit "
-                                    value="{{ old('poids_brut', $invoices->poids_brut) }}">
-                            </div>
-                            <div class="col">
-                                <label for="inputName" class="control-label">Poids net</label>
-                                <input type="text" class="form-control" id="poids_net" name="poids_net"
-                                    title="Saisir le nom du produit"
-                                    value="{{ old('poids_net', $invoices->poids_net) }}">
-                            </div>
+                         
                             <div class="col">
                                 <label for="inputName" class="control-label">Le nombre de colis</label>
                                 <input type="text" class="form-control" id="packages" name="packages"
@@ -229,10 +218,11 @@
                                                 <th style="width: 20%" scope="col">Produit</th>
                                                 <th style="width: 20%" scope="col">Designation</th>
                                                 <th style="width: 9%" scope="col">Quantité</th>
-                                                <th style="width: 9%" scope="col">Poids en Kg</th>
-                                                <th style="width: 9%" scope="col">Poids Total en Kg</th>
+                                           
                                                 <th scope="col">Prix unitaire</th>
                                                 <th scope="col">Prix total</th>
+                                                <th style="display: none" scope="col">Prix total</th>
+                                                <th style="display: none" scope="col">Prix total</th>
                                                 <th scope="col"><a class="btn btn-success btn-sm add_more "><i
                                                             class="fas fa-plus"></i></a></th>
                                             </tr>
@@ -245,7 +235,7 @@
                                                 <tr id="{{ $loop->index }}">
 
                                                     <td>
-                                                        <select name="categorie_id[{{ $loop->index }}]" id="categorie_id"
+                                                        <select required name="categorie_id[{{ $loop->index }}]" id="categorie_id"
                                                             class="form-control categorie_id ">
                                                             
                                                             <option label="Choisir Categorie"></option>
@@ -259,13 +249,13 @@
 
                                                         </select>
                                                     </td>
-                                                    <td> <select name="product_id[{{ $loop->index }}]" id="product_id"
+                                                    <td> <select required name="product_id[{{ $loop->index }}]" id="product_id"
                                                             class="form-control product_id ">
                                                             <option value="{{ $item->product->id }}">
                                                                 {{ $item->product->name }}</option>
 
                                                         </select></td>
-                                                    <td> <select name="size_id[{{ $loop->index }}]" id="size_id"
+                                                    <td> <select required name="size_id[{{ $loop->index }}]" id="size_id"
                                                             class="form-control size_id ">
 
                                                             <option value="{{ $item->size->id }}">
@@ -277,29 +267,39 @@
 
                                                     <td>
 
-                                                        <input type="text" name="quantity[{{ $loop->index }}]"
+                                                        <input required type="text" name="quantity[{{ $loop->index }}]"
                                                             class="form-control quantity"
                                                             value="{{ old('quantity', $item->quantity) }}" />
                                                     </td>
-                                                    <td>
-                                                        <input type="text" name="weight[{{ $loop->index }}]" class="form-control weight "
+                                                    <td style="display:none;">
+                                                        <input required type="text" name="weight[{{ $loop->index }}]" class="form-control weight "
                                                         value="{{ old('unit_price', $item->weight) }}"   readonly />
                                                     </td>
-                                                    <td>
-                                                        <input type="text" name="total_weight[{{ $loop->index }}]"
-                                                            class="form-control total_weight " value="{{ old('unit_price', $item->total_weight) }}" readonly />
+                                                    <td style="display:none;">
+                                                        <input required type="text" name="total_weight[{{ $loop->index }}]"
+                                                            class="form-control total_weight " value="{{ old('total_weight', $item->total_weight) }}" readonly />
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="unit_price[{{ $loop->index }}]"
+                                                        <input required type="text" name="unit_price[{{ $loop->index }}]"
                                                             class="form-control unit_price "
                                                             value="{{ old('unit_price', $item->unit_price) }}" />
                                                     </td>
                                                     <td>
 
-                                                        <input type="text" name="total_price[{{ $loop->index }}]"
+                                                        <input  type="text" name="total_price[{{ $loop->index }}]"
                                                             class="form-control total_price"
                                                             value="{{ old('total_price', $item->total_price) }}"
                                                             readonly />
+                                                    </td>
+                                                    <td style="display:none;">
+
+                                                        <input type="hidden" name="buying_price[0]"
+                                                            class="form-control buying_price"  value="{{ old('buying_price', $item->buying_price) }}"   />
+                                                    </td>
+                                                    <td style="display:none;">
+    
+                                                        <input type="hidden" name="benefice[0]"
+                                                            class="form-control benefice"  value="{{ old('benefice', $item->benefice) }}"  />
                                                     </td>
                                                     <td>
                                                         @if ($loop->index == 0)
@@ -334,7 +334,7 @@
 
                                                 <label for="sub_total">Sub Total</label>
                                                 <input type="text" id="sub_total" name="sub_total"
-                                                    class="form-control sub_total"  value="{{ old('poids_net', $invoices->poids_net) }}" readonly>
+                                                    class="form-control sub_total"  value="{{ old('sub_total', $invoices->sub_total) }}" readonly>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -344,7 +344,7 @@
                                                 <label for="poids_emballage">Poids d'emballage en Kg</label>
 
                                                 <input type="text" id="poids_emballage" name="poids_emballage"
-                                                    class="form-control poids_emballage"  value="{{ old('poids_net', $invoices->poids_net) }}">
+                                                    class="form-control poids_emballage"  value="{{ old('poids_emballage', $invoices->poids_emballage) }}">
                                             </div>
                                             <div class="col"></div>
                                             <div class="col"></div>
@@ -475,20 +475,25 @@
             var categorie = $('.categorie_id').html();
 
             var tr = '<tr>' +
-                '<td> <select class="form-control categorie_id  "  id="categorie_id" name="categorie_id[' + i +
+                '<td> <select required class="form-control categorie_id  "  id="categorie_id" name="categorie_id[' + i +
                 ']" >' + categorie +
-                '</select></td>' +
-                '<td>  <select class="form-control product_id  "  id=product_id" name="product_id[' + i +
+                '  </select></td>' +
+                '<td>  <select  required class="form-control product_id  "  id=product_id" name="product_id[' + i +
                 ']" ><option label="Choisir Produit"></option></select></td>' +
-                '<td>  <select class="form-control size_id  "  id="size_id" name="size_id[' + i +
+                '<td>  <select  required class="form-control size_id  "  id="size_id" name="size_id[' + i +
                 ']" ><option label="Choisir Designation"></option></select></td>' +
-                '<td> <input type="text" name="quantity[' + i + ']" class="form-control quantity" value="0" ></td>' +
-                '<td> <input type="text" name="weight[' + i + ']" class="form-control weight" ></td>' +
-                '<td> <input type="text" name="total_weight[' + i + ']" class="form-control total_weight" ></td>' +
-                '<td> <input type="text" name="unit_price[' + i + ']" class="form-control unit_price" ></td>' +
+                '<td> <input required type="text" name="quantity[' + i + ']" class="form-control quantity" value="0" ></td>' +
+                '<td style="display:none;"> <input type="hidden" name="weight[' + i + ']" class="form-control weight" readonly></td>' +
+                '<td style="display:none;"> <input type="hidden" name="total_weight[' + i +
+                ']" class="form-control total_weight" readonly ></td>' +
+                '<td> <input required type="text" name="unit_price[' + i + ']" class="form-control unit_price" ></td>' +
+
                 '<td> <input type="text" name="total_price[' + i +
                 ']" class="form-control total_price" readonly></td>' +
+                '<td style="display:none;"> <input type="hidden" name="buying_price[' + i + ']" class="form-control buying_price" ></td>' +
+                '<td style="display:none;"> <input type="hidden" name="benefice[' + i + ']" class="form-control benefice" ></td>' +
                 '<td> <a class="btn btn-danger btn-sm delete "><i class="fa fa-trash"></a></td></tr>';
+
 
 
             $('.addMoreProduct').append(tr);
