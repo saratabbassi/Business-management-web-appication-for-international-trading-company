@@ -158,11 +158,7 @@ class InvoicesController extends Controller
         $details_list = [];
         for ($i = 0; $i < count($request->categorie_id); $i++) {
            
-            $validatedData = $request->validate([
-                'categorie_id]'=>'required',
-            ],[
-
-                ]); 
+          
 
             $details_list[$i]['categorie_id'] = $request->categorie_id[$i];
             $details_list[$i]['product_id'] = $request->product_id[$i];
@@ -248,15 +244,56 @@ class InvoicesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, invoices $invoices)
+
+
     {
+        $id = $request->invoice_id;
+    
+
+        $this->validate($request, [
+
+            'invoice_no' => 'required|unique:invoices,invoice_no,'.$id,
+            'devise' =>'required',
+            'customer_name' => 'required',
+            'customer_adress' =>'required',
+            'invoice_date' => 'required',
+            'company_adress' =>'required',
+            'company_name' =>'required',
+            'company_phone' =>'required',
+            'poids_brut'=>'required',
+            'poids_net'=>'required',
+            'incoterm'=>'required',
+            'payment_details'=>'required',
+            'sub_total'=>'required',
+            'total_due'=>'required',
+      
+
+           
+
+
+        ],[
+            'invoice_no.unique'=>'Le numero de facture a déjà été pris',
+            'invoice_no.required' => 'Saisir le numero de facture',
+            'devise.required' => 'Choisir un devise',
+            'customer_name.required' => 'Choisir un Client',
+            'customer_adress.required' => 'Le champ adresse du client est obligatoire',
+            'company_name.required'=>'Le champ Nom Societé est obligatoire',
+            'company_adress.required'=>'Le champ Adresse societé est obligatoire',
+            'company_phone.required'=>'Le champ Tel est obligatoire',
+            'poids_brut.required'=>'Le champ Poids brut est obligatoire',
+            'poids_net.required'=>'Le champ Poids net est obligatoire',
+            'payment_details.required'=>'Le champ Détails de paiement est obligatoire',
+            'sub_total.required'=>'Le champ Sub Total est obligatoire',
+            'total_due.required'=>'Le champ Total due  est obligatoire',
+            'incoterm.required' => 'Choisir un Incoterm',
+           
+          
+            ]);
+
         $invoices = invoices::findOrFail($request->invoice_id);
 
         $data['invoice_no'] = $request->invoice_no;
-      //  $data['Status'] = 'Non Payé';
-       // $data['Value_Status'] = 2;
-        
-        
-        $data['devise'] = $request->devise;
+       $data['devise'] = $request->devise;
         $data['customer_name'] = $request->customer_name;
         $data['customer_adress'] = $request->customer_adress;
      
@@ -299,10 +336,9 @@ class InvoicesController extends Controller
         $details = $invoices->details()->createMany($details_list);
 
         if ($details) {
-            return redirect('/invoices')->with([
-                'message' => __('la facture est modifiée avec succès'),
-                'alert-type' => 'success'
-            ]);
+          
+        session()->flash('edit', 'La facture est modifié');
+        return redirect('/invoices');
         } else {
             return redirect()->back()->with([
                 'message' => __('la modification de facture a échoué'),

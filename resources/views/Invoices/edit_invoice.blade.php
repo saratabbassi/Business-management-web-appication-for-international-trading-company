@@ -73,25 +73,24 @@
                                 <input type="hidden" name="invoice_id" value="{{ $invoices->id }}">
                                 <input type="text" class="form-control" id="invoice_no" name="invoice_no"
                                     value="{{ old('invoice_no', $invoices->invoice_no) }}"
-                                    title="Saisir le nom du produit ">
+                                    title="Saisir le numéro de facture " required >
                             </div>
                             <div class="col">
                                 <label>Date</label>
                                 <input class="form-control fc-datepicker" data-date-format="dd-mm-yyyy" name="invoice_date"
                                     id="invoice_date" placeholder="DD-MM-YYYY" type="text"
-                                    value="{{ old('invoice_date', $invoices->invoice_date) }}">
+                                    value="{{ old('invoice_date', $invoices->invoice_date) }}" required>
                             </div>
 
                             <div class="col ">
 
                                 <label for="inputName" class="control-label">Devise</label>
 
-                                <select name="devise" class="form-control select2" onclick="console.log($(this).val())"
+                                <select required name="devise" class="form-control select2" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')">
-
+                                
                                     @foreach ($devises as $d)
-                                        <option value="{{ $d->id }}"
-                                            {{ $invoices->devise == $d->id ? 'selected' : '' }}>{{ $d->devise }}
+                                        <option value="{{ $d->devise }}" {{ $invoices->devise == $d->devise ? 'selected' : '' }}>{{ $d->devise }}
                                         </option>
                                     @endforeach
 
@@ -110,16 +109,15 @@
                             <div class="col ">
 
                                 <label for="inputName" class="control-label">Client</label>
-                                <select id="customer_name" name="customer_name" class="form-control select2 "
-                                    onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                                <select required id="customer_name" name="customer_name" class="form-control select2 "
+                                onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                              
+                                @foreach ($customers as $c)
 
-                                    @foreach ($customers as $c)
-                                        <option adress="{{ $c->customer_adress }}" value="{{ $c->id }}"
-                                            {{ $invoices->customer_name == $c->id ? 'selected' : '' }}>
-                                            {{ $c->customer_name }}</option>
-                                    @endforeach
+                                        <option value="{{ $c->customer_name}}" adress="{{ $c->customer_adress }}" {{ $invoices->customer_name == $c->customer_name  ? 'selected' : '' }}> {{ $c->customer_name }}</option>
+                                @endforeach
 
-                                </select>
+                            </select>
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Adresse du client</label>
@@ -181,7 +179,7 @@
 
 
 
-                                <select id="incoterm" name="incoterm" class="form-control select2 "
+                                <select required id="incoterm" name="incoterm" class="form-control select2 "
                                     onclick="console.log($(this).val())" onchange="console.log('change is firing')">
 
                                     @foreach ($incoterms as $i)
@@ -251,6 +249,7 @@
                                                     </td>
                                                     <td> <select required name="product_id[{{ $loop->index }}]" id="product_id"
                                                             class="form-control product_id ">
+                                                            
                                                             <option value="{{ $item->product->id }}">
                                                                 {{ $item->product->name }}</option>
 
@@ -505,15 +504,12 @@
         });
 
     </script>
-    <script>
+      <script>
         $(document).on('change', 'select[name^="categorie_id"]', function() {
-            var s = $(this).find(':selected').data('id');
-            console.log(s, "Hello, world!");
             var curEle = jQuery(this);
             var categorieID = curEle.val();
             var parentEle = curEle.closest('tr');
             var prodEle = parentEle.find('select[name^="product_id"]');
-
             var sizeEle = parentEle.find('select[name^="size_id"]');
             sizeEle.empty();
             prodEle.empty();
@@ -555,10 +551,9 @@
                         sizeEle.append(' <option label="Choisir Designation"></option>');
                         jQuery.each(data, function(key, value) {
                             sizeEle.append('<option value="' + value.id + '" data-price="' +
-                                value.selling_price + '" data-weight="' + value.weight +
+                                value.selling_price + '" data-weight="' + value.weight + '" data-buy="' + value.buying_price +
                                 '">' + value.designation +
-                                '</option>'
-                               );
+                                '</option>');
 
                         });
                     }
@@ -567,116 +562,146 @@
         });
 
     </script>
-   <script>
-    function TotalAmount() {
-        var total = 0;
 
-        $('.total_price').each(function(i, e) {
-            var amount = $(this).val() - 0;
-            total += amount;
+    <script>
+        function TotalAmount() {
+            var total = 0;
 
-        })
-        var subtotal = total;
-        $('.sub_total').val(subtotal);
-    }
+            $('.total_price').each(function(i, e) {
+                var amount = $(this).val() - 0;
+                total += amount;
 
-</script>
-<script>
-    function TotalWeight() {
-        var weight = 0;
+            })
+            var subtotal = total;
+            $('.sub_total').val(subtotal);
+        }
 
-        $('.total_weight').each(function(i, e) {
-            var amount = $(this).val() - 0;
-            weight += amount;
+    </script>
+    <script>
+        function TotalWeight() {
+            var weight = 0;
 
-        })
-        var subtotal = weight;
-        $('.poids_net').val(subtotal);
-    }
+            $('.total_weight').each(function(i, e) {
+                var amount = $(this).val() - 0;
+                weight += amount;
 
-</script>
+            })
+            var subtotal = weight;
+            $('.poids_net').val(subtotal);
+        }
 
-<script>
-    let due_total = function() {
-        let due = 0;
-        let sub_totalVal = parseFloat($('.sub_total').val()) || 0;
-        let shippingVal = parseFloat($('.shipping').val()) || 0;
-        due += sub_totalVal;
-        due += shippingVal;
-        return due;
-    }
+    </script>
+     <script>
+        function TotalBenefice() {
+            var b = 0;
 
-</script>
-<script>
-    let gross_weight = function() {
-        let w = 0;
-        let poids_net = parseFloat($('.poids_net').val()) || 0;
-        let poids_emballage = parseFloat($('.poids_emballage').val()) || 0;
-        w += poids_net;
-        w += poids_emballage;
-        return w;
-    }
+            $('.benefice').each(function(i, e) {
+                var ben = $(this).val() - 0;
+                b += ben;
 
-</script>
+            })
+            var bb = b;
+            $('.total_ben').val(bb);
+        }
 
+    </script>
 
+    <script>
+        let due_total = function() {
+            let due = 0;
+            let sub_totalVal = parseFloat($('.sub_total').val()) || 0;
+            let shippingVal = parseFloat($('.shipping').val()) || 0;
+            due += sub_totalVal;
+            due += shippingVal;
+            return due;
+        }
 
+    </script>
+    <script>
+        let gross_weight = function() {
+            let w = 0;
+            let poids_net = parseFloat($('.poids_net').val()) || 0;
+            let poids_emballage = parseFloat($('.poids_emballage').val()) || 0;
+            w += poids_net;
+            w += poids_emballage;
+            return w;
+        }
 
-
-<script>
-    $('.addMoreProduct').delegate('.size_id', 'change', function() {
-
-        var tr = $(this).parent().parent();
-        var price = tr.find('.size_id option:selected').attr('data-price');
-        tr.find('.unit_price').val(price);
-        var qty = tr.find('.quantity').val() - 0;
-        var totalprice = (qty * price);
-        tr.find('.total_price').val(totalprice);
-        TotalAmount();
-        $('.total_due').val(due_total());
-
-        var weight = tr.find('.size_id option:selected').attr('data-weight');
-        tr.find('.weight').val(weight);
-        var totalweight = (qty * weight);
-        tr.find('.total_weight').val(totalweight);
-        TotalWeight();
-        $('.poids_brut').val(gross_weight());
-
-
-
-    });
-    $('.addMoreProduct').delegate('.quantity,.unit_price', 'keyup', function() {
-        var tr = $(this).parent().parent();
-        var qty = tr.find('.quantity').val() - 0;
-        var price = tr.find('.unit_price').val() - 0;
-        var totalprice = (qty * price);
-        tr.find('.total_price').val(totalprice);
-        TotalAmount();
-        $('.total_due').val(due_total());
-        var weight = tr.find('.weight').val() - 0;
-        var totalweight = (qty * weight);
-        tr.find('.total_weight').val(totalweight);
-        TotalWeight();
-        $('.poids_brut').val(gross_weight());
-
-
-
-    })
-    $('.invoice_details').delegate('.shipping', 'keyup', function() {
-
-
-        $('.total_due').val(due_total());
-
-    })
-    $('.invoice_details').delegate('.poids_emballage', 'keyup', function() {
-
-
-        $('.poids_brut').val(gross_weight());
-
-    })
+    </script>
  
 
-</script>
 
+
+
+    <script>
+        $('.addMoreProduct').delegate('.size_id', 'change', function() {
+
+            var tr = $(this).parent().parent();
+            var price = tr.find('.size_id option:selected').attr('data-price');
+            tr.find('.unit_price').val(price);
+            var qty = tr.find('.quantity').val() - 0;
+            var totalprice = (qty * price);
+            tr.find('.total_price').val(totalprice);
+            TotalAmount();
+            $('.total_due').val(due_total());
+
+            var weight = tr.find('.size_id option:selected').attr('data-weight');
+            tr.find('.weight').val(weight);
+            var totalweight = (qty * weight);
+            tr.find('.total_weight').val(totalweight);
+            TotalWeight();
+            $('.poids_brut').val(gross_weight());
+
+            var buying = tr.find('.size_id option:selected').attr('data-buy');
+            tr.find('.buying_price').val(buying);
+            
+            var benefice = (qty * (price - buying));
+            tr.find('.benefice').val(benefice);
+            TotalBenefice();
+           
+
+
+
+        });
+        $('.addMoreProduct').delegate('.quantity,.unit_price', 'keyup', function() {
+            var tr = $(this).parent().parent();
+            var qty = tr.find('.quantity').val() - 0;
+            var price = tr.find('.unit_price').val() - 0;
+            var totalprice = (qty * price);
+            tr.find('.total_price').val(totalprice);
+            TotalAmount();
+            $('.total_due').val(due_total());
+
+            var weight = tr.find('.weight').val() - 0;
+            var totalweight = (qty * weight);
+            tr.find('.total_weight').val(totalweight);
+            TotalWeight();
+            $('.poids_brut').val(gross_weight());
+
+             var buying = tr.find('.buying_price').val() - 0;;
+           
+            
+            var benefice = (qty * (price - buying));
+            tr.find('.benefice').val(benefice);
+            TotalBenefice();
+
+
+
+        })
+        $('.invoice_details').delegate('.shipping', 'keyup', function() {
+
+
+            $('.total_due').val(due_total());
+
+        })
+        $('.invoice_details').delegate('.poids_emballage', 'keyup', function() {
+
+
+            $('.poids_brut').val(gross_weight());
+
+        })
+     
+
+    </script>
 
 @endsection

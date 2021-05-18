@@ -193,12 +193,54 @@ class ProductsController extends Controller
     public function update(Request $request, products $products,sizes $sizes ,$id)
     
     {
+        $id = $request->product_id;
+       
+        $this->validate($request, [
+            'name' => "required|unique:products,name,$id",
+         
+         
+      
+         
+                'moreFields.*.designation' => 'required',
+                'moreFields.*.buying_price' => 'required|numeric|min:0',
+                'moreFields.*.selling_price' => 'required|numeric|min:0',
+                'moreFields.*.weight' => 'required|numeric|min:0',
+                'moreFields.*.stock' => 'required|min:0|integer',
+        
+         
+            'file_name' => 'mimes:pdf,jpeg,png,jpg',
+            'categorie_id'=>'required'
+        ],[
+
+            'name.required' =>'Veuillez saisir le nom du produit',
+            'name.unique' =>' Le produit existe deja',
+       
+          'moreFields.*.designation.required' => "Veuillez saisir la designation",
+          'moreFields.*.buying_price.required' =>"Veuillez saisir le prix d achat",
+          'moreFields.*.selling_price.required'=>"Veuillez saisir le prix de vente",
+          'moreFields.*.weight.required'=>"Veuillez saisir le pois",
+          'moreFields.*.stock.required'=>"Veuillez saisir le stock",
+          'moreFields.*.buying_price.numeric'=>'le prix d achat doit entre un nombre ',
+          'moreFields.*.buying_price.min'=>'le prix d achat doit etre un nombre positive',
+          'moreFields.*.selling_price.numeric'=>'le prix de vente doit entre un nombre ',
+          'moreFields.*.selling_price.min'=>'le prix de vente doit etre un nombre positive',
+          'moreFields.*.weight.numeric'=>'le poids doit entre un nombre ',
+          'moreFields.*.weight.min'=>'le poids doit entre un nombre positive',
+           
+          'moreFields.*.stock.min'=>'
+          La quantité doit être un entier positive',
+          'moreFields.*.stock.integer'=>'
+          La quantité doit être un entier.',
+
+            'file_name.mimes' => ' l image doit etre en format pdf, jpeg , png , jpg',
+            'categorie_id.required' =>'Veuillez choisir une categorie',
+            
+
+
+        ]);
+
+    
         $products = products::findOrFail($request->product_id);
-    
-
-
-    
-    
     $products->update([
        
         'name' => $request->name,

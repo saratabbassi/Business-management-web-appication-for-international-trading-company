@@ -95,6 +95,7 @@
                                     <th class="border-bottom-0">Date</th>
                                     <th class="border-bottom-0">Status</th>
                                     <th class="border-bottom-0">Montant</th>
+                                    <th class="border-bottom-0">Devise</th>
                                     <th class="border-bottom-0">Imprimer </th>
 
                                     <th class="border-bottom-0">Operations</th>
@@ -130,6 +131,7 @@
 
                                     </td>
                                     <td>{{ $invoice->total_due }}</td>
+                                    <td>{{$invoice->devise}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button aria-expanded="false" aria-haspopup="true"
