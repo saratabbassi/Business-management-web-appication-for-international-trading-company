@@ -197,7 +197,7 @@
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">Détails de paiement</label>
-                                <input type="text" class="form-control" id="payment_details" name="payment_details" value="{{old('payment_details')}}">
+                                <input required type="text" class="form-control" id="payment_details" name="payment_details" value="{{old('payment_details')}}">
                             </div>
                         </div>
 

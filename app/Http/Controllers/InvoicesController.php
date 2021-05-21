@@ -335,16 +335,8 @@ class InvoicesController extends Controller
 
         $details = $invoices->details()->createMany($details_list);
 
-        if ($details) {
-          
         session()->flash('edit', 'La facture est modifié');
         return redirect('/invoices');
-        } else {
-            return redirect()->back()->with([
-                'message' => __('la modification de facture a échoué'),
-                'alert-type' => 'danger'
-            ]);
-        }
     }
 
     /**

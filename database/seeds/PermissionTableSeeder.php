@@ -22,7 +22,7 @@ $permissions = [
         'Employés',
         'Liste des Employés',
         'Autorisations des Employés',
-        'Paramètres',
+        'Profil',
         'Produits',
         'Categories',
         'Devises',
@@ -57,8 +57,6 @@ $permissions = [
         'Modifier Incoterm',
         'Supprimer Incoterm',
 
-        'Ajouter Image',
-        'Supprimer Image',
 
         'Ajouter Employés',
         'Modifier Employés',

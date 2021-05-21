@@ -216,9 +216,7 @@
                         <a href="#" class="btn btn-danger float-left mt-3 mr-2" id="print_Button" onclick="printDiv()">
                             <i class="mdi mdi-printer ml-1"></i>Imprimer
                         </a>
-                        <a href="#" class="btn btn-success float-left mt-3" id="send_invoice">
-                            <i class="mdi mdi-telegram ml-1"></i>Envoyer Facture
-                        </a>
+                       
                     </div>
                     
                 </div>

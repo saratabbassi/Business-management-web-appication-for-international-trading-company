@@ -42,9 +42,10 @@ Employés
         <div class="card">
             <div class="card-header pb-0">
                 <div class="col-sm-1 col-md-2">
+                    @can('Ajouter Employés')
 
                         <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">Ajouter Employée</a>
-            
+            @endcan
                 </div>
             </div>
             <div class="card-body">
@@ -67,7 +68,7 @@ Employés
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        @if ($user->Status == 'activé')
+                                        @if ($user->Status == 'Activé')
                                             <span class="label text-success  " >
                                                 <div class="dot-label bg-success ml-5"></div> {{ $user->Status }} 
                                             </span>
@@ -87,10 +88,13 @@ Employés
                                     </td>
 
                                     <td>     
+                                        @can('Modifier Employés')
                                        
                                       
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info"
                                                ><i class="las la-pen"></i></a>
+                                               @endcan
+                                               @can('Supprimer Employés')
                                      
 
                                        
@@ -98,6 +102,7 @@ Employés
                                                 data-user_id="{{ $user->id }}" data-username="{{ $user->name }}"
                                                 data-toggle="modal" href="#modaldemo8" ><i
                                                     class="las la-trash"></i></a>
+                                                    @endcan
                                         
                                     </td>
                                 </tr>

@@ -48,10 +48,12 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
+                    @can('Ajouter Produit')
 
 
                     <a href="products/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
                             class="fas fa-plus"></i> &nbsp;Céer Produit</a>
+                            @endcan
 
                 </div>
                 <div class="card-body">
@@ -93,16 +95,7 @@
 
 
 
-                                    <!--			<td> 
-                     @if ($prod->stock == 0)
-                     <span class="text-danger">{{ $prod->stock }}</span>
-            @elseif ($prod->stock < 6)
-                    <span class="text-warning">{{ $prod->stock }}</span>
-                     
-            @else
-                    <span class="text-success">{{ $prod->stock }}</span>
-                    @endif
-                   </td>-->
+                   
                                     <td>
 
 
@@ -115,16 +108,19 @@
 
                                     </td>
                                     <td>
+                                        @can('Modifier Produit')
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                             href="{{ url('edit_product') }}/{{ $prod->id }}" title="Modifier"><i
                                                 class="las la-pen"></i></a>
-
+@endcan
+@can('Supprimer Produit')
 
 
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                             data-id="{{ $prod->id }}" data-name="{{ $prod->name }}"
                                             data-toggle="modal" href="#modaldemo9" title="Supprimer"><i
                                                 class="las la-trash"></i></a>
+                                                @endcan
                                     </td>
                                     </tr>
                                 @endforeach

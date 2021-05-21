@@ -46,10 +46,13 @@
 						<div class="card">
                             <div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
+									@can('Ajouter Client')
 									
 									<a href="customers/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-										class="fas fa-plus"></i> &nbsp;Céer Client</a>
-									<i class="mdi mdi-dots-horizontal text-gray"></i>
+										class="fas fa-plus"></i> &nbsp;Ajouter Client</a>
+
+										@endcan
+									
 								</div>
 								
 								
@@ -85,18 +88,21 @@
 												<td>{{$customer->customer_adress}}</td>
 											
 													<td>
+														@can('Modifier Client')
 													<a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
 												   
 													href="{{ url ('edit_customer')}}/{{$customer->id}}" title="Modifier"><i class="las la-pen"></i></a>
+													@endcan
 										   
 	
 										  
 												
-														
+														@can('Supprimer Client')
 														<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
 														data-id="{{ $customer->id }}" data-customer_name="{{ $customer->customer_name }}"
 														data-toggle="modal" href="#modaldemo9" title="Supprimer"><i
 															class="las la-trash"></i></a>
+															@endcan
 												</td>
 											</tr>
 											@endforeach

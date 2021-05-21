@@ -75,6 +75,7 @@
 
 
                             </div>
+                            @can('Notifications')
                             <div id="unreadNotifications">
                                 @foreach (auth()->user()->unreadNotifications as $notification)
 								
@@ -99,6 +100,7 @@
                                 @endforeach
 
                             </div>
+                            @endcan
                         </div>
                     </div>
 
@@ -128,7 +130,9 @@
                                 </div>
                             </div>
                         </div>
+                        @can('Profil')
                         <a class="dropdown-item" href="{{ url('/' . ($page = 'edit_profile')) }}"><i class="bx bx-user-circle"></i>Profile</a>
+@endcan
                        
                        
                         <a class="dropdown-item" href="{{ route('logout') }}"

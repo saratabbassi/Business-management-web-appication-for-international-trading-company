@@ -68,9 +68,11 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
+                    @can('Ajouter Categorie')
 
                     <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
                         data-toggle="modal" href="#modaldemo8">Ajouter Catégorie</a>
+                        @endcan
 
                 </div>
 
@@ -96,11 +98,14 @@
                                     <td>{{ $x->categorie_name }}</td>
                                     <td>{{ $x->created_by }}</td>
                                     <td>
+                                        @can('Modifier Categorie')
 
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                             data-id="{{ $x->id }}"
                                             data-categorie_name="{{ $x->categorie_name }}" data-toggle="modal"
                                             href="#exampleModal2" title="Modifier"><i class="las la-pen"></i></a>
+                                            @endcan
+                                            @can('Supprimer Categorie')
 
 
 
@@ -108,6 +113,7 @@
                                             data-id="{{ $x->id }}"
                                             data-categorie_name="{{ $x->categorie_name }}" data-toggle="modal"
                                             href="#modaldemo9" title="Supprimer"><i class="las la-trash"></i></a>
+                                            @endcan
 
                                     </td>
                                 </tr>

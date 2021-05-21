@@ -68,9 +68,10 @@ msg: "La permission a été ajoutée avec succès",
                 <div class="d-flex justify-content-between">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-right">
+                            @can('Ajouter  Permission')
                            
                                 <a class="btn btn-primary btn-sm" href="{{ route('roles.create') }}">Ajouter </a>
-                          
+                          @endcan
                         </div>
                     </div>
                     <br>
@@ -93,22 +94,27 @@ msg: "La permission a été ajoutée avec succès",
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>
+                                        @can('Afficher  Permission')
                                         
                                             <a class="btn btn-success btn-sm"
                                                 href="{{ route('roles.show', $role->id) }}">Afficher</a>
                                      
-                                        
+                                        @endcan
+                                        @can('Modifier  Permission')
                                        
                                             <a class="btn btn-primary btn-sm"
                                                 href="{{ route('roles.edit', $role->id) }}">Modifier</a>
+                                                @endcan
                                      
 
                                         @if ($role->name !== 'owner')
+                                        @can('Supprimer  Permission')
                                           
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy',
                                                 $role->id], 'style' => 'display:inline']) !!}
                                                 {!! Form::submit('supprimer', ['class' => 'btn btn-danger btn-sm']) !!}
                                                 {!! Form::close() !!}
+                                                @endcan
                                             
                                         @endif
 

@@ -17,7 +17,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto"> incoterms</h4>
+            <h4 class="content-title mb-0 my-auto"> Incoterms</h4>
 
         </div>
     </div>
@@ -68,9 +68,11 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
+                    @can('Ajouter Incoterm')
 
                     <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
                         data-toggle="modal" href="#modaldemo8">Ajouter Incoterm</a>
+                        @endcan
 
                 </div>
 
@@ -96,19 +98,21 @@
                                     <td>{{ $x->incoterm }}</td>
                                     <td>{{ $x->created_by }}</td>
                                     <td>
+                                        @can('Modifier Incoterm')
 
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                             data-id="{{ $x->id }}" data-incoterm="{{ $x->incoterm }}"
                                             data-toggle="modal" href="#exampleModal2" title="Modifier"><i
                                                 class="las la-pen"></i></a>
+                                                @endcan
 
 
-
+@can('Supprimer Incoterm')
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                             data-id="{{ $x->id }}" data-incoterm="{{ $x->incoterm }}"
                                             data-toggle="modal" href="#modaldemo9" title="Supprimer"><i
                                                 class="las la-trash"></i></a>
-
+@endcan
                                     </td>
                                 </tr>
                             @endforeach

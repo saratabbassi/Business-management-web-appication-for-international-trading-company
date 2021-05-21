@@ -96,7 +96,7 @@ Modifier Employée
                         <label class="form-label">Status : </label>
                         <select name="Status" id="select-beast" class="form-control  nice-select  custom-select">
                             <option value="{{ $user->Status}}">{{ $user->Status}}</option>
-                            <option value="activé">Activé</option>
+                            <option value="Activé">Activé</option>
                             <option value="
                             désactivée"> Désactivée</option>
                         </select>

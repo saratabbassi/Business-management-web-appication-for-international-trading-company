@@ -73,12 +73,15 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
 
-
+@can('Ajouter Facture')
                     <a href="invoices/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
                             class="fas fa-plus"></i> &nbsp;Céer Facture</a>
+                            @endcan
+                            @can('Exporter Excel')
 
                     <a class="modal-effect btn btn-sm btn-success" href="{{ url('export_invoices') }}"
                         style="color:white"><i class="fas fa-file-download"></i>&nbsp;Exporter Excel</a>
+                        @endcan
 
 
 
@@ -138,6 +141,7 @@
                                                 class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
                                                 type="button">Imprimer<i class="fas fa-caret-down ml-1"></i></button>
                                             <div class="dropdown-menu tx-13">
+                                                @can('Imprimer Proforma Facture')
                                                 <a class="dropdown-item" href="Print_proforma_fr/{{ $invoice->id }}"><i
                                                         class="text-info fas fa-print"></i>&nbsp;&nbsp;Proforma Facture FR
 
@@ -146,6 +150,8 @@
                                                         class="text-info fas fa-print"></i>&nbsp;&nbsp;Proforma Facture ANG
 
                                                 </a>
+                                                @endcan
+                                                @can('Imprimer Liste de Colisage')
 
 
                                                 <a class="dropdown-item" href="Print_packing_fr/{{ $invoice->id }}"><i
@@ -158,6 +164,8 @@
                                                     ANG
 
                                                 </a>
+                                                @endcan
+                                                @can('Imprimer Facture')
                                                 <a class="dropdown-item" href="Print_invoice_fr/{{ $invoice->id }}"><i
                                                         class="text-success fas fa-print"></i>&nbsp;&nbsp;Facture FR
 
@@ -166,6 +174,7 @@
                                                         class="text-success fas fa-print"></i>&nbsp;&nbsp;Facture ANG
 
                                                 </a>
+                                                @endcan
 
 
                                             </div>
@@ -178,19 +187,22 @@
                                                 class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
                                                 type="button">Opérations<i class="fas fa-caret-down ml-1"></i></button>
                                             <div class="dropdown-menu tx-13">
-
+@can('Modifier Facture')
                                                 <a class="dropdown-item" data-effect="effect-scale"
                                                     href="{{ url('edit_invoice') }}/{{ $invoice->id }}"
                                                     title="Modifier"><i class="text-info fas fa-pen-alt"></i>&nbsp;&nbsp;
                                                     Modifier</a>
+                                                    @endcan
 
-
+@can('Supprimer Facture')
 
                                                 <a class="dropdown-item" data-id="{{ $invoice->id }}"
                                                     data-name="{{ $invoice->invoice_no }}" data-toggle="modal"
                                                     href="#modaldemo9" title="Supprimer"><i
                                                         class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;
                                                     Supprimer</a>
+                                                    @endcan
+                                                    @can('Modifié Etat du Paiment')
 
                                                 <a class="dropdown-item"
                                                     href="{{ URL::route('Status_show', [$invoice->id]) }}"><i class=" text-success fas
@@ -198,6 +210,7 @@
                                                     de
                                                     paiment
                                                 </a>
+                                                @endcan
 
                                              
 

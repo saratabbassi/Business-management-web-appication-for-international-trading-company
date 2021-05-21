@@ -37,6 +37,7 @@
                             d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z" />
                     </svg><span class="side-menu__label">Tableau de Bord</span></a>
             </li>
+            @can('Employés')
             <li class="side-item side-item-category">Contact</li>
            
 
@@ -47,22 +48,29 @@
                         <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/> 
                     </svg><span class="side-menu__label">Employés</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">Liste les employés</a></li>
+                    @can('Liste des Employés')
+                    <li><a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">Liste des employés</a></li>
+                    @endcan
+                    @can('Autorisations des Employés')
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'roles')) }}">
                         Permissions des employés</a></li>
+                        @endcan
 
 
                 </ul>
             </li>
-
+@endcan
 
             <li class="side-item side-item-category">Gestion de produit</li>
+            @can('Categories')
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/' . ($page = 'categories')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-diagram-3-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1z"/>
                     </svg><span class="side-menu__label">Catégories</span></a>
             </li>
+            @endcan
+            @can('Produits')
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/' . ($page = 'products')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-basket-fill"  viewBox="0 0 16 16">
@@ -70,8 +78,10 @@
                     </svg><span class="side-menu__label">Produits</span></a>
 
             </li>
+            @endcan 
 
             <li class="side-item side-item-category">Gestion de commerce</li>
+            @can('Clients')
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/' . ($page = 'customers')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-people-fill"  viewBox="0 0 16 16">
@@ -80,13 +90,17 @@
                         <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
                     </svg><span class="side-menu__label">Clients</span></a>
             </li>
-      <!--      <li class="slide">
+            @endcan
+            @can('Devises')
+            <li class="slide">
                 <a class="side-menu__item" href="{{ url('/' . ($page = 'devise')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-cash-stack"   viewBox="0 0 16 16">
                         <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
                         <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
                     </svg><span class="side-menu__label">Devises</span></a>
-            </li> -->
+            </li> 
+            @endcan
+            @can('Incoterm')
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/' . ($page = 'incoterm')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-truck"  viewBox="0 0 16 16">
@@ -94,6 +108,7 @@
                     </svg><span class="side-menu__label">Incoterm</span></a>
 
             </li>
+            @endcan
            
          
             @can('Factures')

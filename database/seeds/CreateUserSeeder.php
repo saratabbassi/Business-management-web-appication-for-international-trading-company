@@ -18,13 +18,13 @@ public function run()
         'email' => 'sara.tabbassi@gmail.com',
         'password' => bcrypt('123456'),
         'roles_name' => ["owner"],
-        'Status' => 'activé',
+        'Status' => 'Activé',
         'avatar' => 'default.png',
-        'adress' => 'adreseeee',
+        'adress' => '',
         'phone' => '99906497',
-        'facebook' => 'fbfbfb',
-        'linkedin' => 'linkedinnn',
-        'github' => 'gittthub',
+        'facebook' => '',
+        'linkedin' => '',
+        'github' => '',
         ]);
   
         $role = Role::create(['name' => 'owner']);
